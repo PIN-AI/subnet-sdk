@@ -1,0 +1,79 @@
+syntax = "proto3";
+package subnet.v1;
+
+option go_package = "subnet/proto/subnet;pb";
+
+message ValidationPolicy {
+  string policy_id = 1;
+  string version = 2;
+  uint64 effective_epoch = 3;
+
+  message SamplingParams {
+    double sample_rate = 1;    // 0.0 - 1.0
+    uint32 min_validators = 2;
+  }
+
+  message ExecutionLimits {
+    uint64 max_exec_time_ms = 1;
+    uint64 max_memory_mb = 2;
+    repeated string network_allowlist = 3;
+  }
+
+  message AntiCheat {
+    uint32 similarity_threshold = 1;
+    uint64 duplicate_submission_window = 2;
+    repeated string blacklist = 3;
+  }
+
+  enum Mode {
+    MODE_UNSPECIFIED = 0;
+    DETERMINISTIC = 1;
+    SAMPLED = 2;
+    EXTERNAL = 3;
+    MULTI_SOURCE = 4;
+  }
+
+  message Rules {
+    repeated string required_evidence = 1; // e.g., ["transcript_root","env_fingerprint","inputs_hash","outputs_hash","proof_exec"]
+    Mode validation_mode = 2;
+    SamplingParams sampling_params = 3;   // optional presence
+    ExecutionLimits execution_limits = 4; // optional presence
+    AntiCheat anti_cheat = 5;             // optional presence
+  }
+
+  Rules rules = 4;
+  bytes metadata = 5; // opaque policy metadata
+}
+
+message VerificationRecord {
+  string record_id = 1;
+  string intent_id = 2;
+  string agent_id = 3;
+  string report_id = 4;
+  string policy_id = 5;
+  string validator_id = 6;
+
+  enum Verdict { VERDICT_UNSPECIFIED = 0; PASS = 1; FAIL = 2; SKIP = 3; }
+  Verdict verdict = 7;
+  double confidence = 8; // 0.0 - 1.0
+  string reason = 9;
+  repeated string evidence_checked = 10;
+
+  message SamplingInfo { bool is_sampled = 1; string sample_seed = 2; }
+  SamplingInfo sampling_info = 11;
+
+  message ExternalAttestation { string provider = 1; string reference = 2; bytes signature = 3; }
+  ExternalAttestation external_attestation = 12;
+
+  int64 timestamp = 13;
+  bytes validator_signature = 14;
+}
+
+message PolicyQuery { string subnet_id = 1; string intent_type = 2; uint64 epoch = 3; }
+message VerificationQuery { string intent_id = 1; string agent_id = 2; uint32 limit = 3; }
+
+service ValidationService {
+  rpc GetValidationPolicy(PolicyQuery) returns (ValidationPolicy);
+  rpc GetVerificationRecords(VerificationQuery) returns (stream VerificationRecord);
+}
+

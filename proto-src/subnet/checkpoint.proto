@@ -1,0 +1,63 @@
+syntax = "proto3";
+package subnet.v1;
+
+option go_package = "subnet/proto/subnet;pb";
+
+message CommitmentRoots {
+  bytes agent_root = 1;
+  bytes agent_service_root = 2;
+  bytes rank_root = 3;
+  bytes metrics_root = 4;
+  bytes data_usage_root = 5;
+  bytes state_root = 6;
+  bytes event_root = 7;
+  bytes cross_subnet_root = 8;
+}
+
+message DACommitment {
+  string kind = 1;            // e.g., IPFS, EigenDA
+  string pointer = 2;         // CID or blob id
+  uint64 size_hint = 3;
+  repeated bytes segment_hashes = 4;
+  int64 expiry = 5;
+}
+
+message EpochSlot { uint64 epoch = 1; uint64 slot = 2; }
+
+message CheckpointHeader {
+  string subnet_id = 1;
+  uint64 epoch = 2;
+  bytes parent_cp_hash = 3;
+  int64 timestamp = 4;
+  uint32 version = 5;
+  bytes params_hash = 6;
+  CommitmentRoots roots = 7;
+  repeated DACommitment da_commitments = 8;
+  string validator_set_id = 9;
+  bytes stats = 11;   // optional serialized stats
+  bytes aux_hash = 12; // auxiliary hash
+  EpochSlot epoch_slot = 13;
+  // Optional extensions to align with updated protocol
+  bytes assignments_root = 14;        // optional
+  bytes validation_commitment = 15;   // optional
+  bytes policy_root = 16;             // optional
+  
+  // Signature aggregation (ECDSA with bitmap)
+  CheckpointSignatures signatures = 17;
+}
+
+// ECDSA signature aggregation with bitmap
+message CheckpointSignatures {
+  repeated bytes ecdsa_signatures = 1;  // list of ECDSA signatures
+  bytes signers_bitmap = 2;             // bitmap indicating which validators signed
+  uint32 signature_count = 3;           // number of signatures
+  uint64 total_weight = 4;              // total weight of signers
+}
+
+message Signature {
+  string algo = 1;     // ECDSA-secp256k1
+  bytes der = 2;
+  bytes pubkey = 3;
+  bytes msg_hash = 4;
+  string signer_id = 5; // validator id
+}

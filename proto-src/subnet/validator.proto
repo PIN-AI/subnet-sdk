@@ -1,0 +1,28 @@
+syntax = "proto3";
+package subnet.v1;
+
+option go_package = "subnet/proto/subnet;pb";
+
+import "proto/subnet/checkpoint.proto";
+
+message Validator {
+  string id = 1;
+  bytes pubkey = 2;
+  uint64 weight = 3;
+  string endpoint = 4;
+}
+
+message ValidatorSet {
+  repeated Validator validators = 1;
+  int32 min_validators = 2;  // >=4
+  int32 threshold_num = 3;   // default 3
+  int32 threshold_denom = 4; // default 4
+  uint64 effective_epoch = 5;
+}
+
+message SignatureSubmission {
+  bytes cp_hash = 1;    // canonical hash of header
+  Signature signature = 2;
+  string signer_id = 3; // explicit signer id
+  uint32 bit = 4;       // bitmap position
+}

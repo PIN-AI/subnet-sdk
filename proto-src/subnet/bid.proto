@@ -1,0 +1,38 @@
+syntax = "proto3";
+package subnet.v1;
+
+option go_package = "subnet/proto/subnet;pb";
+
+// Bid status enumerates the matcher lifecycle.
+enum BidStatus {
+  BID_STATUS_UNSPECIFIED = 0;
+  BID_STATUS_SUBMITTED = 1;
+  BID_STATUS_ACCEPTED = 2;
+  BID_STATUS_REJECTED = 3;
+  BID_STATUS_WINNER = 4;
+  BID_STATUS_RUNNER_UP = 5;
+}
+
+// Bid contains the payload an agent submits to the matcher.
+message Bid {
+  string bid_id = 1;
+  string intent_id = 2;
+  string agent_id = 3;
+  uint64 price = 4;
+  string token = 5;
+  string settle_chain = 6;
+  int64 submitted_at = 7;
+  string nonce = 8;
+  bytes signature = 9;
+  BidStatus status = 10;
+  map<string, string> metadata = 11;
+}
+
+// BidSubmissionAck summarises matcher acceptance.
+message BidSubmissionAck {
+  string bid_id = 1;
+  bool accepted = 2;
+  string reason = 3;
+  BidStatus status = 4;
+  int64 recorded_at = 5;
+}

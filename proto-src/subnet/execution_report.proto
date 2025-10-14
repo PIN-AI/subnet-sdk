@@ -1,0 +1,49 @@
+syntax = "proto3";
+package subnet.v1;
+
+option go_package = "subnet/proto/subnet;pb";
+import "proto/subnet/report.proto"; // for RootLayerRef reuse
+
+// Execution report submitted by Agent Service to Validators.
+message ExecutionReport {
+  string report_id = 1;
+  string assignment_id = 2;
+  string intent_id = 3;
+  string agent_id = 4;
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    SUCCESS = 1;
+    FAILED = 2;
+    PARTIAL = 3;
+  }
+  Status status = 5;
+  bytes result_data = 6;              // opaque; recommend DA for large payloads
+  VerificationEvidence evidence = 7;  // required evidence set
+  ErrorInfo error = 8;                // optional
+  int64 timestamp = 9;                // unix seconds
+  bytes signature = 10;               // agent ECDSA signature over domain hash
+  RootLayerRef root_ref = 11;         // optional: root layer reference for audit
+}
+
+message VerificationEvidence {
+  bytes env_fingerprint = 1; // image/wasm/code hash, version
+  bytes inputs_hash = 2;
+  bytes outputs_hash = 3;
+  bytes transcript_root = 4;
+  bytes proof_exec = 5;       // optional, serialized proof
+  ResourceUsage resource_usage = 6;
+  repeated string external_refs = 7; // optional references
+}
+
+message ResourceUsage {
+  uint64 cpu_ms = 1;
+  uint64 memory_mb = 2;
+  uint64 io_ops = 3;
+  uint64 network_bytes = 4;
+}
+
+message ErrorInfo {
+  string code = 1;
+  string message = 2;
+  bytes details = 3;
+}

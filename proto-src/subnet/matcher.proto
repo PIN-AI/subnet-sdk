@@ -1,0 +1,93 @@
+syntax = "proto3";
+package subnet.v1;
+
+option go_package = "subnet/proto/subnet;pb";
+
+import "proto/subnet/bid.proto";
+
+// Snapshot of an intent and associated bids within the matcher.
+message IntentBidSnapshot {
+  string intent_id = 1;
+  repeated Bid bids = 2;
+  int64 bidding_start_time = 3;
+  int64 bidding_end_time = 4;
+  bool bidding_closed = 5;
+}
+
+// Matching result emitted by matcher to RootLayer/observers.
+message MatchingResult {
+  string matcher_id = 1;
+  string intent_id = 2;
+  string winning_bid_id = 3;
+  string winning_agent_id = 4;
+  repeated string runner_up_bid_ids = 5;
+  int64 matched_at = 6;
+  string matching_reason = 7;
+  bytes result_hash = 8;
+  bytes matcher_signature = 9;
+}
+
+// Request/response structures for matcher RPCs.
+message SubmitBidRequest {
+  Bid bid = 1;
+}
+
+message SubmitBidResponse {
+  BidSubmissionAck ack = 1;
+}
+
+message GetIntentSnapshotRequest {
+  string intent_id = 1;
+  bool include_closed = 2;
+}
+
+message GetIntentSnapshotResponse {
+  IntentBidSnapshot snapshot = 1;
+}
+
+message StreamIntentsRequest {
+  string subnet_id = 1;
+  repeated string intent_types = 2;
+}
+
+message StreamBidsRequest {
+  string intent_id = 1;
+  string agent_id = 2;
+}
+
+message MatcherIntentUpdate {
+  string intent_id = 1;
+  string update_type = 2;
+  int64 timestamp = 3;
+}
+
+message BidEvent {
+  enum EventType {
+    EVENT_UNSPECIFIED = 0;
+    EVENT_SUBMITTED = 1;
+    EVENT_ACCEPTED = 2;
+    EVENT_REJECTED = 3;
+    EVENT_WITHDRAWN = 4;
+  }
+  EventType type = 1;
+  Bid bid = 2;
+  int64 timestamp = 3;
+}
+
+// Agent's response to a task assignment
+message TaskResponse {
+  string task_id = 1;      // Same as assignment_id
+  string agent_id = 2;
+  bool accepted = 3;
+  string reason = 4;        // Rejection reason if not accepted
+  int64 timestamp = 5;
+}
+
+message RespondToTaskRequest {
+  TaskResponse response = 1;
+}
+
+message RespondToTaskResponse {
+  bool success = 1;
+  string message = 2;
+}

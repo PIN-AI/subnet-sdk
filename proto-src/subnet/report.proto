@@ -1,0 +1,48 @@
+syntax = "proto3";
+package subnet.v1;
+
+option go_package = "subnet/proto/subnet;pb";
+
+message RootLayerRef {
+  uint64 height = 1;
+  bytes root = 2;     // root hash
+  bytes proof = 3;     // optional
+}
+
+message Report {
+  reserved 2, 6, 7, 8;
+
+  // Deprecated: use ExecutionReport in execution_report.proto
+  string intent_id = 1;
+  RootLayerRef root_ref = 3;
+  int64 executed_at = 4;
+  int64 received_ts = 5;
+
+  // Agent related (forward compatible)
+  string agent_id = 10;
+  string agent_endpoint = 11;
+  bytes env_fingerprint = 12;
+  bytes result_hash = 13;
+  string result_uri = 14;
+  bytes proof_exec = 15;
+  uint32 confidence_score = 16;
+  uint64 cost_estimate = 17;
+  bytes validator_hints = 18;
+
+  string assignment_id = 19;
+  bytes result_data = 20;
+  bytes agent_signature = 21;
+  bytes agent_pubkey = 22;
+  uint64 agent_nonce = 23;
+}
+
+message Receipt {
+  string intent_id = 1;
+  string validator_id = 2;
+  int64 received_ts = 3;
+  string status = 4; // accepted/rejected
+  uint32 score_hint = 5;
+  // Extensions for execution report flow (optional)
+  string report_id = 6; // if available
+  string phase = 7;     // RECEIVED/VALIDATING/VERIFIED/REJECTED (optional)
+}

@@ -1,0 +1,80 @@
+syntax = "proto3";
+package subnet.v1;
+
+option go_package = "subnet/proto/subnet;pb";
+
+import "proto/subnet/execution_report.proto";
+import "proto/subnet/validation.proto";
+import "proto/subnet/checkpoint.proto";
+import "proto/subnet/validator.proto";
+import "proto/subnet/report.proto";
+
+// Common acknowledgment message
+message Ack { 
+  bool ok = 1; 
+  string msg = 2; 
+}
+
+// Subnet Validator Service - handles execution reports and validation
+service ValidatorService {
+  // Agent submits execution report to validators
+  rpc SubmitExecutionReport(ExecutionReport) returns (Receipt);
+  
+  // Checkpoint operations
+  rpc GetCheckpoint(GetCheckpointRequest) returns (CheckpointHeader);
+  rpc ProposeHeader(CheckpointHeader) returns (Ack);
+  rpc SubmitSignature(SignatureSubmission) returns (Ack);
+  rpc GetSignatures(GetCheckpointRequest) returns (stream Signature);
+  rpc GetValidatorSet(GetCheckpointRequest) returns (ValidatorSet);
+  
+  // Double sign detection
+  rpc GetDoubleSignEvidences(DoubleSignQuery) returns (stream DoubleSignEvidence);
+  
+  // Validation and verification
+  rpc GetValidationPolicy(GetValidationPolicyRequest) returns (ValidationPolicy);
+  rpc GetVerificationRecords(GetVerificationRecordsRequest) returns (stream VerificationRecord);
+  rpc GetValidatorMetrics(GetValidatorMetricsRequest) returns (ValidatorMetrics);
+}
+
+// Request messages
+message GetCheckpointRequest {
+  string subnet_id = 1;
+  oneof by {
+    uint64 epoch = 2;
+    bytes cp_hash = 3;
+  }
+}
+
+message GetValidationPolicyRequest {
+  string intent_type = 1;  // Optional filter by intent type
+}
+
+message GetVerificationRecordsRequest {
+  string intent_id = 1;  // Optional filter by intent
+  string agent_id = 2;   // Optional filter by agent
+  uint32 limit = 3;      // Optional limit
+}
+
+message GetValidatorMetricsRequest {
+  string validator_id = 1;  // Optional specific validator
+}
+
+message DoubleSignQuery {
+  string validator_id = 1; // optional
+  uint64 epoch = 2;        // optional
+  uint32 limit = 3;        // optional, default 100
+}
+
+message DoubleSignEvidence {
+  string validator_id = 1;
+  uint64 epoch = 2;
+  bytes evidence = 3;      // opaque evidence blob
+}
+
+message ValidatorMetrics {
+  string validator_id = 1;
+  uint64 reports_verified = 2;
+  uint64 checkpoints_signed = 3;
+  double uptime_percentage = 4;
+  uint64 last_active = 5;
+}

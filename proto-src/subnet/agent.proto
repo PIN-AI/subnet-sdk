@@ -1,0 +1,20 @@
+syntax = "proto3";
+package subnet.v1;
+
+option go_package = "subnet/proto/subnet;pb";
+
+// Agent represents an agent in the subnet
+message Agent {
+  string id = 1;
+  repeated string capabilities = 2;
+  string endpoint = 3;
+  AgentStatus status = 4;
+  int64 last_seen = 5;
+}
+
+enum AgentStatus {
+  AGENT_STATUS_UNKNOWN = 0;
+  AGENT_STATUS_ACTIVE = 1;
+  AGENT_STATUS_INACTIVE = 2;
+  AGENT_STATUS_UNHEALTHY = 3;
+}

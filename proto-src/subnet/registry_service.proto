@@ -1,0 +1,70 @@
+syntax = "proto3";
+package subnet.v1;
+
+option go_package = "subnet/proto/subnet;pb";
+
+import "proto/subnet/agent.proto";
+
+service RegistryService {
+    rpc RegisterAgent(RegisterAgentRequest) returns (RegisterAgentResponse);
+    rpc UnregisterAgent(UnregisterAgentRequest) returns (UnregisterAgentResponse);
+    rpc DiscoverAgents(DiscoverAgentsRequest) returns (DiscoverAgentsResponse);
+    rpc Heartbeat(HeartbeatRequest) returns (HeartbeatResponse);
+    rpc GetAgent(GetAgentRequest) returns (GetAgentResponse);
+    rpc ListAgents(ListAgentsRequest) returns (ListAgentsResponse);
+}
+
+message RegisterAgentRequest {
+    Agent agent = 1;
+}
+
+message RegisterAgentResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message UnregisterAgentRequest {
+    string agent_id = 1;
+}
+
+message UnregisterAgentResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message DiscoverAgentsRequest {
+    repeated string capabilities = 1;
+}
+
+message DiscoverAgentsResponse {
+    repeated Agent agents = 1;
+}
+
+message HeartbeatRequest {
+    string agent_id = 1;
+    AgentStatus status = 2;
+}
+
+message HeartbeatResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message GetAgentRequest {
+    string agent_id = 1;
+}
+
+message GetAgentResponse {
+    Agent agent = 1;
+}
+
+message ListAgentsRequest {
+    // Optional filters
+    repeated string capabilities = 1;
+    AgentStatus status = 2;
+}
+
+message ListAgentsResponse {
+    repeated Agent agents = 1;
+    int32 total = 2;
+}
