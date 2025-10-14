@@ -16,7 +16,7 @@ A standalone Go SDK for building agents that interact with the Subnet protocol. 
 ## Installation
 
 ```bash
-go get github.com/pinai/subnet-sdk-go
+go get github.com/PIN-AI/subnet-sdk/go
 ```
 
 ## Quick Start
@@ -29,7 +29,7 @@ import (
     "log"
     "time"
 
-    sdk "github.com/pinai/subnet-sdk-go"
+    sdk "github.com/PIN-AI/subnet-sdk/go"
 )
 
 func main() {

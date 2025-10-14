@@ -208,7 +208,7 @@ import (
     "encoding/hex"
     "fmt"
     "log"
-    sdk "github.com/pinai/subnet-sdk-go"
+    sdk "github.com/PIN-AI/subnet-sdk/go"
 )
 
 type ReportingHandler struct {

@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	sdk "github.com/pinai/subnet-sdk-go"
+	sdk "github.com/PIN-AI/subnet-sdk/go"
 )
 
 // ExampleHandler implements task execution
@@ -121,8 +121,8 @@ func main() {
 		WithRegistryAddr("http://localhost:8092").  // HTTP registry
 		WithAgentEndpoint("http://localhost:7000"). // Agent HTTP endpoint
 		WithCapabilities("compute", "ml", "storage").
-		WithTaskTimeout(60 * time.Second).
-		WithBidTimeout(5 * time.Second).
+		WithTaskTimeout(60*time.Second).
+		WithBidTimeout(5*time.Second).
 		WithMaxConcurrentTasks(10).
 		WithBiddingStrategy("dynamic", 100, 1000).
 		Build()

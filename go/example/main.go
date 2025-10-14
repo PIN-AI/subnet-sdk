@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	sdk "github.com/pinai/subnet-sdk-go"
+	sdk "github.com/PIN-AI/subnet-sdk/go"
 )
 
 // ExampleHandler implements the SDK handler interface
@@ -47,8 +47,8 @@ func main() {
 		WithPrivateKey("0xYOUR_PRIVATE_KEY_HERE").
 		WithMatcherAddr("localhost:8090").
 		WithCapabilities("compute", "storage", "ml").
-		WithTaskTimeout(60 * time.Second).
-		WithBidTimeout(10 * time.Second).
+		WithTaskTimeout(60*time.Second).
+		WithBidTimeout(10*time.Second).
 		WithMaxConcurrentTasks(10).
 		WithBiddingStrategy("dynamic", 50, 500).
 		Build()

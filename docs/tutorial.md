@@ -13,7 +13,7 @@ A step-by-step guide to building your first Subnet agent.
 
 ### Go
 ```bash
-go get github.com/pinai/subnet-sdk-go
+go get github.com/PIN-AI/subnet-sdk/go
 ```
 
 ### Python
@@ -33,7 +33,7 @@ package main
 
 import (
     "log"
-    sdk "github.com/pinai/subnet-sdk-go"
+    sdk "github.com/PIN-AI/subnet-sdk/go"
 )
 
 func main() {

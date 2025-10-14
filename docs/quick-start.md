@@ -12,7 +12,7 @@ Get your first Subnet agent running in 5 minutes!
 
 ### Go
 ```bash
-go get github.com/pinai/subnet-sdk-go
+go get github.com/PIN-AI/subnet-sdk/go
 ```
 
 ### Python
@@ -33,7 +33,7 @@ import (
     "context"
     "fmt"
     "log"
-    sdk "github.com/pinai/subnet-sdk-go"
+    sdk "github.com/PIN-AI/subnet-sdk/go"
 )
 
 // Simple handler that echoes input

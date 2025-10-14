@@ -1,154 +1,92 @@
 # Subnet SDK
 
-Multi-language SDK for building agents that interact with the Subnet protocol.
+Official SDKs for building agents that interact with PinAI Subnets.
 
-## 🌟 Features
+## Structure
 
-- **Multi-Language Support**: Go and Python SDKs with consistent APIs
-- **Independent Design**: No dependencies on internal Subnet packages
-- **Security First**: No default IDs to prevent conflicts
-- **Simple Interface**: Clean handler-based architecture
-- **Built-in Metrics**: Performance and earnings tracking
-- **Thread-Safe**: Safe for concurrent use
+```
+subnet-sdk/
+├── proto-src/          # Proto source files (synced from pin_protocol)
+├── go/                 # Go SDK
+├── python/             # Python SDK
+└── scripts/            # Utility scripts
+```
 
-## 📦 Languages
+## Quick Start
 
 ### Go SDK
 
 ```bash
 cd go
-go get github.com/pinai/subnet-sdk-go
+make proto    # Generate proto files (optional, already generated)
+make build    # Build SDK
+make test     # Run tests
 ```
-
-[Go Documentation](go/README.md) | [Go Example](go/example/)
 
 ### Python SDK
 
 ```bash
-pip install subnet-sdk
+cd python
+pip install -e ".[dev]"  # Install SDK with dev dependencies
+make test                # Run tests
 ```
 
-[Python Documentation](python/README.md) | [Python Example](python/example.py)
+## Proto Management
 
-## 🚀 Quick Start
+Proto source files are maintained in `proto-src/` directory.
 
-### Go
+### Syncing Proto from pin_protocol
 
-```go
-import sdk "github.com/pinai/subnet-sdk-go"
+```bash
+# From local pin_protocol (development)
+./scripts/sync-proto.sh
 
-config, _ := sdk.NewConfigBuilder().
-    WithSubnetID("subnet-1").   // REQUIRED - no defaults
-    WithAgentID("agent-1").     // REQUIRED - no defaults
-    WithMatcherAddr("localhost:8090").
-    WithCapabilities("compute").
-    Build()
+# From GitHub tag (production)
+./scripts/sync-proto.sh v0.1.0
 
-agent, _ := sdk.New(config)
+# From GitHub main branch
+./scripts/sync-proto.sh main
 ```
 
-### Python
+After syncing, regenerate proto for both SDKs:
 
-```python
-from subnet_sdk import SDK, ConfigBuilder
-
-config = ConfigBuilder() \
-    .with_subnet_id("subnet-1") \     # REQUIRED - no defaults
-    .with_agent_id("agent-1") \       # REQUIRED - no defaults
-    .with_matcher_addr("localhost:8090") \
-    .with_capabilities("compute") \
-    .build()
-
-sdk = SDK(config)
+```bash
+cd go && make proto
+cd python && make proto
 ```
 
-## ⚠️ Important Configuration Rules
+## Development Workflow
 
-1. **No Default IDs**: SubnetID and AgentID MUST be explicitly configured
-   - Prevents identity conflicts in production
-   - Forces conscious ID selection
-   - No "subnet-1" or "agent-1" defaults
+### 1. Clone Repository
 
-2. **Required Fields** (all languages):
-   - `subnet_id` - Identifies the subnet
-   - `agent_id` - Unique agent identifier
-   - `matcher_addr` - Matcher service endpoint
-   - `capabilities` - At least one capability
-
-3. **Private Key Format**:
-   - 64 hex characters (32 bytes)
-   - Without "0x" prefix in Go
-   - With or without "0x" prefix in Python
-
-## 🏗️ Architecture
-
-```
-subnet-sdk/
-├── go/                    # Go SDK
-│   ├── sdk.go            # Core SDK
-│   ├── types.go          # Type definitions
-│   ├── config_builder.go # Configuration builder
-│   └── example/          # Example implementation
-├── python/               # Python SDK
-│   ├── subnet_sdk/       # Package directory
-│   │   ├── sdk.py       # Core SDK
-│   │   ├── types.py     # Type definitions
-│   │   └── config_builder.py
-│   ├── setup.py         # Package setup
-│   └── example.py       # Example implementation
-├── docs/                # Shared documentation
-└── examples/            # Cross-language examples
+```bash
+git clone https://github.com/PIN-AI/subnet-sdk
+cd subnet-sdk
 ```
 
-## 🔧 Development
-
-### Building
+### 2. Build and Test
 
 ```bash
 # Go
 cd go
 make build
-
-# Python
-cd python
-pip install -e .[dev]
-```
-
-### Testing
-
-```bash
-# Go
-cd go
 make test
 
 # Python
 cd python
-pytest
+pip install -e ".[dev]"
+make test
 ```
 
-## 📖 Documentation
+## Proto Source Strategy
 
-- [Quick Start Guide](docs/quick-start.md) - Get started in 5 minutes
-- [Complete Tutorial](docs/tutorial.md) - Step-by-step guide
-- [API Reference](docs/api-reference.md) - Complete API documentation
-- [Execution Reporting](docs/execution-reporting.md) - How to report results to Validators
-- [Go SDK Documentation](go/README.md) - Go-specific details
-- [Python SDK Documentation](python/README.md) - Python-specific details
+The SDK uses a **proto-in-repo** strategy:
 
-## 🤝 Contributing
+- ✅ Proto source files are committed to `proto-src/`
+- ✅ Generated files are also committed (for user convenience)
+- ✅ No external dependencies required for build
+- ✅ Version control over proto definitions
 
-1. Keep APIs consistent across languages
-2. No default IDs in any language
-3. Update all SDKs when adding features
-4. Write tests for all new functionality
-5. Update documentation
+## License
 
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) file
-
-## 🔗 Links
-
-- [Subnet Repository](https://github.com/pinai/subnet)
-- [Protocol Documentation](https://docs.pinai.io)
-- [Discord Community](https://discord.gg/pinai)
+MIT License

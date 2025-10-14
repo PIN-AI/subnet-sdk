@@ -25,7 +25,7 @@ subnet-sdk/go/
 ## go.mod 配置
 
 ```go
-module github.com/pinai/subnet-sdk-go
+module github.com/PIN-AI/subnet-sdk/go
 
 require (
     github.com/ethereum/go-ethereum v1.16.4
@@ -113,7 +113,7 @@ import pb "subnet/proto/subnet"
 ```
 
 **不要使用：**
-- ~~`import pb "github.com/pinai/subnet-sdk-go/proto/subnet"`~~（太长）
+- ~~`import pb "github.com/PIN-AI/subnet-sdk/go/proto/subnet"`~~（太长）
 - ~~`import pb "../../Subnet/proto/subnet"`~~（依赖主项目）
 
 ## 与主 Subnet 项目的关系
