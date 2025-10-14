@@ -1,4 +1,4 @@
-module github.com/pinai/subnet-sdk-go
+module github.com/PIN-AI/subnet-sdk/go
 
 go 1.24.0
 
