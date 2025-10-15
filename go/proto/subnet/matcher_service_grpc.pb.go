@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v4.25.3
-// source: proto/subnet/matcher_service.proto
+// source: subnet/matcher_service.proto
 
 package pb
 
@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion9
 
 const (
 	MatcherService_SubmitBid_FullMethodName             = "/subnet.v1.MatcherService/SubmitBid"
+	MatcherService_SubmitBidBatch_FullMethodName        = "/subnet.v1.MatcherService/SubmitBidBatch"
 	MatcherService_GetIntentSnapshot_FullMethodName     = "/subnet.v1.MatcherService/GetIntentSnapshot"
 	MatcherService_StreamIntents_FullMethodName         = "/subnet.v1.MatcherService/StreamIntents"
 	MatcherService_StreamBids_FullMethodName            = "/subnet.v1.MatcherService/StreamBids"
@@ -36,6 +37,8 @@ const (
 type MatcherServiceClient interface {
 	// Agent submits a bid to the matcher.
 	SubmitBid(ctx context.Context, in *SubmitBidRequest, opts ...grpc.CallOption) (*SubmitBidResponse, error)
+	// Agent submits multiple bids to the matcher in batch.
+	SubmitBidBatch(ctx context.Context, in *SubmitBidBatchRequest, opts ...grpc.CallOption) (*SubmitBidBatchResponse, error)
 	// Pull the latest bid snapshot for an intent.
 	GetIntentSnapshot(ctx context.Context, in *GetIntentSnapshotRequest, opts ...grpc.CallOption) (*GetIntentSnapshotResponse, error)
 	// Stream intents that require bidding (server side streaming).
@@ -62,6 +65,16 @@ func (c *matcherServiceClient) SubmitBid(ctx context.Context, in *SubmitBidReque
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SubmitBidResponse)
 	err := c.cc.Invoke(ctx, MatcherService_SubmitBid_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *matcherServiceClient) SubmitBidBatch(ctx context.Context, in *SubmitBidBatchRequest, opts ...grpc.CallOption) (*SubmitBidBatchResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SubmitBidBatchResponse)
+	err := c.cc.Invoke(ctx, MatcherService_SubmitBidBatch_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -163,6 +176,8 @@ type MatcherService_StreamTasksClient = grpc.ServerStreamingClient[ExecutionTask
 type MatcherServiceServer interface {
 	// Agent submits a bid to the matcher.
 	SubmitBid(context.Context, *SubmitBidRequest) (*SubmitBidResponse, error)
+	// Agent submits multiple bids to the matcher in batch.
+	SubmitBidBatch(context.Context, *SubmitBidBatchRequest) (*SubmitBidBatchResponse, error)
 	// Pull the latest bid snapshot for an intent.
 	GetIntentSnapshot(context.Context, *GetIntentSnapshotRequest) (*GetIntentSnapshotResponse, error)
 	// Stream intents that require bidding (server side streaming).
@@ -187,6 +202,9 @@ type UnimplementedMatcherServiceServer struct{}
 
 func (UnimplementedMatcherServiceServer) SubmitBid(context.Context, *SubmitBidRequest) (*SubmitBidResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitBid not implemented")
+}
+func (UnimplementedMatcherServiceServer) SubmitBidBatch(context.Context, *SubmitBidBatchRequest) (*SubmitBidBatchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitBidBatch not implemented")
 }
 func (UnimplementedMatcherServiceServer) GetIntentSnapshot(context.Context, *GetIntentSnapshotRequest) (*GetIntentSnapshotResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetIntentSnapshot not implemented")
@@ -241,6 +259,24 @@ func _MatcherService_SubmitBid_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MatcherServiceServer).SubmitBid(ctx, req.(*SubmitBidRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MatcherService_SubmitBidBatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitBidBatchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MatcherServiceServer).SubmitBidBatch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MatcherService_SubmitBidBatch_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MatcherServiceServer).SubmitBidBatch(ctx, req.(*SubmitBidBatchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -344,6 +380,10 @@ var MatcherService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _MatcherService_SubmitBid_Handler,
 		},
 		{
+			MethodName: "SubmitBidBatch",
+			Handler:    _MatcherService_SubmitBidBatch_Handler,
+		},
+		{
 			MethodName: "GetIntentSnapshot",
 			Handler:    _MatcherService_GetIntentSnapshot_Handler,
 		},
@@ -373,5 +413,5 @@ var MatcherService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "proto/subnet/matcher_service.proto",
+	Metadata: "subnet/matcher_service.proto",
 }

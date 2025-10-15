@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.8
 // 	protoc        v4.25.3
-// source: proto/subnet/execution_report.proto
+// source: subnet/execution_report.proto
 
 package pb
 
@@ -57,11 +57,11 @@ func (x ExecutionReport_Status) String() string {
 }
 
 func (ExecutionReport_Status) Descriptor() protoreflect.EnumDescriptor {
-	return file_proto_subnet_execution_report_proto_enumTypes[0].Descriptor()
+	return file_subnet_execution_report_proto_enumTypes[0].Descriptor()
 }
 
 func (ExecutionReport_Status) Type() protoreflect.EnumType {
-	return &file_proto_subnet_execution_report_proto_enumTypes[0]
+	return &file_subnet_execution_report_proto_enumTypes[0]
 }
 
 func (x ExecutionReport_Status) Number() protoreflect.EnumNumber {
@@ -70,7 +70,7 @@ func (x ExecutionReport_Status) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ExecutionReport_Status.Descriptor instead.
 func (ExecutionReport_Status) EnumDescriptor() ([]byte, []int) {
-	return file_proto_subnet_execution_report_proto_rawDescGZIP(), []int{0, 0}
+	return file_subnet_execution_report_proto_rawDescGZIP(), []int{0, 0}
 }
 
 // Execution report submitted by Agent Service to Validators.
@@ -93,7 +93,7 @@ type ExecutionReport struct {
 
 func (x *ExecutionReport) Reset() {
 	*x = ExecutionReport{}
-	mi := &file_proto_subnet_execution_report_proto_msgTypes[0]
+	mi := &file_subnet_execution_report_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -105,7 +105,7 @@ func (x *ExecutionReport) String() string {
 func (*ExecutionReport) ProtoMessage() {}
 
 func (x *ExecutionReport) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_execution_report_proto_msgTypes[0]
+	mi := &file_subnet_execution_report_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -118,7 +118,7 @@ func (x *ExecutionReport) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecutionReport.ProtoReflect.Descriptor instead.
 func (*ExecutionReport) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_execution_report_proto_rawDescGZIP(), []int{0}
+	return file_subnet_execution_report_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ExecutionReport) GetReportId() string {
@@ -213,7 +213,7 @@ type VerificationEvidence struct {
 
 func (x *VerificationEvidence) Reset() {
 	*x = VerificationEvidence{}
-	mi := &file_proto_subnet_execution_report_proto_msgTypes[1]
+	mi := &file_subnet_execution_report_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -225,7 +225,7 @@ func (x *VerificationEvidence) String() string {
 func (*VerificationEvidence) ProtoMessage() {}
 
 func (x *VerificationEvidence) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_execution_report_proto_msgTypes[1]
+	mi := &file_subnet_execution_report_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -238,7 +238,7 @@ func (x *VerificationEvidence) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerificationEvidence.ProtoReflect.Descriptor instead.
 func (*VerificationEvidence) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_execution_report_proto_rawDescGZIP(), []int{1}
+	return file_subnet_execution_report_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *VerificationEvidence) GetEnvFingerprint() []byte {
@@ -302,7 +302,7 @@ type ResourceUsage struct {
 
 func (x *ResourceUsage) Reset() {
 	*x = ResourceUsage{}
-	mi := &file_proto_subnet_execution_report_proto_msgTypes[2]
+	mi := &file_subnet_execution_report_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -314,7 +314,7 @@ func (x *ResourceUsage) String() string {
 func (*ResourceUsage) ProtoMessage() {}
 
 func (x *ResourceUsage) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_execution_report_proto_msgTypes[2]
+	mi := &file_subnet_execution_report_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -327,7 +327,7 @@ func (x *ResourceUsage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResourceUsage.ProtoReflect.Descriptor instead.
 func (*ResourceUsage) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_execution_report_proto_rawDescGZIP(), []int{2}
+	return file_subnet_execution_report_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ResourceUsage) GetCpuMs() uint64 {
@@ -369,7 +369,7 @@ type ErrorInfo struct {
 
 func (x *ErrorInfo) Reset() {
 	*x = ErrorInfo{}
-	mi := &file_proto_subnet_execution_report_proto_msgTypes[3]
+	mi := &file_subnet_execution_report_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -381,7 +381,7 @@ func (x *ErrorInfo) String() string {
 func (*ErrorInfo) ProtoMessage() {}
 
 func (x *ErrorInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_execution_report_proto_msgTypes[3]
+	mi := &file_subnet_execution_report_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -394,7 +394,7 @@ func (x *ErrorInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ErrorInfo.ProtoReflect.Descriptor instead.
 func (*ErrorInfo) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_execution_report_proto_rawDescGZIP(), []int{3}
+	return file_subnet_execution_report_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ErrorInfo) GetCode() string {
@@ -418,11 +418,11 @@ func (x *ErrorInfo) GetDetails() []byte {
 	return nil
 }
 
-var File_proto_subnet_execution_report_proto protoreflect.FileDescriptor
+var File_subnet_execution_report_proto protoreflect.FileDescriptor
 
-const file_proto_subnet_execution_report_proto_rawDesc = "" +
+const file_subnet_execution_report_proto_rawDesc = "" +
 	"\n" +
-	"#proto/subnet/execution_report.proto\x12\tsubnet.v1\x1a\x19proto/subnet/report.proto\"\x88\x04\n" +
+	"\x1dsubnet/execution_report.proto\x12\tsubnet.v1\x1a\x13subnet/report.proto\"\x88\x04\n" +
 	"\x0fExecutionReport\x12\x1b\n" +
 	"\treport_id\x18\x01 \x01(\tR\breportId\x12#\n" +
 	"\rassignment_id\x18\x02 \x01(\tR\fassignmentId\x12\x1b\n" +
@@ -464,20 +464,20 @@ const file_proto_subnet_execution_report_proto_rawDesc = "" +
 	"\adetails\x18\x03 \x01(\fR\adetailsB\x18Z\x16subnet/proto/subnet;pbb\x06proto3"
 
 var (
-	file_proto_subnet_execution_report_proto_rawDescOnce sync.Once
-	file_proto_subnet_execution_report_proto_rawDescData []byte
+	file_subnet_execution_report_proto_rawDescOnce sync.Once
+	file_subnet_execution_report_proto_rawDescData []byte
 )
 
-func file_proto_subnet_execution_report_proto_rawDescGZIP() []byte {
-	file_proto_subnet_execution_report_proto_rawDescOnce.Do(func() {
-		file_proto_subnet_execution_report_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_subnet_execution_report_proto_rawDesc), len(file_proto_subnet_execution_report_proto_rawDesc)))
+func file_subnet_execution_report_proto_rawDescGZIP() []byte {
+	file_subnet_execution_report_proto_rawDescOnce.Do(func() {
+		file_subnet_execution_report_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_subnet_execution_report_proto_rawDesc), len(file_subnet_execution_report_proto_rawDesc)))
 	})
-	return file_proto_subnet_execution_report_proto_rawDescData
+	return file_subnet_execution_report_proto_rawDescData
 }
 
-var file_proto_subnet_execution_report_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_proto_subnet_execution_report_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_proto_subnet_execution_report_proto_goTypes = []any{
+var file_subnet_execution_report_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_subnet_execution_report_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_subnet_execution_report_proto_goTypes = []any{
 	(ExecutionReport_Status)(0),  // 0: subnet.v1.ExecutionReport.Status
 	(*ExecutionReport)(nil),      // 1: subnet.v1.ExecutionReport
 	(*VerificationEvidence)(nil), // 2: subnet.v1.VerificationEvidence
@@ -485,7 +485,7 @@ var file_proto_subnet_execution_report_proto_goTypes = []any{
 	(*ErrorInfo)(nil),            // 4: subnet.v1.ErrorInfo
 	(*RootLayerRef)(nil),         // 5: subnet.v1.RootLayerRef
 }
-var file_proto_subnet_execution_report_proto_depIdxs = []int32{
+var file_subnet_execution_report_proto_depIdxs = []int32{
 	0, // 0: subnet.v1.ExecutionReport.status:type_name -> subnet.v1.ExecutionReport.Status
 	2, // 1: subnet.v1.ExecutionReport.evidence:type_name -> subnet.v1.VerificationEvidence
 	4, // 2: subnet.v1.ExecutionReport.error:type_name -> subnet.v1.ErrorInfo
@@ -498,28 +498,28 @@ var file_proto_subnet_execution_report_proto_depIdxs = []int32{
 	0, // [0:5] is the sub-list for field type_name
 }
 
-func init() { file_proto_subnet_execution_report_proto_init() }
-func file_proto_subnet_execution_report_proto_init() {
-	if File_proto_subnet_execution_report_proto != nil {
+func init() { file_subnet_execution_report_proto_init() }
+func file_subnet_execution_report_proto_init() {
+	if File_subnet_execution_report_proto != nil {
 		return
 	}
-	file_proto_subnet_report_proto_init()
+	file_subnet_report_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_subnet_execution_report_proto_rawDesc), len(file_proto_subnet_execution_report_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subnet_execution_report_proto_rawDesc), len(file_subnet_execution_report_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_proto_subnet_execution_report_proto_goTypes,
-		DependencyIndexes: file_proto_subnet_execution_report_proto_depIdxs,
-		EnumInfos:         file_proto_subnet_execution_report_proto_enumTypes,
-		MessageInfos:      file_proto_subnet_execution_report_proto_msgTypes,
+		GoTypes:           file_subnet_execution_report_proto_goTypes,
+		DependencyIndexes: file_subnet_execution_report_proto_depIdxs,
+		EnumInfos:         file_subnet_execution_report_proto_enumTypes,
+		MessageInfos:      file_subnet_execution_report_proto_msgTypes,
 	}.Build()
-	File_proto_subnet_execution_report_proto = out.File
-	file_proto_subnet_execution_report_proto_goTypes = nil
-	file_proto_subnet_execution_report_proto_depIdxs = nil
+	File_subnet_execution_report_proto = out.File
+	file_subnet_execution_report_proto_goTypes = nil
+	file_subnet_execution_report_proto_depIdxs = nil
 }

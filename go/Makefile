@@ -12,6 +12,9 @@ proto:
 		--go-grpc_out=. \
 		--go-grpc_opt=paths=source_relative \
 		$(PROTO_SRC)/subnet/*.proto
+	@mkdir -p proto/subnet
+	@mv subnet/*.pb.go proto/subnet/ 2>/dev/null || true
+	@rmdir subnet 2>/dev/null || true
 	@echo "✓ Proto generation complete"
 
 # Check if proto files are in sync with proto-src

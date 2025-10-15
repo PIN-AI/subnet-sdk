@@ -3,11 +3,11 @@ package subnet.v1;
 
 option go_package = "subnet/proto/subnet;pb";
 
-import "proto/subnet/execution_report.proto";
-import "proto/subnet/validation.proto";
-import "proto/subnet/checkpoint.proto";
-import "proto/subnet/validator.proto";
-import "proto/subnet/report.proto";
+import "subnet/execution_report.proto";
+import "subnet/validation.proto";
+import "subnet/checkpoint.proto";
+import "subnet/validator.proto";
+import "subnet/report.proto";
 
 // Common acknowledgment message
 message Ack { 
@@ -19,7 +19,10 @@ message Ack {
 service ValidatorService {
   // Agent submits execution report to validators
   rpc SubmitExecutionReport(ExecutionReport) returns (Receipt);
-  
+
+  // Agent submits multiple execution reports in batch
+  rpc SubmitExecutionReportBatch(ExecutionReportBatchRequest) returns (ExecutionReportBatchResponse);
+
   // Checkpoint operations
   rpc GetCheckpoint(GetCheckpointRequest) returns (CheckpointHeader);
   rpc ProposeHeader(CheckpointHeader) returns (Ack);
@@ -77,4 +80,19 @@ message ValidatorMetrics {
   uint64 checkpoints_signed = 3;
   double uptime_percentage = 4;
   uint64 last_active = 5;
+}
+
+// Batch execution report submission request
+message ExecutionReportBatchRequest {
+  repeated ExecutionReport reports = 1;
+  string batch_id = 2;           // Optional batch identifier for idempotency
+  optional bool partial_ok = 3;  // Allow partial success (default: false)
+}
+
+// Batch execution report submission response
+message ExecutionReportBatchResponse {
+  repeated Receipt receipts = 1;  // Per-report responses aligned with request order
+  int32 success = 2;              // Number of successful submissions
+  int32 failed = 3;               // Number of failed submissions
+  string msg = 4;                 // Optional summary message
 }

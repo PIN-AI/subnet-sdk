@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.8
 // 	protoc        v4.25.3
-// source: proto/subnet/checkpoint.proto
+// source: subnet/checkpoint.proto
 
 package pb
 
@@ -37,7 +37,7 @@ type CommitmentRoots struct {
 
 func (x *CommitmentRoots) Reset() {
 	*x = CommitmentRoots{}
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[0]
+	mi := &file_subnet_checkpoint_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -49,7 +49,7 @@ func (x *CommitmentRoots) String() string {
 func (*CommitmentRoots) ProtoMessage() {}
 
 func (x *CommitmentRoots) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[0]
+	mi := &file_subnet_checkpoint_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62,7 +62,7 @@ func (x *CommitmentRoots) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CommitmentRoots.ProtoReflect.Descriptor instead.
 func (*CommitmentRoots) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_checkpoint_proto_rawDescGZIP(), []int{0}
+	return file_subnet_checkpoint_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CommitmentRoots) GetAgentRoot() []byte {
@@ -134,7 +134,7 @@ type DACommitment struct {
 
 func (x *DACommitment) Reset() {
 	*x = DACommitment{}
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[1]
+	mi := &file_subnet_checkpoint_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -146,7 +146,7 @@ func (x *DACommitment) String() string {
 func (*DACommitment) ProtoMessage() {}
 
 func (x *DACommitment) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[1]
+	mi := &file_subnet_checkpoint_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -159,7 +159,7 @@ func (x *DACommitment) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DACommitment.ProtoReflect.Descriptor instead.
 func (*DACommitment) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_checkpoint_proto_rawDescGZIP(), []int{1}
+	return file_subnet_checkpoint_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *DACommitment) GetKind() string {
@@ -207,7 +207,7 @@ type EpochSlot struct {
 
 func (x *EpochSlot) Reset() {
 	*x = EpochSlot{}
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[2]
+	mi := &file_subnet_checkpoint_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -219,7 +219,7 @@ func (x *EpochSlot) String() string {
 func (*EpochSlot) ProtoMessage() {}
 
 func (x *EpochSlot) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[2]
+	mi := &file_subnet_checkpoint_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -232,7 +232,7 @@ func (x *EpochSlot) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EpochSlot.ProtoReflect.Descriptor instead.
 func (*EpochSlot) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_checkpoint_proto_rawDescGZIP(), []int{2}
+	return file_subnet_checkpoint_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *EpochSlot) GetEpoch() uint64 {
@@ -275,7 +275,7 @@ type CheckpointHeader struct {
 
 func (x *CheckpointHeader) Reset() {
 	*x = CheckpointHeader{}
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[3]
+	mi := &file_subnet_checkpoint_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -287,7 +287,7 @@ func (x *CheckpointHeader) String() string {
 func (*CheckpointHeader) ProtoMessage() {}
 
 func (x *CheckpointHeader) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[3]
+	mi := &file_subnet_checkpoint_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -300,7 +300,7 @@ func (x *CheckpointHeader) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckpointHeader.ProtoReflect.Descriptor instead.
 func (*CheckpointHeader) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_checkpoint_proto_rawDescGZIP(), []int{3}
+	return file_subnet_checkpoint_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CheckpointHeader) GetSubnetId() string {
@@ -428,7 +428,7 @@ type CheckpointSignatures struct {
 
 func (x *CheckpointSignatures) Reset() {
 	*x = CheckpointSignatures{}
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[4]
+	mi := &file_subnet_checkpoint_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -440,7 +440,7 @@ func (x *CheckpointSignatures) String() string {
 func (*CheckpointSignatures) ProtoMessage() {}
 
 func (x *CheckpointSignatures) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[4]
+	mi := &file_subnet_checkpoint_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -453,7 +453,7 @@ func (x *CheckpointSignatures) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CheckpointSignatures.ProtoReflect.Descriptor instead.
 func (*CheckpointSignatures) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_checkpoint_proto_rawDescGZIP(), []int{4}
+	return file_subnet_checkpoint_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CheckpointSignatures) GetEcdsaSignatures() [][]byte {
@@ -497,7 +497,7 @@ type Signature struct {
 
 func (x *Signature) Reset() {
 	*x = Signature{}
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[5]
+	mi := &file_subnet_checkpoint_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -509,7 +509,7 @@ func (x *Signature) String() string {
 func (*Signature) ProtoMessage() {}
 
 func (x *Signature) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_checkpoint_proto_msgTypes[5]
+	mi := &file_subnet_checkpoint_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -522,7 +522,7 @@ func (x *Signature) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Signature.ProtoReflect.Descriptor instead.
 func (*Signature) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_checkpoint_proto_rawDescGZIP(), []int{5}
+	return file_subnet_checkpoint_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *Signature) GetAlgo() string {
@@ -560,11 +560,11 @@ func (x *Signature) GetSignerId() string {
 	return ""
 }
 
-var File_proto_subnet_checkpoint_proto protoreflect.FileDescriptor
+var File_subnet_checkpoint_proto protoreflect.FileDescriptor
 
-const file_proto_subnet_checkpoint_proto_rawDesc = "" +
+const file_subnet_checkpoint_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproto/subnet/checkpoint.proto\x12\tsubnet.v1\"\xb0\x02\n" +
+	"\x17subnet/checkpoint.proto\x12\tsubnet.v1\"\xb0\x02\n" +
 	"\x0fCommitmentRoots\x12\x1d\n" +
 	"\n" +
 	"agent_root\x18\x01 \x01(\fR\tagentRoot\x12,\n" +
@@ -621,19 +621,19 @@ const file_proto_subnet_checkpoint_proto_rawDesc = "" +
 	"\tsigner_id\x18\x05 \x01(\tR\bsignerIdB\x18Z\x16subnet/proto/subnet;pbb\x06proto3"
 
 var (
-	file_proto_subnet_checkpoint_proto_rawDescOnce sync.Once
-	file_proto_subnet_checkpoint_proto_rawDescData []byte
+	file_subnet_checkpoint_proto_rawDescOnce sync.Once
+	file_subnet_checkpoint_proto_rawDescData []byte
 )
 
-func file_proto_subnet_checkpoint_proto_rawDescGZIP() []byte {
-	file_proto_subnet_checkpoint_proto_rawDescOnce.Do(func() {
-		file_proto_subnet_checkpoint_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_subnet_checkpoint_proto_rawDesc), len(file_proto_subnet_checkpoint_proto_rawDesc)))
+func file_subnet_checkpoint_proto_rawDescGZIP() []byte {
+	file_subnet_checkpoint_proto_rawDescOnce.Do(func() {
+		file_subnet_checkpoint_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_subnet_checkpoint_proto_rawDesc), len(file_subnet_checkpoint_proto_rawDesc)))
 	})
-	return file_proto_subnet_checkpoint_proto_rawDescData
+	return file_subnet_checkpoint_proto_rawDescData
 }
 
-var file_proto_subnet_checkpoint_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_proto_subnet_checkpoint_proto_goTypes = []any{
+var file_subnet_checkpoint_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_subnet_checkpoint_proto_goTypes = []any{
 	(*CommitmentRoots)(nil),      // 0: subnet.v1.CommitmentRoots
 	(*DACommitment)(nil),         // 1: subnet.v1.DACommitment
 	(*EpochSlot)(nil),            // 2: subnet.v1.EpochSlot
@@ -641,7 +641,7 @@ var file_proto_subnet_checkpoint_proto_goTypes = []any{
 	(*CheckpointSignatures)(nil), // 4: subnet.v1.CheckpointSignatures
 	(*Signature)(nil),            // 5: subnet.v1.Signature
 }
-var file_proto_subnet_checkpoint_proto_depIdxs = []int32{
+var file_subnet_checkpoint_proto_depIdxs = []int32{
 	0, // 0: subnet.v1.CheckpointHeader.roots:type_name -> subnet.v1.CommitmentRoots
 	1, // 1: subnet.v1.CheckpointHeader.da_commitments:type_name -> subnet.v1.DACommitment
 	2, // 2: subnet.v1.CheckpointHeader.epoch_slot:type_name -> subnet.v1.EpochSlot
@@ -653,26 +653,26 @@ var file_proto_subnet_checkpoint_proto_depIdxs = []int32{
 	0, // [0:4] is the sub-list for field type_name
 }
 
-func init() { file_proto_subnet_checkpoint_proto_init() }
-func file_proto_subnet_checkpoint_proto_init() {
-	if File_proto_subnet_checkpoint_proto != nil {
+func init() { file_subnet_checkpoint_proto_init() }
+func file_subnet_checkpoint_proto_init() {
+	if File_subnet_checkpoint_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_subnet_checkpoint_proto_rawDesc), len(file_proto_subnet_checkpoint_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subnet_checkpoint_proto_rawDesc), len(file_subnet_checkpoint_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_proto_subnet_checkpoint_proto_goTypes,
-		DependencyIndexes: file_proto_subnet_checkpoint_proto_depIdxs,
-		MessageInfos:      file_proto_subnet_checkpoint_proto_msgTypes,
+		GoTypes:           file_subnet_checkpoint_proto_goTypes,
+		DependencyIndexes: file_subnet_checkpoint_proto_depIdxs,
+		MessageInfos:      file_subnet_checkpoint_proto_msgTypes,
 	}.Build()
-	File_proto_subnet_checkpoint_proto = out.File
-	file_proto_subnet_checkpoint_proto_goTypes = nil
-	file_proto_subnet_checkpoint_proto_depIdxs = nil
+	File_subnet_checkpoint_proto = out.File
+	file_subnet_checkpoint_proto_goTypes = nil
+	file_subnet_checkpoint_proto_depIdxs = nil
 }

@@ -3,7 +3,7 @@ package subnet.v1;
 
 option go_package = "subnet/proto/subnet;pb";
 
-import "proto/subnet/checkpoint.proto";
+import "subnet/checkpoint.proto";
 
 message Validator {
   string id = 1;

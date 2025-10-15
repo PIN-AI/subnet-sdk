@@ -3,13 +3,16 @@ package subnet.v1;
 
 option go_package = "subnet/proto/subnet;pb";
 
-import "proto/subnet/bid.proto";
-import "proto/subnet/matcher.proto";
+import "subnet/bid.proto";
+import "subnet/matcher.proto";
 
 // MatcherService defines the bid intake and matching control plane inside subnets.
 service MatcherService {
   // Agent submits a bid to the matcher.
   rpc SubmitBid(SubmitBidRequest) returns (SubmitBidResponse);
+
+  // Agent submits multiple bids to the matcher in batch.
+  rpc SubmitBidBatch(SubmitBidBatchRequest) returns (SubmitBidBatchResponse);
 
   // Pull the latest bid snapshot for an intent.
   rpc GetIntentSnapshot(GetIntentSnapshotRequest) returns (GetIntentSnapshotResponse);

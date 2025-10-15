@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.8
 // 	protoc        v4.25.3
-// source: proto/subnet/matcher_service.proto
+// source: subnet/matcher_service.proto
 
 package pb
 
@@ -31,7 +31,7 @@ type StreamTasksRequest struct {
 
 func (x *StreamTasksRequest) Reset() {
 	*x = StreamTasksRequest{}
-	mi := &file_proto_subnet_matcher_service_proto_msgTypes[0]
+	mi := &file_subnet_matcher_service_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +43,7 @@ func (x *StreamTasksRequest) String() string {
 func (*StreamTasksRequest) ProtoMessage() {}
 
 func (x *StreamTasksRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_matcher_service_proto_msgTypes[0]
+	mi := &file_subnet_matcher_service_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +56,7 @@ func (x *StreamTasksRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamTasksRequest.ProtoReflect.Descriptor instead.
 func (*StreamTasksRequest) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_matcher_service_proto_rawDescGZIP(), []int{0}
+	return file_subnet_matcher_service_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *StreamTasksRequest) GetAgentId() string {
@@ -83,7 +83,7 @@ type ExecutionTask struct {
 
 func (x *ExecutionTask) Reset() {
 	*x = ExecutionTask{}
-	mi := &file_proto_subnet_matcher_service_proto_msgTypes[1]
+	mi := &file_subnet_matcher_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -95,7 +95,7 @@ func (x *ExecutionTask) String() string {
 func (*ExecutionTask) ProtoMessage() {}
 
 func (x *ExecutionTask) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_matcher_service_proto_msgTypes[1]
+	mi := &file_subnet_matcher_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -108,7 +108,7 @@ func (x *ExecutionTask) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecutionTask.ProtoReflect.Descriptor instead.
 func (*ExecutionTask) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_matcher_service_proto_rawDescGZIP(), []int{1}
+	return file_subnet_matcher_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ExecutionTask) GetTaskId() string {
@@ -167,11 +167,11 @@ func (x *ExecutionTask) GetIntentType() string {
 	return ""
 }
 
-var File_proto_subnet_matcher_service_proto protoreflect.FileDescriptor
+var File_subnet_matcher_service_proto protoreflect.FileDescriptor
 
-const file_proto_subnet_matcher_service_proto_rawDesc = "" +
+const file_subnet_matcher_service_proto_rawDesc = "" +
 	"\n" +
-	"\"proto/subnet/matcher_service.proto\x12\tsubnet.v1\x1a\x16proto/subnet/bid.proto\x1a\x1aproto/subnet/matcher.proto\"/\n" +
+	"\x1csubnet/matcher_service.proto\x12\tsubnet.v1\x1a\x10subnet/bid.proto\x1a\x14subnet/matcher.proto\"/\n" +
 	"\x12StreamTasksRequest\x12\x19\n" +
 	"\bagent_id\x18\x01 \x01(\tR\aagentId\"\xf4\x01\n" +
 	"\rExecutionTask\x12\x17\n" +
@@ -185,9 +185,10 @@ const file_proto_subnet_matcher_service_proto_rawDesc = "" +
 	"\vintent_data\x18\a \x01(\fR\n" +
 	"intentData\x12\x1f\n" +
 	"\vintent_type\x18\b \x01(\tR\n" +
-	"intentType2\xbe\x04\n" +
+	"intentType2\x95\x05\n" +
 	"\x0eMatcherService\x12F\n" +
-	"\tSubmitBid\x12\x1b.subnet.v1.SubmitBidRequest\x1a\x1c.subnet.v1.SubmitBidResponse\x12^\n" +
+	"\tSubmitBid\x12\x1b.subnet.v1.SubmitBidRequest\x1a\x1c.subnet.v1.SubmitBidResponse\x12U\n" +
+	"\x0eSubmitBidBatch\x12 .subnet.v1.SubmitBidBatchRequest\x1a!.subnet.v1.SubmitBidBatchResponse\x12^\n" +
 	"\x11GetIntentSnapshot\x12#.subnet.v1.GetIntentSnapshotRequest\x1a$.subnet.v1.GetIntentSnapshotResponse\x12R\n" +
 	"\rStreamIntents\x12\x1f.subnet.v1.StreamIntentsRequest\x1a\x1e.subnet.v1.MatcherIntentUpdate0\x01\x12A\n" +
 	"\n" +
@@ -197,78 +198,82 @@ const file_proto_subnet_matcher_service_proto_rawDesc = "" +
 	"\vStreamTasks\x12\x1d.subnet.v1.StreamTasksRequest\x1a\x18.subnet.v1.ExecutionTask0\x01B\x18Z\x16subnet/proto/subnet;pbb\x06proto3"
 
 var (
-	file_proto_subnet_matcher_service_proto_rawDescOnce sync.Once
-	file_proto_subnet_matcher_service_proto_rawDescData []byte
+	file_subnet_matcher_service_proto_rawDescOnce sync.Once
+	file_subnet_matcher_service_proto_rawDescData []byte
 )
 
-func file_proto_subnet_matcher_service_proto_rawDescGZIP() []byte {
-	file_proto_subnet_matcher_service_proto_rawDescOnce.Do(func() {
-		file_proto_subnet_matcher_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_subnet_matcher_service_proto_rawDesc), len(file_proto_subnet_matcher_service_proto_rawDesc)))
+func file_subnet_matcher_service_proto_rawDescGZIP() []byte {
+	file_subnet_matcher_service_proto_rawDescOnce.Do(func() {
+		file_subnet_matcher_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_subnet_matcher_service_proto_rawDesc), len(file_subnet_matcher_service_proto_rawDesc)))
 	})
-	return file_proto_subnet_matcher_service_proto_rawDescData
+	return file_subnet_matcher_service_proto_rawDescData
 }
 
-var file_proto_subnet_matcher_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_proto_subnet_matcher_service_proto_goTypes = []any{
+var file_subnet_matcher_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_subnet_matcher_service_proto_goTypes = []any{
 	(*StreamTasksRequest)(nil),        // 0: subnet.v1.StreamTasksRequest
 	(*ExecutionTask)(nil),             // 1: subnet.v1.ExecutionTask
 	(*SubmitBidRequest)(nil),          // 2: subnet.v1.SubmitBidRequest
-	(*GetIntentSnapshotRequest)(nil),  // 3: subnet.v1.GetIntentSnapshotRequest
-	(*StreamIntentsRequest)(nil),      // 4: subnet.v1.StreamIntentsRequest
-	(*StreamBidsRequest)(nil),         // 5: subnet.v1.StreamBidsRequest
-	(*MatchingResult)(nil),            // 6: subnet.v1.MatchingResult
-	(*RespondToTaskRequest)(nil),      // 7: subnet.v1.RespondToTaskRequest
-	(*SubmitBidResponse)(nil),         // 8: subnet.v1.SubmitBidResponse
-	(*GetIntentSnapshotResponse)(nil), // 9: subnet.v1.GetIntentSnapshotResponse
-	(*MatcherIntentUpdate)(nil),       // 10: subnet.v1.MatcherIntentUpdate
-	(*BidEvent)(nil),                  // 11: subnet.v1.BidEvent
-	(*BidSubmissionAck)(nil),          // 12: subnet.v1.BidSubmissionAck
-	(*RespondToTaskResponse)(nil),     // 13: subnet.v1.RespondToTaskResponse
+	(*SubmitBidBatchRequest)(nil),     // 3: subnet.v1.SubmitBidBatchRequest
+	(*GetIntentSnapshotRequest)(nil),  // 4: subnet.v1.GetIntentSnapshotRequest
+	(*StreamIntentsRequest)(nil),      // 5: subnet.v1.StreamIntentsRequest
+	(*StreamBidsRequest)(nil),         // 6: subnet.v1.StreamBidsRequest
+	(*MatchingResult)(nil),            // 7: subnet.v1.MatchingResult
+	(*RespondToTaskRequest)(nil),      // 8: subnet.v1.RespondToTaskRequest
+	(*SubmitBidResponse)(nil),         // 9: subnet.v1.SubmitBidResponse
+	(*SubmitBidBatchResponse)(nil),    // 10: subnet.v1.SubmitBidBatchResponse
+	(*GetIntentSnapshotResponse)(nil), // 11: subnet.v1.GetIntentSnapshotResponse
+	(*MatcherIntentUpdate)(nil),       // 12: subnet.v1.MatcherIntentUpdate
+	(*BidEvent)(nil),                  // 13: subnet.v1.BidEvent
+	(*BidSubmissionAck)(nil),          // 14: subnet.v1.BidSubmissionAck
+	(*RespondToTaskResponse)(nil),     // 15: subnet.v1.RespondToTaskResponse
 }
-var file_proto_subnet_matcher_service_proto_depIdxs = []int32{
+var file_subnet_matcher_service_proto_depIdxs = []int32{
 	2,  // 0: subnet.v1.MatcherService.SubmitBid:input_type -> subnet.v1.SubmitBidRequest
-	3,  // 1: subnet.v1.MatcherService.GetIntentSnapshot:input_type -> subnet.v1.GetIntentSnapshotRequest
-	4,  // 2: subnet.v1.MatcherService.StreamIntents:input_type -> subnet.v1.StreamIntentsRequest
-	5,  // 3: subnet.v1.MatcherService.StreamBids:input_type -> subnet.v1.StreamBidsRequest
-	6,  // 4: subnet.v1.MatcherService.PublishMatchingResult:input_type -> subnet.v1.MatchingResult
-	7,  // 5: subnet.v1.MatcherService.RespondToTask:input_type -> subnet.v1.RespondToTaskRequest
-	0,  // 6: subnet.v1.MatcherService.StreamTasks:input_type -> subnet.v1.StreamTasksRequest
-	8,  // 7: subnet.v1.MatcherService.SubmitBid:output_type -> subnet.v1.SubmitBidResponse
-	9,  // 8: subnet.v1.MatcherService.GetIntentSnapshot:output_type -> subnet.v1.GetIntentSnapshotResponse
-	10, // 9: subnet.v1.MatcherService.StreamIntents:output_type -> subnet.v1.MatcherIntentUpdate
-	11, // 10: subnet.v1.MatcherService.StreamBids:output_type -> subnet.v1.BidEvent
-	12, // 11: subnet.v1.MatcherService.PublishMatchingResult:output_type -> subnet.v1.BidSubmissionAck
-	13, // 12: subnet.v1.MatcherService.RespondToTask:output_type -> subnet.v1.RespondToTaskResponse
-	1,  // 13: subnet.v1.MatcherService.StreamTasks:output_type -> subnet.v1.ExecutionTask
-	7,  // [7:14] is the sub-list for method output_type
-	0,  // [0:7] is the sub-list for method input_type
+	3,  // 1: subnet.v1.MatcherService.SubmitBidBatch:input_type -> subnet.v1.SubmitBidBatchRequest
+	4,  // 2: subnet.v1.MatcherService.GetIntentSnapshot:input_type -> subnet.v1.GetIntentSnapshotRequest
+	5,  // 3: subnet.v1.MatcherService.StreamIntents:input_type -> subnet.v1.StreamIntentsRequest
+	6,  // 4: subnet.v1.MatcherService.StreamBids:input_type -> subnet.v1.StreamBidsRequest
+	7,  // 5: subnet.v1.MatcherService.PublishMatchingResult:input_type -> subnet.v1.MatchingResult
+	8,  // 6: subnet.v1.MatcherService.RespondToTask:input_type -> subnet.v1.RespondToTaskRequest
+	0,  // 7: subnet.v1.MatcherService.StreamTasks:input_type -> subnet.v1.StreamTasksRequest
+	9,  // 8: subnet.v1.MatcherService.SubmitBid:output_type -> subnet.v1.SubmitBidResponse
+	10, // 9: subnet.v1.MatcherService.SubmitBidBatch:output_type -> subnet.v1.SubmitBidBatchResponse
+	11, // 10: subnet.v1.MatcherService.GetIntentSnapshot:output_type -> subnet.v1.GetIntentSnapshotResponse
+	12, // 11: subnet.v1.MatcherService.StreamIntents:output_type -> subnet.v1.MatcherIntentUpdate
+	13, // 12: subnet.v1.MatcherService.StreamBids:output_type -> subnet.v1.BidEvent
+	14, // 13: subnet.v1.MatcherService.PublishMatchingResult:output_type -> subnet.v1.BidSubmissionAck
+	15, // 14: subnet.v1.MatcherService.RespondToTask:output_type -> subnet.v1.RespondToTaskResponse
+	1,  // 15: subnet.v1.MatcherService.StreamTasks:output_type -> subnet.v1.ExecutionTask
+	8,  // [8:16] is the sub-list for method output_type
+	0,  // [0:8] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_proto_subnet_matcher_service_proto_init() }
-func file_proto_subnet_matcher_service_proto_init() {
-	if File_proto_subnet_matcher_service_proto != nil {
+func init() { file_subnet_matcher_service_proto_init() }
+func file_subnet_matcher_service_proto_init() {
+	if File_subnet_matcher_service_proto != nil {
 		return
 	}
-	file_proto_subnet_bid_proto_init()
-	file_proto_subnet_matcher_proto_init()
+	file_subnet_bid_proto_init()
+	file_subnet_matcher_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_subnet_matcher_service_proto_rawDesc), len(file_proto_subnet_matcher_service_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subnet_matcher_service_proto_rawDesc), len(file_subnet_matcher_service_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_subnet_matcher_service_proto_goTypes,
-		DependencyIndexes: file_proto_subnet_matcher_service_proto_depIdxs,
-		MessageInfos:      file_proto_subnet_matcher_service_proto_msgTypes,
+		GoTypes:           file_subnet_matcher_service_proto_goTypes,
+		DependencyIndexes: file_subnet_matcher_service_proto_depIdxs,
+		MessageInfos:      file_subnet_matcher_service_proto_msgTypes,
 	}.Build()
-	File_proto_subnet_matcher_service_proto = out.File
-	file_proto_subnet_matcher_service_proto_goTypes = nil
-	file_proto_subnet_matcher_service_proto_depIdxs = nil
+	File_subnet_matcher_service_proto = out.File
+	file_subnet_matcher_service_proto_goTypes = nil
+	file_subnet_matcher_service_proto_depIdxs = nil
 }

@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.8
 // 	protoc        v4.25.3
-// source: proto/subnet/report.proto
+// source: subnet/report.proto
 
 package pb
 
@@ -32,7 +32,7 @@ type RootLayerRef struct {
 
 func (x *RootLayerRef) Reset() {
 	*x = RootLayerRef{}
-	mi := &file_proto_subnet_report_proto_msgTypes[0]
+	mi := &file_subnet_report_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -44,7 +44,7 @@ func (x *RootLayerRef) String() string {
 func (*RootLayerRef) ProtoMessage() {}
 
 func (x *RootLayerRef) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_report_proto_msgTypes[0]
+	mi := &file_subnet_report_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +57,7 @@ func (x *RootLayerRef) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RootLayerRef.ProtoReflect.Descriptor instead.
 func (*RootLayerRef) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_report_proto_rawDescGZIP(), []int{0}
+	return file_subnet_report_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *RootLayerRef) GetHeight() uint64 {
@@ -109,7 +109,7 @@ type Report struct {
 
 func (x *Report) Reset() {
 	*x = Report{}
-	mi := &file_proto_subnet_report_proto_msgTypes[1]
+	mi := &file_subnet_report_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -121,7 +121,7 @@ func (x *Report) String() string {
 func (*Report) ProtoMessage() {}
 
 func (x *Report) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_report_proto_msgTypes[1]
+	mi := &file_subnet_report_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -134,7 +134,7 @@ func (x *Report) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Report.ProtoReflect.Descriptor instead.
 func (*Report) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_report_proto_rawDescGZIP(), []int{1}
+	return file_subnet_report_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Report) GetIntentId() string {
@@ -279,7 +279,7 @@ type Receipt struct {
 
 func (x *Receipt) Reset() {
 	*x = Receipt{}
-	mi := &file_proto_subnet_report_proto_msgTypes[2]
+	mi := &file_subnet_report_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -291,7 +291,7 @@ func (x *Receipt) String() string {
 func (*Receipt) ProtoMessage() {}
 
 func (x *Receipt) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_report_proto_msgTypes[2]
+	mi := &file_subnet_report_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -304,7 +304,7 @@ func (x *Receipt) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Receipt.ProtoReflect.Descriptor instead.
 func (*Receipt) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_report_proto_rawDescGZIP(), []int{2}
+	return file_subnet_report_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Receipt) GetIntentId() string {
@@ -356,11 +356,11 @@ func (x *Receipt) GetPhase() string {
 	return ""
 }
 
-var File_proto_subnet_report_proto protoreflect.FileDescriptor
+var File_subnet_report_proto protoreflect.FileDescriptor
 
-const file_proto_subnet_report_proto_rawDesc = "" +
+const file_subnet_report_proto_rawDesc = "" +
 	"\n" +
-	"\x19proto/subnet/report.proto\x12\tsubnet.v1\"P\n" +
+	"\x13subnet/report.proto\x12\tsubnet.v1\"P\n" +
 	"\fRootLayerRef\x12\x16\n" +
 	"\x06height\x18\x01 \x01(\x04R\x06height\x12\x12\n" +
 	"\x04root\x18\x02 \x01(\fR\x04root\x12\x14\n" +
@@ -404,24 +404,24 @@ const file_proto_subnet_report_proto_rawDesc = "" +
 	"\x05phase\x18\a \x01(\tR\x05phaseB\x18Z\x16subnet/proto/subnet;pbb\x06proto3"
 
 var (
-	file_proto_subnet_report_proto_rawDescOnce sync.Once
-	file_proto_subnet_report_proto_rawDescData []byte
+	file_subnet_report_proto_rawDescOnce sync.Once
+	file_subnet_report_proto_rawDescData []byte
 )
 
-func file_proto_subnet_report_proto_rawDescGZIP() []byte {
-	file_proto_subnet_report_proto_rawDescOnce.Do(func() {
-		file_proto_subnet_report_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_subnet_report_proto_rawDesc), len(file_proto_subnet_report_proto_rawDesc)))
+func file_subnet_report_proto_rawDescGZIP() []byte {
+	file_subnet_report_proto_rawDescOnce.Do(func() {
+		file_subnet_report_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_subnet_report_proto_rawDesc), len(file_subnet_report_proto_rawDesc)))
 	})
-	return file_proto_subnet_report_proto_rawDescData
+	return file_subnet_report_proto_rawDescData
 }
 
-var file_proto_subnet_report_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_proto_subnet_report_proto_goTypes = []any{
+var file_subnet_report_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_subnet_report_proto_goTypes = []any{
 	(*RootLayerRef)(nil), // 0: subnet.v1.RootLayerRef
 	(*Report)(nil),       // 1: subnet.v1.Report
 	(*Receipt)(nil),      // 2: subnet.v1.Receipt
 }
-var file_proto_subnet_report_proto_depIdxs = []int32{
+var file_subnet_report_proto_depIdxs = []int32{
 	0, // 0: subnet.v1.Report.root_ref:type_name -> subnet.v1.RootLayerRef
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
@@ -430,26 +430,26 @@ var file_proto_subnet_report_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_proto_subnet_report_proto_init() }
-func file_proto_subnet_report_proto_init() {
-	if File_proto_subnet_report_proto != nil {
+func init() { file_subnet_report_proto_init() }
+func file_subnet_report_proto_init() {
+	if File_subnet_report_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_subnet_report_proto_rawDesc), len(file_proto_subnet_report_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subnet_report_proto_rawDesc), len(file_subnet_report_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_proto_subnet_report_proto_goTypes,
-		DependencyIndexes: file_proto_subnet_report_proto_depIdxs,
-		MessageInfos:      file_proto_subnet_report_proto_msgTypes,
+		GoTypes:           file_subnet_report_proto_goTypes,
+		DependencyIndexes: file_subnet_report_proto_depIdxs,
+		MessageInfos:      file_subnet_report_proto_msgTypes,
 	}.Build()
-	File_proto_subnet_report_proto = out.File
-	file_proto_subnet_report_proto_goTypes = nil
-	file_proto_subnet_report_proto_depIdxs = nil
+	File_subnet_report_proto = out.File
+	file_subnet_report_proto_goTypes = nil
+	file_subnet_report_proto_depIdxs = nil
 }

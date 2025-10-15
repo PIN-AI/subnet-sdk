@@ -40,6 +40,11 @@ func (c *ValidatorClient) SubmitExecutionReport(ctx context.Context, req *pb.Exe
 	return c.client.SubmitExecutionReport(ctx, req)
 }
 
+// SubmitExecutionReportBatch submits multiple execution reports to the validator in batch
+func (c *ValidatorClient) SubmitExecutionReportBatch(ctx context.Context, req *pb.ExecutionReportBatchRequest) (*pb.ExecutionReportBatchResponse, error) {
+	return c.client.SubmitExecutionReportBatch(ctx, req)
+}
+
 // GetValidatorSet retrieves the validator set
 func (c *ValidatorClient) GetValidatorSet(ctx context.Context, req *pb.GetCheckpointRequest) (*pb.ValidatorSet, error) {
 	return c.client.GetValidatorSet(ctx, req)

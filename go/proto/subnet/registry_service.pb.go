@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.8
 // 	protoc        v4.25.3
-// source: proto/subnet/registry_service.proto
+// source: subnet/registry_service.proto
 
 package pb
 
@@ -30,7 +30,7 @@ type RegisterAgentRequest struct {
 
 func (x *RegisterAgentRequest) Reset() {
 	*x = RegisterAgentRequest{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[0]
+	mi := &file_subnet_registry_service_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +42,7 @@ func (x *RegisterAgentRequest) String() string {
 func (*RegisterAgentRequest) ProtoMessage() {}
 
 func (x *RegisterAgentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[0]
+	mi := &file_subnet_registry_service_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +55,7 @@ func (x *RegisterAgentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterAgentRequest.ProtoReflect.Descriptor instead.
 func (*RegisterAgentRequest) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{0}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *RegisterAgentRequest) GetAgent() *Agent {
@@ -75,7 +75,7 @@ type RegisterAgentResponse struct {
 
 func (x *RegisterAgentResponse) Reset() {
 	*x = RegisterAgentResponse{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[1]
+	mi := &file_subnet_registry_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -87,7 +87,7 @@ func (x *RegisterAgentResponse) String() string {
 func (*RegisterAgentResponse) ProtoMessage() {}
 
 func (x *RegisterAgentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[1]
+	mi := &file_subnet_registry_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -100,7 +100,7 @@ func (x *RegisterAgentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterAgentResponse.ProtoReflect.Descriptor instead.
 func (*RegisterAgentResponse) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{1}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *RegisterAgentResponse) GetSuccess() bool {
@@ -126,7 +126,7 @@ type UnregisterAgentRequest struct {
 
 func (x *UnregisterAgentRequest) Reset() {
 	*x = UnregisterAgentRequest{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[2]
+	mi := &file_subnet_registry_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -138,7 +138,7 @@ func (x *UnregisterAgentRequest) String() string {
 func (*UnregisterAgentRequest) ProtoMessage() {}
 
 func (x *UnregisterAgentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[2]
+	mi := &file_subnet_registry_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -151,7 +151,7 @@ func (x *UnregisterAgentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnregisterAgentRequest.ProtoReflect.Descriptor instead.
 func (*UnregisterAgentRequest) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{2}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UnregisterAgentRequest) GetAgentId() string {
@@ -171,7 +171,7 @@ type UnregisterAgentResponse struct {
 
 func (x *UnregisterAgentResponse) Reset() {
 	*x = UnregisterAgentResponse{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[3]
+	mi := &file_subnet_registry_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -183,7 +183,7 @@ func (x *UnregisterAgentResponse) String() string {
 func (*UnregisterAgentResponse) ProtoMessage() {}
 
 func (x *UnregisterAgentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[3]
+	mi := &file_subnet_registry_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -196,7 +196,7 @@ func (x *UnregisterAgentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UnregisterAgentResponse.ProtoReflect.Descriptor instead.
 func (*UnregisterAgentResponse) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{3}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UnregisterAgentResponse) GetSuccess() bool {
@@ -222,7 +222,7 @@ type DiscoverAgentsRequest struct {
 
 func (x *DiscoverAgentsRequest) Reset() {
 	*x = DiscoverAgentsRequest{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[4]
+	mi := &file_subnet_registry_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -234,7 +234,7 @@ func (x *DiscoverAgentsRequest) String() string {
 func (*DiscoverAgentsRequest) ProtoMessage() {}
 
 func (x *DiscoverAgentsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[4]
+	mi := &file_subnet_registry_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -247,7 +247,7 @@ func (x *DiscoverAgentsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DiscoverAgentsRequest.ProtoReflect.Descriptor instead.
 func (*DiscoverAgentsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{4}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DiscoverAgentsRequest) GetCapabilities() []string {
@@ -266,7 +266,7 @@ type DiscoverAgentsResponse struct {
 
 func (x *DiscoverAgentsResponse) Reset() {
 	*x = DiscoverAgentsResponse{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[5]
+	mi := &file_subnet_registry_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -278,7 +278,7 @@ func (x *DiscoverAgentsResponse) String() string {
 func (*DiscoverAgentsResponse) ProtoMessage() {}
 
 func (x *DiscoverAgentsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[5]
+	mi := &file_subnet_registry_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -291,7 +291,7 @@ func (x *DiscoverAgentsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DiscoverAgentsResponse.ProtoReflect.Descriptor instead.
 func (*DiscoverAgentsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{5}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *DiscoverAgentsResponse) GetAgents() []*Agent {
@@ -311,7 +311,7 @@ type HeartbeatRequest struct {
 
 func (x *HeartbeatRequest) Reset() {
 	*x = HeartbeatRequest{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[6]
+	mi := &file_subnet_registry_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -323,7 +323,7 @@ func (x *HeartbeatRequest) String() string {
 func (*HeartbeatRequest) ProtoMessage() {}
 
 func (x *HeartbeatRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[6]
+	mi := &file_subnet_registry_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -336,7 +336,7 @@ func (x *HeartbeatRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HeartbeatRequest.ProtoReflect.Descriptor instead.
 func (*HeartbeatRequest) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{6}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *HeartbeatRequest) GetAgentId() string {
@@ -363,7 +363,7 @@ type HeartbeatResponse struct {
 
 func (x *HeartbeatResponse) Reset() {
 	*x = HeartbeatResponse{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[7]
+	mi := &file_subnet_registry_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -375,7 +375,7 @@ func (x *HeartbeatResponse) String() string {
 func (*HeartbeatResponse) ProtoMessage() {}
 
 func (x *HeartbeatResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[7]
+	mi := &file_subnet_registry_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -388,7 +388,7 @@ func (x *HeartbeatResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use HeartbeatResponse.ProtoReflect.Descriptor instead.
 func (*HeartbeatResponse) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{7}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *HeartbeatResponse) GetSuccess() bool {
@@ -414,7 +414,7 @@ type GetAgentRequest struct {
 
 func (x *GetAgentRequest) Reset() {
 	*x = GetAgentRequest{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[8]
+	mi := &file_subnet_registry_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -426,7 +426,7 @@ func (x *GetAgentRequest) String() string {
 func (*GetAgentRequest) ProtoMessage() {}
 
 func (x *GetAgentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[8]
+	mi := &file_subnet_registry_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -439,7 +439,7 @@ func (x *GetAgentRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAgentRequest.ProtoReflect.Descriptor instead.
 func (*GetAgentRequest) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{8}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *GetAgentRequest) GetAgentId() string {
@@ -458,7 +458,7 @@ type GetAgentResponse struct {
 
 func (x *GetAgentResponse) Reset() {
 	*x = GetAgentResponse{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[9]
+	mi := &file_subnet_registry_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -470,7 +470,7 @@ func (x *GetAgentResponse) String() string {
 func (*GetAgentResponse) ProtoMessage() {}
 
 func (x *GetAgentResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[9]
+	mi := &file_subnet_registry_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -483,7 +483,7 @@ func (x *GetAgentResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAgentResponse.ProtoReflect.Descriptor instead.
 func (*GetAgentResponse) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{9}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetAgentResponse) GetAgent() *Agent {
@@ -504,7 +504,7 @@ type ListAgentsRequest struct {
 
 func (x *ListAgentsRequest) Reset() {
 	*x = ListAgentsRequest{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[10]
+	mi := &file_subnet_registry_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -516,7 +516,7 @@ func (x *ListAgentsRequest) String() string {
 func (*ListAgentsRequest) ProtoMessage() {}
 
 func (x *ListAgentsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[10]
+	mi := &file_subnet_registry_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -529,7 +529,7 @@ func (x *ListAgentsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAgentsRequest.ProtoReflect.Descriptor instead.
 func (*ListAgentsRequest) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{10}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ListAgentsRequest) GetCapabilities() []string {
@@ -556,7 +556,7 @@ type ListAgentsResponse struct {
 
 func (x *ListAgentsResponse) Reset() {
 	*x = ListAgentsResponse{}
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[11]
+	mi := &file_subnet_registry_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -568,7 +568,7 @@ func (x *ListAgentsResponse) String() string {
 func (*ListAgentsResponse) ProtoMessage() {}
 
 func (x *ListAgentsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_registry_service_proto_msgTypes[11]
+	mi := &file_subnet_registry_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -581,7 +581,7 @@ func (x *ListAgentsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAgentsResponse.ProtoReflect.Descriptor instead.
 func (*ListAgentsResponse) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_registry_service_proto_rawDescGZIP(), []int{11}
+	return file_subnet_registry_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListAgentsResponse) GetAgents() []*Agent {
@@ -598,11 +598,11 @@ func (x *ListAgentsResponse) GetTotal() int32 {
 	return 0
 }
 
-var File_proto_subnet_registry_service_proto protoreflect.FileDescriptor
+var File_subnet_registry_service_proto protoreflect.FileDescriptor
 
-const file_proto_subnet_registry_service_proto_rawDesc = "" +
+const file_subnet_registry_service_proto_rawDesc = "" +
 	"\n" +
-	"#proto/subnet/registry_service.proto\x12\tsubnet.v1\x1a\x18proto/subnet/agent.proto\">\n" +
+	"\x1dsubnet/registry_service.proto\x12\tsubnet.v1\x1a\x12subnet/agent.proto\">\n" +
 	"\x14RegisterAgentRequest\x12&\n" +
 	"\x05agent\x18\x01 \x01(\v2\x10.subnet.v1.AgentR\x05agent\"K\n" +
 	"\x15RegisterAgentResponse\x12\x18\n" +
@@ -643,19 +643,19 @@ const file_proto_subnet_registry_service_proto_rawDesc = "" +
 	"ListAgents\x12\x1c.subnet.v1.ListAgentsRequest\x1a\x1d.subnet.v1.ListAgentsResponseB\x18Z\x16subnet/proto/subnet;pbb\x06proto3"
 
 var (
-	file_proto_subnet_registry_service_proto_rawDescOnce sync.Once
-	file_proto_subnet_registry_service_proto_rawDescData []byte
+	file_subnet_registry_service_proto_rawDescOnce sync.Once
+	file_subnet_registry_service_proto_rawDescData []byte
 )
 
-func file_proto_subnet_registry_service_proto_rawDescGZIP() []byte {
-	file_proto_subnet_registry_service_proto_rawDescOnce.Do(func() {
-		file_proto_subnet_registry_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_subnet_registry_service_proto_rawDesc), len(file_proto_subnet_registry_service_proto_rawDesc)))
+func file_subnet_registry_service_proto_rawDescGZIP() []byte {
+	file_subnet_registry_service_proto_rawDescOnce.Do(func() {
+		file_subnet_registry_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_subnet_registry_service_proto_rawDesc), len(file_subnet_registry_service_proto_rawDesc)))
 	})
-	return file_proto_subnet_registry_service_proto_rawDescData
+	return file_subnet_registry_service_proto_rawDescData
 }
 
-var file_proto_subnet_registry_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
-var file_proto_subnet_registry_service_proto_goTypes = []any{
+var file_subnet_registry_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_subnet_registry_service_proto_goTypes = []any{
 	(*RegisterAgentRequest)(nil),    // 0: subnet.v1.RegisterAgentRequest
 	(*RegisterAgentResponse)(nil),   // 1: subnet.v1.RegisterAgentResponse
 	(*UnregisterAgentRequest)(nil),  // 2: subnet.v1.UnregisterAgentRequest
@@ -671,7 +671,7 @@ var file_proto_subnet_registry_service_proto_goTypes = []any{
 	(*Agent)(nil),                   // 12: subnet.v1.Agent
 	(AgentStatus)(0),                // 13: subnet.v1.AgentStatus
 }
-var file_proto_subnet_registry_service_proto_depIdxs = []int32{
+var file_subnet_registry_service_proto_depIdxs = []int32{
 	12, // 0: subnet.v1.RegisterAgentRequest.agent:type_name -> subnet.v1.Agent
 	12, // 1: subnet.v1.DiscoverAgentsResponse.agents:type_name -> subnet.v1.Agent
 	13, // 2: subnet.v1.HeartbeatRequest.status:type_name -> subnet.v1.AgentStatus
@@ -697,27 +697,27 @@ var file_proto_subnet_registry_service_proto_depIdxs = []int32{
 	0,  // [0:6] is the sub-list for field type_name
 }
 
-func init() { file_proto_subnet_registry_service_proto_init() }
-func file_proto_subnet_registry_service_proto_init() {
-	if File_proto_subnet_registry_service_proto != nil {
+func init() { file_subnet_registry_service_proto_init() }
+func file_subnet_registry_service_proto_init() {
+	if File_subnet_registry_service_proto != nil {
 		return
 	}
-	file_proto_subnet_agent_proto_init()
+	file_subnet_agent_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_subnet_registry_service_proto_rawDesc), len(file_proto_subnet_registry_service_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subnet_registry_service_proto_rawDesc), len(file_subnet_registry_service_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_subnet_registry_service_proto_goTypes,
-		DependencyIndexes: file_proto_subnet_registry_service_proto_depIdxs,
-		MessageInfos:      file_proto_subnet_registry_service_proto_msgTypes,
+		GoTypes:           file_subnet_registry_service_proto_goTypes,
+		DependencyIndexes: file_subnet_registry_service_proto_depIdxs,
+		MessageInfos:      file_subnet_registry_service_proto_msgTypes,
 	}.Build()
-	File_proto_subnet_registry_service_proto = out.File
-	file_proto_subnet_registry_service_proto_goTypes = nil
-	file_proto_subnet_registry_service_proto_depIdxs = nil
+	File_subnet_registry_service_proto = out.File
+	file_subnet_registry_service_proto_goTypes = nil
+	file_subnet_registry_service_proto_depIdxs = nil
 }

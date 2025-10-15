@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.8
 // 	protoc        v4.25.3
-// source: proto/subnet/validation.proto
+// source: subnet/validation.proto
 
 package pb
 
@@ -60,11 +60,11 @@ func (x ValidationPolicy_Mode) String() string {
 }
 
 func (ValidationPolicy_Mode) Descriptor() protoreflect.EnumDescriptor {
-	return file_proto_subnet_validation_proto_enumTypes[0].Descriptor()
+	return file_subnet_validation_proto_enumTypes[0].Descriptor()
 }
 
 func (ValidationPolicy_Mode) Type() protoreflect.EnumType {
-	return &file_proto_subnet_validation_proto_enumTypes[0]
+	return &file_subnet_validation_proto_enumTypes[0]
 }
 
 func (x ValidationPolicy_Mode) Number() protoreflect.EnumNumber {
@@ -73,7 +73,7 @@ func (x ValidationPolicy_Mode) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use ValidationPolicy_Mode.Descriptor instead.
 func (ValidationPolicy_Mode) EnumDescriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{0, 0}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{0, 0}
 }
 
 type VerificationRecord_Verdict int32
@@ -112,11 +112,11 @@ func (x VerificationRecord_Verdict) String() string {
 }
 
 func (VerificationRecord_Verdict) Descriptor() protoreflect.EnumDescriptor {
-	return file_proto_subnet_validation_proto_enumTypes[1].Descriptor()
+	return file_subnet_validation_proto_enumTypes[1].Descriptor()
 }
 
 func (VerificationRecord_Verdict) Type() protoreflect.EnumType {
-	return &file_proto_subnet_validation_proto_enumTypes[1]
+	return &file_subnet_validation_proto_enumTypes[1]
 }
 
 func (x VerificationRecord_Verdict) Number() protoreflect.EnumNumber {
@@ -125,7 +125,7 @@ func (x VerificationRecord_Verdict) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use VerificationRecord_Verdict.Descriptor instead.
 func (VerificationRecord_Verdict) EnumDescriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{1, 0}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{1, 0}
 }
 
 type ValidationPolicy struct {
@@ -141,7 +141,7 @@ type ValidationPolicy struct {
 
 func (x *ValidationPolicy) Reset() {
 	*x = ValidationPolicy{}
-	mi := &file_proto_subnet_validation_proto_msgTypes[0]
+	mi := &file_subnet_validation_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -153,7 +153,7 @@ func (x *ValidationPolicy) String() string {
 func (*ValidationPolicy) ProtoMessage() {}
 
 func (x *ValidationPolicy) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validation_proto_msgTypes[0]
+	mi := &file_subnet_validation_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -166,7 +166,7 @@ func (x *ValidationPolicy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidationPolicy.ProtoReflect.Descriptor instead.
 func (*ValidationPolicy) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{0}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *ValidationPolicy) GetPolicyId() string {
@@ -226,7 +226,7 @@ type VerificationRecord struct {
 
 func (x *VerificationRecord) Reset() {
 	*x = VerificationRecord{}
-	mi := &file_proto_subnet_validation_proto_msgTypes[1]
+	mi := &file_subnet_validation_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -238,7 +238,7 @@ func (x *VerificationRecord) String() string {
 func (*VerificationRecord) ProtoMessage() {}
 
 func (x *VerificationRecord) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validation_proto_msgTypes[1]
+	mi := &file_subnet_validation_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -251,7 +251,7 @@ func (x *VerificationRecord) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerificationRecord.ProtoReflect.Descriptor instead.
 func (*VerificationRecord) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{1}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *VerificationRecord) GetRecordId() string {
@@ -363,7 +363,7 @@ type PolicyQuery struct {
 
 func (x *PolicyQuery) Reset() {
 	*x = PolicyQuery{}
-	mi := &file_proto_subnet_validation_proto_msgTypes[2]
+	mi := &file_subnet_validation_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -375,7 +375,7 @@ func (x *PolicyQuery) String() string {
 func (*PolicyQuery) ProtoMessage() {}
 
 func (x *PolicyQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validation_proto_msgTypes[2]
+	mi := &file_subnet_validation_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -388,7 +388,7 @@ func (x *PolicyQuery) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PolicyQuery.ProtoReflect.Descriptor instead.
 func (*PolicyQuery) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{2}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *PolicyQuery) GetSubnetId() string {
@@ -423,7 +423,7 @@ type VerificationQuery struct {
 
 func (x *VerificationQuery) Reset() {
 	*x = VerificationQuery{}
-	mi := &file_proto_subnet_validation_proto_msgTypes[3]
+	mi := &file_subnet_validation_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -435,7 +435,7 @@ func (x *VerificationQuery) String() string {
 func (*VerificationQuery) ProtoMessage() {}
 
 func (x *VerificationQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validation_proto_msgTypes[3]
+	mi := &file_subnet_validation_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -448,7 +448,7 @@ func (x *VerificationQuery) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerificationQuery.ProtoReflect.Descriptor instead.
 func (*VerificationQuery) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{3}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *VerificationQuery) GetIntentId() string {
@@ -482,7 +482,7 @@ type ValidationPolicy_SamplingParams struct {
 
 func (x *ValidationPolicy_SamplingParams) Reset() {
 	*x = ValidationPolicy_SamplingParams{}
-	mi := &file_proto_subnet_validation_proto_msgTypes[4]
+	mi := &file_subnet_validation_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -494,7 +494,7 @@ func (x *ValidationPolicy_SamplingParams) String() string {
 func (*ValidationPolicy_SamplingParams) ProtoMessage() {}
 
 func (x *ValidationPolicy_SamplingParams) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validation_proto_msgTypes[4]
+	mi := &file_subnet_validation_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -507,7 +507,7 @@ func (x *ValidationPolicy_SamplingParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidationPolicy_SamplingParams.ProtoReflect.Descriptor instead.
 func (*ValidationPolicy_SamplingParams) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{0, 0}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{0, 0}
 }
 
 func (x *ValidationPolicy_SamplingParams) GetSampleRate() float64 {
@@ -535,7 +535,7 @@ type ValidationPolicy_ExecutionLimits struct {
 
 func (x *ValidationPolicy_ExecutionLimits) Reset() {
 	*x = ValidationPolicy_ExecutionLimits{}
-	mi := &file_proto_subnet_validation_proto_msgTypes[5]
+	mi := &file_subnet_validation_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -547,7 +547,7 @@ func (x *ValidationPolicy_ExecutionLimits) String() string {
 func (*ValidationPolicy_ExecutionLimits) ProtoMessage() {}
 
 func (x *ValidationPolicy_ExecutionLimits) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validation_proto_msgTypes[5]
+	mi := &file_subnet_validation_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -560,7 +560,7 @@ func (x *ValidationPolicy_ExecutionLimits) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidationPolicy_ExecutionLimits.ProtoReflect.Descriptor instead.
 func (*ValidationPolicy_ExecutionLimits) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{0, 1}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{0, 1}
 }
 
 func (x *ValidationPolicy_ExecutionLimits) GetMaxExecTimeMs() uint64 {
@@ -595,7 +595,7 @@ type ValidationPolicy_AntiCheat struct {
 
 func (x *ValidationPolicy_AntiCheat) Reset() {
 	*x = ValidationPolicy_AntiCheat{}
-	mi := &file_proto_subnet_validation_proto_msgTypes[6]
+	mi := &file_subnet_validation_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -607,7 +607,7 @@ func (x *ValidationPolicy_AntiCheat) String() string {
 func (*ValidationPolicy_AntiCheat) ProtoMessage() {}
 
 func (x *ValidationPolicy_AntiCheat) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validation_proto_msgTypes[6]
+	mi := &file_subnet_validation_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -620,7 +620,7 @@ func (x *ValidationPolicy_AntiCheat) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidationPolicy_AntiCheat.ProtoReflect.Descriptor instead.
 func (*ValidationPolicy_AntiCheat) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{0, 2}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{0, 2}
 }
 
 func (x *ValidationPolicy_AntiCheat) GetSimilarityThreshold() uint32 {
@@ -657,7 +657,7 @@ type ValidationPolicy_Rules struct {
 
 func (x *ValidationPolicy_Rules) Reset() {
 	*x = ValidationPolicy_Rules{}
-	mi := &file_proto_subnet_validation_proto_msgTypes[7]
+	mi := &file_subnet_validation_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -669,7 +669,7 @@ func (x *ValidationPolicy_Rules) String() string {
 func (*ValidationPolicy_Rules) ProtoMessage() {}
 
 func (x *ValidationPolicy_Rules) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validation_proto_msgTypes[7]
+	mi := &file_subnet_validation_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -682,7 +682,7 @@ func (x *ValidationPolicy_Rules) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidationPolicy_Rules.ProtoReflect.Descriptor instead.
 func (*ValidationPolicy_Rules) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{0, 3}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{0, 3}
 }
 
 func (x *ValidationPolicy_Rules) GetRequiredEvidence() []string {
@@ -730,7 +730,7 @@ type VerificationRecord_SamplingInfo struct {
 
 func (x *VerificationRecord_SamplingInfo) Reset() {
 	*x = VerificationRecord_SamplingInfo{}
-	mi := &file_proto_subnet_validation_proto_msgTypes[8]
+	mi := &file_subnet_validation_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -742,7 +742,7 @@ func (x *VerificationRecord_SamplingInfo) String() string {
 func (*VerificationRecord_SamplingInfo) ProtoMessage() {}
 
 func (x *VerificationRecord_SamplingInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validation_proto_msgTypes[8]
+	mi := &file_subnet_validation_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -755,7 +755,7 @@ func (x *VerificationRecord_SamplingInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerificationRecord_SamplingInfo.ProtoReflect.Descriptor instead.
 func (*VerificationRecord_SamplingInfo) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{1, 0}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{1, 0}
 }
 
 func (x *VerificationRecord_SamplingInfo) GetIsSampled() bool {
@@ -783,7 +783,7 @@ type VerificationRecord_ExternalAttestation struct {
 
 func (x *VerificationRecord_ExternalAttestation) Reset() {
 	*x = VerificationRecord_ExternalAttestation{}
-	mi := &file_proto_subnet_validation_proto_msgTypes[9]
+	mi := &file_subnet_validation_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -795,7 +795,7 @@ func (x *VerificationRecord_ExternalAttestation) String() string {
 func (*VerificationRecord_ExternalAttestation) ProtoMessage() {}
 
 func (x *VerificationRecord_ExternalAttestation) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validation_proto_msgTypes[9]
+	mi := &file_subnet_validation_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -808,7 +808,7 @@ func (x *VerificationRecord_ExternalAttestation) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use VerificationRecord_ExternalAttestation.ProtoReflect.Descriptor instead.
 func (*VerificationRecord_ExternalAttestation) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validation_proto_rawDescGZIP(), []int{1, 1}
+	return file_subnet_validation_proto_rawDescGZIP(), []int{1, 1}
 }
 
 func (x *VerificationRecord_ExternalAttestation) GetProvider() string {
@@ -832,11 +832,11 @@ func (x *VerificationRecord_ExternalAttestation) GetSignature() []byte {
 	return nil
 }
 
-var File_proto_subnet_validation_proto protoreflect.FileDescriptor
+var File_subnet_validation_proto protoreflect.FileDescriptor
 
-const file_proto_subnet_validation_proto_rawDesc = "" +
+const file_subnet_validation_proto_rawDesc = "" +
 	"\n" +
-	"\x1dproto/subnet/validation.proto\x12\tsubnet.v1\"\xa1\b\n" +
+	"\x17subnet/validation.proto\x12\tsubnet.v1\"\xa1\b\n" +
 	"\x10ValidationPolicy\x12\x1b\n" +
 	"\tpolicy_id\x18\x01 \x01(\tR\bpolicyId\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\tR\aversion\x12'\n" +
@@ -914,20 +914,20 @@ const file_proto_subnet_validation_proto_rawDesc = "" +
 	"\x16GetVerificationRecords\x12\x1c.subnet.v1.VerificationQuery\x1a\x1d.subnet.v1.VerificationRecord0\x01B\x18Z\x16subnet/proto/subnet;pbb\x06proto3"
 
 var (
-	file_proto_subnet_validation_proto_rawDescOnce sync.Once
-	file_proto_subnet_validation_proto_rawDescData []byte
+	file_subnet_validation_proto_rawDescOnce sync.Once
+	file_subnet_validation_proto_rawDescData []byte
 )
 
-func file_proto_subnet_validation_proto_rawDescGZIP() []byte {
-	file_proto_subnet_validation_proto_rawDescOnce.Do(func() {
-		file_proto_subnet_validation_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_subnet_validation_proto_rawDesc), len(file_proto_subnet_validation_proto_rawDesc)))
+func file_subnet_validation_proto_rawDescGZIP() []byte {
+	file_subnet_validation_proto_rawDescOnce.Do(func() {
+		file_subnet_validation_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_subnet_validation_proto_rawDesc), len(file_subnet_validation_proto_rawDesc)))
 	})
-	return file_proto_subnet_validation_proto_rawDescData
+	return file_subnet_validation_proto_rawDescData
 }
 
-var file_proto_subnet_validation_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_proto_subnet_validation_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
-var file_proto_subnet_validation_proto_goTypes = []any{
+var file_subnet_validation_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_subnet_validation_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_subnet_validation_proto_goTypes = []any{
 	(ValidationPolicy_Mode)(0),                     // 0: subnet.v1.ValidationPolicy.Mode
 	(VerificationRecord_Verdict)(0),                // 1: subnet.v1.VerificationRecord.Verdict
 	(*ValidationPolicy)(nil),                       // 2: subnet.v1.ValidationPolicy
@@ -941,7 +941,7 @@ var file_proto_subnet_validation_proto_goTypes = []any{
 	(*VerificationRecord_SamplingInfo)(nil),        // 10: subnet.v1.VerificationRecord.SamplingInfo
 	(*VerificationRecord_ExternalAttestation)(nil), // 11: subnet.v1.VerificationRecord.ExternalAttestation
 }
-var file_proto_subnet_validation_proto_depIdxs = []int32{
+var file_subnet_validation_proto_depIdxs = []int32{
 	9,  // 0: subnet.v1.ValidationPolicy.rules:type_name -> subnet.v1.ValidationPolicy.Rules
 	1,  // 1: subnet.v1.VerificationRecord.verdict:type_name -> subnet.v1.VerificationRecord.Verdict
 	10, // 2: subnet.v1.VerificationRecord.sampling_info:type_name -> subnet.v1.VerificationRecord.SamplingInfo
@@ -961,27 +961,27 @@ var file_proto_subnet_validation_proto_depIdxs = []int32{
 	0,  // [0:8] is the sub-list for field type_name
 }
 
-func init() { file_proto_subnet_validation_proto_init() }
-func file_proto_subnet_validation_proto_init() {
-	if File_proto_subnet_validation_proto != nil {
+func init() { file_subnet_validation_proto_init() }
+func file_subnet_validation_proto_init() {
+	if File_subnet_validation_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_subnet_validation_proto_rawDesc), len(file_proto_subnet_validation_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subnet_validation_proto_rawDesc), len(file_subnet_validation_proto_rawDesc)),
 			NumEnums:      2,
 			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_subnet_validation_proto_goTypes,
-		DependencyIndexes: file_proto_subnet_validation_proto_depIdxs,
-		EnumInfos:         file_proto_subnet_validation_proto_enumTypes,
-		MessageInfos:      file_proto_subnet_validation_proto_msgTypes,
+		GoTypes:           file_subnet_validation_proto_goTypes,
+		DependencyIndexes: file_subnet_validation_proto_depIdxs,
+		EnumInfos:         file_subnet_validation_proto_enumTypes,
+		MessageInfos:      file_subnet_validation_proto_msgTypes,
 	}.Build()
-	File_proto_subnet_validation_proto = out.File
-	file_proto_subnet_validation_proto_goTypes = nil
-	file_proto_subnet_validation_proto_depIdxs = nil
+	File_subnet_validation_proto = out.File
+	file_subnet_validation_proto_goTypes = nil
+	file_subnet_validation_proto_depIdxs = nil
 }

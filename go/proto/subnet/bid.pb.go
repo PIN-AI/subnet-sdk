@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.8
 // 	protoc        v4.25.3
-// source: proto/subnet/bid.proto
+// source: subnet/bid.proto
 
 package pb
 
@@ -64,11 +64,11 @@ func (x BidStatus) String() string {
 }
 
 func (BidStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_proto_subnet_bid_proto_enumTypes[0].Descriptor()
+	return file_subnet_bid_proto_enumTypes[0].Descriptor()
 }
 
 func (BidStatus) Type() protoreflect.EnumType {
-	return &file_proto_subnet_bid_proto_enumTypes[0]
+	return &file_subnet_bid_proto_enumTypes[0]
 }
 
 func (x BidStatus) Number() protoreflect.EnumNumber {
@@ -77,7 +77,7 @@ func (x BidStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use BidStatus.Descriptor instead.
 func (BidStatus) EnumDescriptor() ([]byte, []int) {
-	return file_proto_subnet_bid_proto_rawDescGZIP(), []int{0}
+	return file_subnet_bid_proto_rawDescGZIP(), []int{0}
 }
 
 // Bid contains the payload an agent submits to the matcher.
@@ -100,7 +100,7 @@ type Bid struct {
 
 func (x *Bid) Reset() {
 	*x = Bid{}
-	mi := &file_proto_subnet_bid_proto_msgTypes[0]
+	mi := &file_subnet_bid_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -112,7 +112,7 @@ func (x *Bid) String() string {
 func (*Bid) ProtoMessage() {}
 
 func (x *Bid) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_bid_proto_msgTypes[0]
+	mi := &file_subnet_bid_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -125,7 +125,7 @@ func (x *Bid) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bid.ProtoReflect.Descriptor instead.
 func (*Bid) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_bid_proto_rawDescGZIP(), []int{0}
+	return file_subnet_bid_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Bid) GetBidId() string {
@@ -219,7 +219,7 @@ type BidSubmissionAck struct {
 
 func (x *BidSubmissionAck) Reset() {
 	*x = BidSubmissionAck{}
-	mi := &file_proto_subnet_bid_proto_msgTypes[1]
+	mi := &file_subnet_bid_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -231,7 +231,7 @@ func (x *BidSubmissionAck) String() string {
 func (*BidSubmissionAck) ProtoMessage() {}
 
 func (x *BidSubmissionAck) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_bid_proto_msgTypes[1]
+	mi := &file_subnet_bid_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -244,7 +244,7 @@ func (x *BidSubmissionAck) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BidSubmissionAck.ProtoReflect.Descriptor instead.
 func (*BidSubmissionAck) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_bid_proto_rawDescGZIP(), []int{1}
+	return file_subnet_bid_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *BidSubmissionAck) GetBidId() string {
@@ -282,11 +282,11 @@ func (x *BidSubmissionAck) GetRecordedAt() int64 {
 	return 0
 }
 
-var File_proto_subnet_bid_proto protoreflect.FileDescriptor
+var File_subnet_bid_proto protoreflect.FileDescriptor
 
-const file_proto_subnet_bid_proto_rawDesc = "" +
+const file_subnet_bid_proto_rawDesc = "" +
 	"\n" +
-	"\x16proto/subnet/bid.proto\x12\tsubnet.v1\"\x9f\x03\n" +
+	"\x10subnet/bid.proto\x12\tsubnet.v1\"\x9f\x03\n" +
 	"\x03Bid\x12\x15\n" +
 	"\x06bid_id\x18\x01 \x01(\tR\x05bidId\x12\x1b\n" +
 	"\tintent_id\x18\x02 \x01(\tR\bintentId\x12\x19\n" +
@@ -319,26 +319,26 @@ const file_proto_subnet_bid_proto_rawDesc = "" +
 	"\x14BID_STATUS_RUNNER_UP\x10\x05B\x18Z\x16subnet/proto/subnet;pbb\x06proto3"
 
 var (
-	file_proto_subnet_bid_proto_rawDescOnce sync.Once
-	file_proto_subnet_bid_proto_rawDescData []byte
+	file_subnet_bid_proto_rawDescOnce sync.Once
+	file_subnet_bid_proto_rawDescData []byte
 )
 
-func file_proto_subnet_bid_proto_rawDescGZIP() []byte {
-	file_proto_subnet_bid_proto_rawDescOnce.Do(func() {
-		file_proto_subnet_bid_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_subnet_bid_proto_rawDesc), len(file_proto_subnet_bid_proto_rawDesc)))
+func file_subnet_bid_proto_rawDescGZIP() []byte {
+	file_subnet_bid_proto_rawDescOnce.Do(func() {
+		file_subnet_bid_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_subnet_bid_proto_rawDesc), len(file_subnet_bid_proto_rawDesc)))
 	})
-	return file_proto_subnet_bid_proto_rawDescData
+	return file_subnet_bid_proto_rawDescData
 }
 
-var file_proto_subnet_bid_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_proto_subnet_bid_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_proto_subnet_bid_proto_goTypes = []any{
+var file_subnet_bid_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_subnet_bid_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_subnet_bid_proto_goTypes = []any{
 	(BidStatus)(0),           // 0: subnet.v1.BidStatus
 	(*Bid)(nil),              // 1: subnet.v1.Bid
 	(*BidSubmissionAck)(nil), // 2: subnet.v1.BidSubmissionAck
 	nil,                      // 3: subnet.v1.Bid.MetadataEntry
 }
-var file_proto_subnet_bid_proto_depIdxs = []int32{
+var file_subnet_bid_proto_depIdxs = []int32{
 	0, // 0: subnet.v1.Bid.status:type_name -> subnet.v1.BidStatus
 	3, // 1: subnet.v1.Bid.metadata:type_name -> subnet.v1.Bid.MetadataEntry
 	0, // 2: subnet.v1.BidSubmissionAck.status:type_name -> subnet.v1.BidStatus
@@ -349,27 +349,27 @@ var file_proto_subnet_bid_proto_depIdxs = []int32{
 	0, // [0:3] is the sub-list for field type_name
 }
 
-func init() { file_proto_subnet_bid_proto_init() }
-func file_proto_subnet_bid_proto_init() {
-	if File_proto_subnet_bid_proto != nil {
+func init() { file_subnet_bid_proto_init() }
+func file_subnet_bid_proto_init() {
+	if File_subnet_bid_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_subnet_bid_proto_rawDesc), len(file_proto_subnet_bid_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subnet_bid_proto_rawDesc), len(file_subnet_bid_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_proto_subnet_bid_proto_goTypes,
-		DependencyIndexes: file_proto_subnet_bid_proto_depIdxs,
-		EnumInfos:         file_proto_subnet_bid_proto_enumTypes,
-		MessageInfos:      file_proto_subnet_bid_proto_msgTypes,
+		GoTypes:           file_subnet_bid_proto_goTypes,
+		DependencyIndexes: file_subnet_bid_proto_depIdxs,
+		EnumInfos:         file_subnet_bid_proto_enumTypes,
+		MessageInfos:      file_subnet_bid_proto_msgTypes,
 	}.Build()
-	File_proto_subnet_bid_proto = out.File
-	file_proto_subnet_bid_proto_goTypes = nil
-	file_proto_subnet_bid_proto_depIdxs = nil
+	File_subnet_bid_proto = out.File
+	file_subnet_bid_proto_goTypes = nil
+	file_subnet_bid_proto_depIdxs = nil
 }

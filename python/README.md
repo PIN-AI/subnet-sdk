@@ -184,6 +184,140 @@ class Result:
     metadata: Optional[Dict[str, Any]] = None
 ```
 
+## Batch Operations
+
+The SDK supports batch operations for improved performance when submitting multiple bids or execution reports:
+
+### Batch Bid Submission
+
+```python
+from subnet_sdk import MatcherClient, SigningConfig
+from subnet_sdk.proto.subnet import matcher_pb2, bid_pb2
+
+# Create matcher client
+signing_config = SigningConfig(
+    private_key="your_64_hex_char_key",
+    agent_id="agent-1",
+    subnet_id="subnet-1"
+)
+
+matcher_client = MatcherClient(
+    target="localhost:8090",
+    secure=False,
+    signing_config=signing_config
+)
+
+# Prepare multiple bids
+bids = [
+    bid_pb2.Bid(
+        bid_id="bid-1",
+        intent_id="intent-123",
+        agent_id="agent-1",
+        price=100,
+    ),
+    bid_pb2.Bid(
+        bid_id="bid-2",
+        intent_id="intent-123",
+        agent_id="agent-1",
+        price=150,
+    ),
+]
+
+# Submit batch
+batch_req = matcher_pb2.SubmitBidBatchRequest(
+    bids=bids,
+    batch_id="batch-123",
+    partial_ok=True,  # Continue on partial failures
+)
+
+try:
+    response = await matcher_client.submit_bid_batch(batch_req)
+    print(f"Batch results: {response.success} succeeded, {response.failed} failed")
+
+    for i, ack in enumerate(response.acks):
+        print(f"Bid {i}: accepted={ack.accepted}, reason={ack.reason}")
+finally:
+    await matcher_client.close()
+```
+
+### Batch Execution Report Submission
+
+```python
+from subnet_sdk import ValidatorClient, SigningConfig
+from subnet_sdk.proto.subnet import service_pb2, execution_report_pb2
+import time
+
+# Create validator client
+validator_client = ValidatorClient(
+    target="localhost:9090",
+    secure=False,
+    signing_config=signing_config
+)
+
+# Prepare multiple reports
+reports = [
+    execution_report_pb2.ExecutionReport(
+        report_id="report-1",
+        assignment_id="assignment-1",
+        intent_id="intent-123",
+        agent_id="agent-1",
+        status=execution_report_pb2.ExecutionReport.SUCCESS,
+        timestamp=int(time.time()),
+    ),
+    execution_report_pb2.ExecutionReport(
+        report_id="report-2",
+        assignment_id="assignment-2",
+        intent_id="intent-456",
+        agent_id="agent-1",
+        status=execution_report_pb2.ExecutionReport.SUCCESS,
+        timestamp=int(time.time()),
+    ),
+]
+
+# Submit batch
+batch_req = service_pb2.ExecutionReportBatchRequest(
+    reports=reports,
+    batch_id="batch-456",
+    partial_ok=False,  # Stop on first failure
+)
+
+try:
+    response = await validator_client.submit_execution_report_batch(batch_req)
+    print(f"Batch results: {response.success} succeeded, {response.failed} failed")
+
+    for i, receipt in enumerate(response.receipts):
+        print(f"Report {i}: status={receipt.status}, phase={receipt.phase}")
+finally:
+    await validator_client.close()
+```
+
+### Batch Operation Benefits
+
+- **Performance**: Reduced network overhead and connection management
+- **Atomicity**: Optional partial success handling with `partial_ok` flag
+- **Efficiency**: Single RPC call for multiple operations
+- **Idempotency**: Use `batch_id` to prevent duplicate submissions
+
+### Batch Error Handling
+
+```python
+# Stop on first failure (partial_ok = False)
+batch_req = matcher_pb2.SubmitBidBatchRequest(
+    bids=bids,
+    batch_id="batch-123",
+    partial_ok=False,
+)
+# If any bid fails, remaining bids are rejected
+
+# Continue on failures (partial_ok = True)
+batch_req = matcher_pb2.SubmitBidBatchRequest(
+    bids=bids,
+    batch_id="batch-123",
+    partial_ok=True,
+)
+# All bids are processed, check individual acks for results
+```
+
 ## Complete Example
 
 See [example.py](example.py) for a complete working example.
