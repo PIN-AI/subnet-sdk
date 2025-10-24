@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.8
 // 	protoc        v4.25.3
-// source: proto/subnet/validator.proto
+// source: subnet/validator.proto
 
 package pb
 
@@ -33,7 +33,7 @@ type Validator struct {
 
 func (x *Validator) Reset() {
 	*x = Validator{}
-	mi := &file_proto_subnet_validator_proto_msgTypes[0]
+	mi := &file_subnet_validator_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -45,7 +45,7 @@ func (x *Validator) String() string {
 func (*Validator) ProtoMessage() {}
 
 func (x *Validator) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validator_proto_msgTypes[0]
+	mi := &file_subnet_validator_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +58,7 @@ func (x *Validator) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Validator.ProtoReflect.Descriptor instead.
 func (*Validator) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validator_proto_rawDescGZIP(), []int{0}
+	return file_subnet_validator_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Validator) GetId() string {
@@ -102,7 +102,7 @@ type ValidatorSet struct {
 
 func (x *ValidatorSet) Reset() {
 	*x = ValidatorSet{}
-	mi := &file_proto_subnet_validator_proto_msgTypes[1]
+	mi := &file_subnet_validator_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -114,7 +114,7 @@ func (x *ValidatorSet) String() string {
 func (*ValidatorSet) ProtoMessage() {}
 
 func (x *ValidatorSet) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validator_proto_msgTypes[1]
+	mi := &file_subnet_validator_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -127,7 +127,7 @@ func (x *ValidatorSet) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidatorSet.ProtoReflect.Descriptor instead.
 func (*ValidatorSet) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validator_proto_rawDescGZIP(), []int{1}
+	return file_subnet_validator_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ValidatorSet) GetValidators() []*Validator {
@@ -177,7 +177,7 @@ type SignatureSubmission struct {
 
 func (x *SignatureSubmission) Reset() {
 	*x = SignatureSubmission{}
-	mi := &file_proto_subnet_validator_proto_msgTypes[2]
+	mi := &file_subnet_validator_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -189,7 +189,7 @@ func (x *SignatureSubmission) String() string {
 func (*SignatureSubmission) ProtoMessage() {}
 
 func (x *SignatureSubmission) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_validator_proto_msgTypes[2]
+	mi := &file_subnet_validator_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -202,7 +202,7 @@ func (x *SignatureSubmission) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SignatureSubmission.ProtoReflect.Descriptor instead.
 func (*SignatureSubmission) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_validator_proto_rawDescGZIP(), []int{2}
+	return file_subnet_validator_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *SignatureSubmission) GetCpHash() []byte {
@@ -233,11 +233,11 @@ func (x *SignatureSubmission) GetBit() uint32 {
 	return 0
 }
 
-var File_proto_subnet_validator_proto protoreflect.FileDescriptor
+var File_subnet_validator_proto protoreflect.FileDescriptor
 
-const file_proto_subnet_validator_proto_rawDesc = "" +
+const file_subnet_validator_proto_rawDesc = "" +
 	"\n" +
-	"\x1cproto/subnet/validator.proto\x12\tsubnet.v1\x1a\x1dproto/subnet/checkpoint.proto\"g\n" +
+	"\x16subnet/validator.proto\x12\tsubnet.v1\x1a\x17subnet/checkpoint.proto\"g\n" +
 	"\tValidator\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x16\n" +
 	"\x06pubkey\x18\x02 \x01(\fR\x06pubkey\x12\x16\n" +
@@ -258,25 +258,25 @@ const file_proto_subnet_validator_proto_rawDesc = "" +
 	"\x03bit\x18\x04 \x01(\rR\x03bitB\x18Z\x16subnet/proto/subnet;pbb\x06proto3"
 
 var (
-	file_proto_subnet_validator_proto_rawDescOnce sync.Once
-	file_proto_subnet_validator_proto_rawDescData []byte
+	file_subnet_validator_proto_rawDescOnce sync.Once
+	file_subnet_validator_proto_rawDescData []byte
 )
 
-func file_proto_subnet_validator_proto_rawDescGZIP() []byte {
-	file_proto_subnet_validator_proto_rawDescOnce.Do(func() {
-		file_proto_subnet_validator_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_subnet_validator_proto_rawDesc), len(file_proto_subnet_validator_proto_rawDesc)))
+func file_subnet_validator_proto_rawDescGZIP() []byte {
+	file_subnet_validator_proto_rawDescOnce.Do(func() {
+		file_subnet_validator_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_subnet_validator_proto_rawDesc), len(file_subnet_validator_proto_rawDesc)))
 	})
-	return file_proto_subnet_validator_proto_rawDescData
+	return file_subnet_validator_proto_rawDescData
 }
 
-var file_proto_subnet_validator_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_proto_subnet_validator_proto_goTypes = []any{
+var file_subnet_validator_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_subnet_validator_proto_goTypes = []any{
 	(*Validator)(nil),           // 0: subnet.v1.Validator
 	(*ValidatorSet)(nil),        // 1: subnet.v1.ValidatorSet
 	(*SignatureSubmission)(nil), // 2: subnet.v1.SignatureSubmission
 	(*Signature)(nil),           // 3: subnet.v1.Signature
 }
-var file_proto_subnet_validator_proto_depIdxs = []int32{
+var file_subnet_validator_proto_depIdxs = []int32{
 	0, // 0: subnet.v1.ValidatorSet.validators:type_name -> subnet.v1.Validator
 	3, // 1: subnet.v1.SignatureSubmission.signature:type_name -> subnet.v1.Signature
 	2, // [2:2] is the sub-list for method output_type
@@ -286,27 +286,27 @@ var file_proto_subnet_validator_proto_depIdxs = []int32{
 	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_proto_subnet_validator_proto_init() }
-func file_proto_subnet_validator_proto_init() {
-	if File_proto_subnet_validator_proto != nil {
+func init() { file_subnet_validator_proto_init() }
+func file_subnet_validator_proto_init() {
+	if File_subnet_validator_proto != nil {
 		return
 	}
-	file_proto_subnet_checkpoint_proto_init()
+	file_subnet_checkpoint_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_subnet_validator_proto_rawDesc), len(file_proto_subnet_validator_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subnet_validator_proto_rawDesc), len(file_subnet_validator_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_proto_subnet_validator_proto_goTypes,
-		DependencyIndexes: file_proto_subnet_validator_proto_depIdxs,
-		MessageInfos:      file_proto_subnet_validator_proto_msgTypes,
+		GoTypes:           file_subnet_validator_proto_goTypes,
+		DependencyIndexes: file_subnet_validator_proto_depIdxs,
+		MessageInfos:      file_subnet_validator_proto_msgTypes,
 	}.Build()
-	File_proto_subnet_validator_proto = out.File
-	file_proto_subnet_validator_proto_goTypes = nil
-	file_proto_subnet_validator_proto_depIdxs = nil
+	File_subnet_validator_proto = out.File
+	file_subnet_validator_proto_goTypes = nil
+	file_subnet_validator_proto_depIdxs = nil
 }

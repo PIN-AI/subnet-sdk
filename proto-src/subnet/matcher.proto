@@ -3,7 +3,7 @@ package subnet.v1;
 
 option go_package = "subnet/proto/subnet;pb";
 
-import "proto/subnet/bid.proto";
+import "subnet/bid.proto";
 
 // Snapshot of an intent and associated bids within the matcher.
 message IntentBidSnapshot {
@@ -90,4 +90,19 @@ message RespondToTaskRequest {
 message RespondToTaskResponse {
   bool success = 1;
   string message = 2;
+}
+
+// Batch bid submission request
+message SubmitBidBatchRequest {
+  repeated Bid bids = 1;
+  string batch_id = 2;           // Optional batch identifier for idempotency
+  optional bool partial_ok = 3;  // Allow partial success (default: false)
+}
+
+// Batch bid submission response
+message SubmitBidBatchResponse {
+  repeated BidSubmissionAck acks = 1;  // Per-bid responses aligned with request order
+  int32 success = 2;                   // Number of successful submissions
+  int32 failed = 3;                    // Number of failed submissions
+  string msg = 4;                      // Optional summary message
 }

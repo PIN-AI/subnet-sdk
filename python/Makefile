@@ -12,9 +12,13 @@ proto:
 		--grpc_python_out=src \
 		--pyi_out=src \
 		$(PROTO_SRC)/subnet/*.proto
+	@echo "Moving proto files to correct location..."
+	@mkdir -p src/subnet_sdk/proto/subnet
+	@mv src/subnet/*_pb2*.py src/subnet_sdk/proto/subnet/ 2>/dev/null || true
+	@rmdir src/subnet 2>/dev/null || true
 	@echo "Fixing proto imports..."
 	@find src/subnet_sdk/proto/subnet -name "*_pb2*.py" -exec sed -i '' \
-		's/from proto\.subnet import/from subnet_sdk.proto.subnet import/g' {} \;
+		's/from subnet import/from subnet_sdk.proto.subnet import/g' {} \;
 	@echo "✓ Proto generation complete"
 
 # 检查 proto 是否正确

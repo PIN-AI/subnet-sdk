@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.8
 // 	protoc        v4.25.3
-// source: proto/subnet/agent.proto
+// source: subnet/agent.proto
 
 package pb
 
@@ -57,11 +57,11 @@ func (x AgentStatus) String() string {
 }
 
 func (AgentStatus) Descriptor() protoreflect.EnumDescriptor {
-	return file_proto_subnet_agent_proto_enumTypes[0].Descriptor()
+	return file_subnet_agent_proto_enumTypes[0].Descriptor()
 }
 
 func (AgentStatus) Type() protoreflect.EnumType {
-	return &file_proto_subnet_agent_proto_enumTypes[0]
+	return &file_subnet_agent_proto_enumTypes[0]
 }
 
 func (x AgentStatus) Number() protoreflect.EnumNumber {
@@ -70,7 +70,7 @@ func (x AgentStatus) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AgentStatus.Descriptor instead.
 func (AgentStatus) EnumDescriptor() ([]byte, []int) {
-	return file_proto_subnet_agent_proto_rawDescGZIP(), []int{0}
+	return file_subnet_agent_proto_rawDescGZIP(), []int{0}
 }
 
 // Agent represents an agent in the subnet
@@ -87,7 +87,7 @@ type Agent struct {
 
 func (x *Agent) Reset() {
 	*x = Agent{}
-	mi := &file_proto_subnet_agent_proto_msgTypes[0]
+	mi := &file_subnet_agent_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -99,7 +99,7 @@ func (x *Agent) String() string {
 func (*Agent) ProtoMessage() {}
 
 func (x *Agent) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_subnet_agent_proto_msgTypes[0]
+	mi := &file_subnet_agent_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -112,7 +112,7 @@ func (x *Agent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Agent.ProtoReflect.Descriptor instead.
 func (*Agent) Descriptor() ([]byte, []int) {
-	return file_proto_subnet_agent_proto_rawDescGZIP(), []int{0}
+	return file_subnet_agent_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Agent) GetId() string {
@@ -150,11 +150,11 @@ func (x *Agent) GetLastSeen() int64 {
 	return 0
 }
 
-var File_proto_subnet_agent_proto protoreflect.FileDescriptor
+var File_subnet_agent_proto protoreflect.FileDescriptor
 
-const file_proto_subnet_agent_proto_rawDesc = "" +
+const file_subnet_agent_proto_rawDesc = "" +
 	"\n" +
-	"\x18proto/subnet/agent.proto\x12\tsubnet.v1\"\xa4\x01\n" +
+	"\x12subnet/agent.proto\x12\tsubnet.v1\"\xa4\x01\n" +
 	"\x05Agent\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\"\n" +
 	"\fcapabilities\x18\x02 \x03(\tR\fcapabilities\x12\x1a\n" +
@@ -168,24 +168,24 @@ const file_proto_subnet_agent_proto_rawDesc = "" +
 	"\x16AGENT_STATUS_UNHEALTHY\x10\x03B\x18Z\x16subnet/proto/subnet;pbb\x06proto3"
 
 var (
-	file_proto_subnet_agent_proto_rawDescOnce sync.Once
-	file_proto_subnet_agent_proto_rawDescData []byte
+	file_subnet_agent_proto_rawDescOnce sync.Once
+	file_subnet_agent_proto_rawDescData []byte
 )
 
-func file_proto_subnet_agent_proto_rawDescGZIP() []byte {
-	file_proto_subnet_agent_proto_rawDescOnce.Do(func() {
-		file_proto_subnet_agent_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_subnet_agent_proto_rawDesc), len(file_proto_subnet_agent_proto_rawDesc)))
+func file_subnet_agent_proto_rawDescGZIP() []byte {
+	file_subnet_agent_proto_rawDescOnce.Do(func() {
+		file_subnet_agent_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_subnet_agent_proto_rawDesc), len(file_subnet_agent_proto_rawDesc)))
 	})
-	return file_proto_subnet_agent_proto_rawDescData
+	return file_subnet_agent_proto_rawDescData
 }
 
-var file_proto_subnet_agent_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_proto_subnet_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_proto_subnet_agent_proto_goTypes = []any{
+var file_subnet_agent_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_subnet_agent_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_subnet_agent_proto_goTypes = []any{
 	(AgentStatus)(0), // 0: subnet.v1.AgentStatus
 	(*Agent)(nil),    // 1: subnet.v1.Agent
 }
-var file_proto_subnet_agent_proto_depIdxs = []int32{
+var file_subnet_agent_proto_depIdxs = []int32{
 	0, // 0: subnet.v1.Agent.status:type_name -> subnet.v1.AgentStatus
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
@@ -194,27 +194,27 @@ var file_proto_subnet_agent_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_proto_subnet_agent_proto_init() }
-func file_proto_subnet_agent_proto_init() {
-	if File_proto_subnet_agent_proto != nil {
+func init() { file_subnet_agent_proto_init() }
+func file_subnet_agent_proto_init() {
+	if File_subnet_agent_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_subnet_agent_proto_rawDesc), len(file_proto_subnet_agent_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subnet_agent_proto_rawDesc), len(file_subnet_agent_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_proto_subnet_agent_proto_goTypes,
-		DependencyIndexes: file_proto_subnet_agent_proto_depIdxs,
-		EnumInfos:         file_proto_subnet_agent_proto_enumTypes,
-		MessageInfos:      file_proto_subnet_agent_proto_msgTypes,
+		GoTypes:           file_subnet_agent_proto_goTypes,
+		DependencyIndexes: file_subnet_agent_proto_depIdxs,
+		EnumInfos:         file_subnet_agent_proto_enumTypes,
+		MessageInfos:      file_subnet_agent_proto_msgTypes,
 	}.Build()
-	File_proto_subnet_agent_proto = out.File
-	file_proto_subnet_agent_proto_goTypes = nil
-	file_proto_subnet_agent_proto_depIdxs = nil
+	File_subnet_agent_proto = out.File
+	file_subnet_agent_proto_goTypes = nil
+	file_subnet_agent_proto_depIdxs = nil
 }

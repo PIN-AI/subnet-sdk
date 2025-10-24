@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v4.25.3
-// source: proto/subnet/service.proto
+// source: subnet/service.proto
 
 package pb
 
@@ -19,16 +19,17 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ValidatorService_SubmitExecutionReport_FullMethodName  = "/subnet.v1.ValidatorService/SubmitExecutionReport"
-	ValidatorService_GetCheckpoint_FullMethodName          = "/subnet.v1.ValidatorService/GetCheckpoint"
-	ValidatorService_ProposeHeader_FullMethodName          = "/subnet.v1.ValidatorService/ProposeHeader"
-	ValidatorService_SubmitSignature_FullMethodName        = "/subnet.v1.ValidatorService/SubmitSignature"
-	ValidatorService_GetSignatures_FullMethodName          = "/subnet.v1.ValidatorService/GetSignatures"
-	ValidatorService_GetValidatorSet_FullMethodName        = "/subnet.v1.ValidatorService/GetValidatorSet"
-	ValidatorService_GetDoubleSignEvidences_FullMethodName = "/subnet.v1.ValidatorService/GetDoubleSignEvidences"
-	ValidatorService_GetValidationPolicy_FullMethodName    = "/subnet.v1.ValidatorService/GetValidationPolicy"
-	ValidatorService_GetVerificationRecords_FullMethodName = "/subnet.v1.ValidatorService/GetVerificationRecords"
-	ValidatorService_GetValidatorMetrics_FullMethodName    = "/subnet.v1.ValidatorService/GetValidatorMetrics"
+	ValidatorService_SubmitExecutionReport_FullMethodName      = "/subnet.v1.ValidatorService/SubmitExecutionReport"
+	ValidatorService_SubmitExecutionReportBatch_FullMethodName = "/subnet.v1.ValidatorService/SubmitExecutionReportBatch"
+	ValidatorService_GetCheckpoint_FullMethodName              = "/subnet.v1.ValidatorService/GetCheckpoint"
+	ValidatorService_ProposeHeader_FullMethodName              = "/subnet.v1.ValidatorService/ProposeHeader"
+	ValidatorService_SubmitSignature_FullMethodName            = "/subnet.v1.ValidatorService/SubmitSignature"
+	ValidatorService_GetSignatures_FullMethodName              = "/subnet.v1.ValidatorService/GetSignatures"
+	ValidatorService_GetValidatorSet_FullMethodName            = "/subnet.v1.ValidatorService/GetValidatorSet"
+	ValidatorService_GetDoubleSignEvidences_FullMethodName     = "/subnet.v1.ValidatorService/GetDoubleSignEvidences"
+	ValidatorService_GetValidationPolicy_FullMethodName        = "/subnet.v1.ValidatorService/GetValidationPolicy"
+	ValidatorService_GetVerificationRecords_FullMethodName     = "/subnet.v1.ValidatorService/GetVerificationRecords"
+	ValidatorService_GetValidatorMetrics_FullMethodName        = "/subnet.v1.ValidatorService/GetValidatorMetrics"
 )
 
 // ValidatorServiceClient is the client API for ValidatorService service.
@@ -39,6 +40,8 @@ const (
 type ValidatorServiceClient interface {
 	// Agent submits execution report to validators
 	SubmitExecutionReport(ctx context.Context, in *ExecutionReport, opts ...grpc.CallOption) (*Receipt, error)
+	// Agent submits multiple execution reports in batch
+	SubmitExecutionReportBatch(ctx context.Context, in *ExecutionReportBatchRequest, opts ...grpc.CallOption) (*ExecutionReportBatchResponse, error)
 	// Checkpoint operations
 	GetCheckpoint(ctx context.Context, in *GetCheckpointRequest, opts ...grpc.CallOption) (*CheckpointHeader, error)
 	ProposeHeader(ctx context.Context, in *CheckpointHeader, opts ...grpc.CallOption) (*Ack, error)
@@ -65,6 +68,16 @@ func (c *validatorServiceClient) SubmitExecutionReport(ctx context.Context, in *
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Receipt)
 	err := c.cc.Invoke(ctx, ValidatorService_SubmitExecutionReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *validatorServiceClient) SubmitExecutionReportBatch(ctx context.Context, in *ExecutionReportBatchRequest, opts ...grpc.CallOption) (*ExecutionReportBatchResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExecutionReportBatchResponse)
+	err := c.cc.Invoke(ctx, ValidatorService_SubmitExecutionReportBatch_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -196,6 +209,8 @@ func (c *validatorServiceClient) GetValidatorMetrics(ctx context.Context, in *Ge
 type ValidatorServiceServer interface {
 	// Agent submits execution report to validators
 	SubmitExecutionReport(context.Context, *ExecutionReport) (*Receipt, error)
+	// Agent submits multiple execution reports in batch
+	SubmitExecutionReportBatch(context.Context, *ExecutionReportBatchRequest) (*ExecutionReportBatchResponse, error)
 	// Checkpoint operations
 	GetCheckpoint(context.Context, *GetCheckpointRequest) (*CheckpointHeader, error)
 	ProposeHeader(context.Context, *CheckpointHeader) (*Ack, error)
@@ -220,6 +235,9 @@ type UnimplementedValidatorServiceServer struct{}
 
 func (UnimplementedValidatorServiceServer) SubmitExecutionReport(context.Context, *ExecutionReport) (*Receipt, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SubmitExecutionReport not implemented")
+}
+func (UnimplementedValidatorServiceServer) SubmitExecutionReportBatch(context.Context, *ExecutionReportBatchRequest) (*ExecutionReportBatchResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitExecutionReportBatch not implemented")
 }
 func (UnimplementedValidatorServiceServer) GetCheckpoint(context.Context, *GetCheckpointRequest) (*CheckpointHeader, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCheckpoint not implemented")
@@ -283,6 +301,24 @@ func _ValidatorService_SubmitExecutionReport_Handler(srv interface{}, ctx contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(ValidatorServiceServer).SubmitExecutionReport(ctx, req.(*ExecutionReport))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ValidatorService_SubmitExecutionReportBatch_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecutionReportBatchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ValidatorServiceServer).SubmitExecutionReportBatch(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ValidatorService_SubmitExecutionReportBatch_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ValidatorServiceServer).SubmitExecutionReportBatch(ctx, req.(*ExecutionReportBatchRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -440,6 +476,10 @@ var ValidatorService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ValidatorService_SubmitExecutionReport_Handler,
 		},
 		{
+			MethodName: "SubmitExecutionReportBatch",
+			Handler:    _ValidatorService_SubmitExecutionReportBatch_Handler,
+		},
+		{
 			MethodName: "GetCheckpoint",
 			Handler:    _ValidatorService_GetCheckpoint_Handler,
 		},
@@ -481,5 +521,5 @@ var ValidatorService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "proto/subnet/service.proto",
+	Metadata: "subnet/service.proto",
 }

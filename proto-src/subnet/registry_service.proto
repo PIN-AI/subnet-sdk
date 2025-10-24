@@ -3,7 +3,7 @@ package subnet.v1;
 
 option go_package = "subnet/proto/subnet;pb";
 
-import "proto/subnet/agent.proto";
+import "subnet/agent.proto";
 
 service RegistryService {
     rpc RegisterAgent(RegisterAgentRequest) returns (RegisterAgentResponse);

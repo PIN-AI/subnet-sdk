@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v4.25.3
-// source: proto/subnet/validation.proto
+// source: subnet/validation.proto
 
 package pb
 
@@ -159,5 +159,5 @@ var ValidationService_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "proto/subnet/validation.proto",
+	Metadata: "subnet/validation.proto",
 }

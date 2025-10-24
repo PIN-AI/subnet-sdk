@@ -170,6 +170,145 @@ config := &sdk.Config{
 
 6. **Validation**: Configuration is validated at SDK creation time with detailed error messages.
 
+## Batch Operations
+
+The SDK supports batch operations for improved performance when submitting multiple bids or execution reports:
+
+### Batch Bid Submission
+
+```go
+import (
+    pb "subnet/proto/subnet"
+)
+
+// Create matcher client
+matcherClient, err := agentsdk.NewMatcherClient(
+    "localhost:8090",
+    signingConfig,
+    false, // secure
+)
+if err != nil {
+    log.Fatal(err)
+}
+defer matcherClient.Close()
+
+// Prepare multiple bids
+bids := []*pb.Bid{
+    {
+        BidId:    "bid-1",
+        IntentId: "intent-123",
+        AgentId:  "agent-1",
+        Price:    100,
+    },
+    {
+        BidId:    "bid-2",
+        IntentId: "intent-123",
+        AgentId:  "agent-1",
+        Price:    150,
+    },
+}
+
+// Submit batch
+partialOk := true // Continue on partial failures
+batchReq := &pb.SubmitBidBatchRequest{
+    Bids:      bids,
+    BatchId:   "batch-123",
+    PartialOk: &partialOk,
+}
+
+resp, err := matcherClient.SubmitBidBatch(ctx, batchReq)
+if err != nil {
+    log.Fatal(err)
+}
+
+log.Printf("Batch results: %d succeeded, %d failed", resp.Success, resp.Failed)
+for i, ack := range resp.Acks {
+    log.Printf("Bid %d: accepted=%v, reason=%s", i, ack.Accepted, ack.Reason)
+}
+```
+
+### Batch Execution Report Submission
+
+```go
+// Create validator client
+validatorClient, err := agentsdk.NewValidatorClient(
+    "localhost:9090",
+    signingConfig,
+    false, // secure
+)
+if err != nil {
+    log.Fatal(err)
+}
+defer validatorClient.Close()
+
+// Prepare multiple reports
+reports := []*pb.ExecutionReport{
+    {
+        ReportId:     "report-1",
+        AssignmentId: "assignment-1",
+        IntentId:     "intent-123",
+        AgentId:      "agent-1",
+        Status:       pb.ExecutionReport_SUCCESS,
+        Timestamp:    time.Now().Unix(),
+    },
+    {
+        ReportId:     "report-2",
+        AssignmentId: "assignment-2",
+        IntentId:     "intent-456",
+        AgentId:      "agent-1",
+        Status:       pb.ExecutionReport_SUCCESS,
+        Timestamp:    time.Now().Unix(),
+    },
+}
+
+// Submit batch
+partialOk := false // Stop on first failure
+batchReq := &pb.ExecutionReportBatchRequest{
+    Reports:   reports,
+    BatchId:   "batch-456",
+    PartialOk: &partialOk,
+}
+
+resp, err := validatorClient.SubmitExecutionReportBatch(ctx, batchReq)
+if err != nil {
+    log.Fatal(err)
+}
+
+log.Printf("Batch results: %d succeeded, %d failed", resp.Success, resp.Failed)
+for i, receipt := range resp.Receipts {
+    log.Printf("Report %d: status=%s, phase=%s", i, receipt.Status, receipt.Phase)
+}
+```
+
+### Batch Operation Benefits
+
+- **Performance**: Reduced network overhead and connection management
+- **Atomicity**: Optional partial success handling with `partial_ok` flag
+- **Efficiency**: Single RPC call for multiple operations
+- **Idempotency**: Use `batch_id` to prevent duplicate submissions
+
+### Batch Error Handling
+
+```go
+// Stop on first failure (partial_ok = false)
+partialOk := false
+req := &pb.SubmitBidBatchRequest{
+    Bids:      bids,
+    BatchId:   "batch-123",
+    PartialOk: &partialOk,
+}
+// If any bid fails, remaining bids are rejected
+
+// Continue on failures (partial_ok = true)
+partialOk := true
+req := &pb.SubmitBidBatchRequest{
+    Bids:      bids,
+    BatchId:   "batch-123",
+    PartialOk: &partialOk,
+}
+// All bids are processed, check individual acks for results
+```
+
 ## API Reference
 
 ### SDK Methods

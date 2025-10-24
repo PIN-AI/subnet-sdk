@@ -13,7 +13,9 @@ from .grpc_transport import (
 )
 from .proto.subnet import matcher_service_pb2_grpc
 from .proto.subnet import matcher_service_pb2
+from .proto.subnet import matcher_pb2
 from .proto.subnet import service_pb2_grpc
+from .proto.subnet import service_pb2
 from .proto.subnet import execution_report_pb2
 from .proto.subnet import validator_pb2
 
@@ -45,6 +47,13 @@ class MatcherClient:
     ) -> matcher_service_pb2.SubmitBidResponse:
         metadata = await self._metadata("/subnet.v1.MatcherService/SubmitBid", request)
         return await self._stub.SubmitBid(request, metadata=metadata)
+
+    async def submit_bid_batch(
+        self, request: matcher_pb2.SubmitBidBatchRequest
+    ) -> matcher_pb2.SubmitBidBatchResponse:
+        """Submit multiple bids to the matcher in batch."""
+        metadata = await self._metadata("/subnet.v1.MatcherService/SubmitBidBatch", request)
+        return await self._stub.SubmitBidBatch(request, metadata=metadata)
 
     async def stream_intents(
         self, request: matcher_service_pb2.StreamIntentsRequest
@@ -101,6 +110,13 @@ class ValidatorClient:
     ) -> service_pb2.Receipt:
         metadata = await self._metadata("/subnet.v1.ValidatorService/SubmitExecutionReport", request)
         return await self._stub.SubmitExecutionReport(request, metadata=metadata)
+
+    async def submit_execution_report_batch(
+        self, request: service_pb2.ExecutionReportBatchRequest
+    ) -> service_pb2.ExecutionReportBatchResponse:
+        """Submit multiple execution reports to the validator in batch."""
+        metadata = await self._metadata("/subnet.v1.ValidatorService/SubmitExecutionReportBatch", request)
+        return await self._stub.SubmitExecutionReportBatch(request, metadata=metadata)
 
     async def get_validator_set(
         self, request: service_pb2.GetCheckpointRequest

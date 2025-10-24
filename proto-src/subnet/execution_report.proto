@@ -2,7 +2,7 @@ syntax = "proto3";
 package subnet.v1;
 
 option go_package = "subnet/proto/subnet;pb";
-import "proto/subnet/report.proto"; // for RootLayerRef reuse
+import "subnet/report.proto"; // for RootLayerRef reuse
 
 // Execution report submitted by Agent Service to Validators.
 message ExecutionReport {

@@ -42,6 +42,11 @@ func (c *MatcherClient) SubmitBid(ctx context.Context, req *pb.SubmitBidRequest)
 	return c.client.SubmitBid(ctx, req)
 }
 
+// SubmitBidBatch submits multiple bids to the matcher in batch
+func (c *MatcherClient) SubmitBidBatch(ctx context.Context, req *pb.SubmitBidBatchRequest) (*pb.SubmitBidBatchResponse, error) {
+	return c.client.SubmitBidBatch(ctx, req)
+}
+
 // StreamIntents streams intents from the matcher
 func (c *MatcherClient) StreamIntents(ctx context.Context, req *pb.StreamIntentsRequest) (<-chan *pb.MatcherIntentUpdate, <-chan error) {
 	intentCh := make(chan *pb.MatcherIntentUpdate)
