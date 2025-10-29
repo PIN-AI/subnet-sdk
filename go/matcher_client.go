@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"log"
 
 	pb "subnet/proto/subnet"
 
@@ -52,29 +53,40 @@ func (c *MatcherClient) StreamIntents(ctx context.Context, req *pb.StreamIntents
 	intentCh := make(chan *pb.MatcherIntentUpdate)
 	errCh := make(chan error, 1)
 
+	log.Printf("[MatcherClient DEBUG] StreamIntents called with SubnetID: %s", req.SubnetId)
+
 	go func() {
 		defer close(intentCh)
 		defer close(errCh)
 
+		log.Printf("[MatcherClient DEBUG] Calling gRPC StreamIntents...")
 		stream, err := c.client.StreamIntents(ctx, req)
 		if err != nil {
+			log.Printf("[MatcherClient DEBUG] Failed to start intent stream: %v", err)
 			errCh <- fmt.Errorf("failed to start intent stream: %w", err)
 			return
 		}
+		log.Printf("[MatcherClient DEBUG] Intent stream started successfully, entering receive loop...")
 
 		for {
+			log.Printf("[MatcherClient DEBUG] Waiting for intent update from stream.Recv()...")
 			update, err := stream.Recv()
 			if err == io.EOF {
+				log.Printf("[MatcherClient DEBUG] Intent stream EOF")
 				return
 			}
 			if err != nil {
+				log.Printf("[MatcherClient DEBUG] Intent stream Recv error: %v", err)
 				errCh <- fmt.Errorf("intent stream error: %w", err)
 				return
 			}
 
+			log.Printf("[MatcherClient DEBUG] Received intent update from stream: %s", update.IntentId)
 			select {
 			case intentCh <- update:
+				log.Printf("[MatcherClient DEBUG] Sent intent update to channel")
 			case <-ctx.Done():
+				log.Printf("[MatcherClient DEBUG] Context done while sending update")
 				errCh <- ctx.Err()
 				return
 			}
@@ -89,29 +101,43 @@ func (c *MatcherClient) StreamTasks(ctx context.Context, req *pb.StreamTasksRequ
 	taskCh := make(chan *pb.ExecutionTask)
 	errCh := make(chan error, 1)
 
+	log.Printf("[MatcherClient DEBUG] StreamTasks called with AgentID: %s", req.AgentId)
+
 	go func() {
 		defer close(taskCh)
 		defer close(errCh)
 
+		log.Printf("[MatcherClient DEBUG] Calling gRPC StreamTasks...")
 		stream, err := c.client.StreamTasks(ctx, req)
 		if err != nil {
+			log.Printf("[MatcherClient DEBUG] Failed to start task stream: %v", err)
 			errCh <- fmt.Errorf("failed to start task stream: %w", err)
 			return
 		}
 
+		log.Printf("[MatcherClient DEBUG] Task stream started successfully, entering receive loop...")
+
 		for {
+			log.Printf("[MatcherClient DEBUG] Waiting for task from stream.Recv()...")
 			task, err := stream.Recv()
 			if err == io.EOF {
+				log.Printf("[MatcherClient DEBUG] Task stream EOF received")
 				return
 			}
 			if err != nil {
+				log.Printf("[MatcherClient DEBUG] Task stream error: %v", err)
 				errCh <- fmt.Errorf("task stream error: %w", err)
 				return
 			}
 
+			log.Printf("[MatcherClient DEBUG] Received task from stream: %s", task.TaskId)
+			log.Printf("[MatcherClient DEBUG] Sent task to channel")
+
 			select {
 			case taskCh <- task:
+				log.Printf("[MatcherClient DEBUG] Task sent to channel successfully")
 			case <-ctx.Done():
+				log.Printf("[MatcherClient DEBUG] Context done while sending task")
 				errCh <- ctx.Err()
 				return
 			}
@@ -123,5 +149,12 @@ func (c *MatcherClient) StreamTasks(ctx context.Context, req *pb.StreamTasksRequ
 
 // RespondToTask sends task acceptance/rejection to matcher
 func (c *MatcherClient) RespondToTask(ctx context.Context, req *pb.RespondToTaskRequest) (*pb.RespondToTaskResponse, error) {
-	return c.client.RespondToTask(ctx, req)
+	log.Printf("[MatcherClient DEBUG] RespondToTask called for task: %s, accepted: %t", req.Response.TaskId, req.Response.Accepted)
+	resp, err := c.client.RespondToTask(ctx, req)
+	if err != nil {
+		log.Printf("[MatcherClient DEBUG] RespondToTask failed: %v", err)
+		return nil, err
+	}
+	log.Printf("[MatcherClient DEBUG] RespondToTask succeeded")
+	return resp, nil
 }

@@ -169,5 +169,7 @@ func DialOption(target string, signingConfig *SigningConfig, secure bool) (*grpc
 		opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	}
 
+	// Use non-blocking dial to avoid hanging on connection
+	// Connection will be established in background
 	return grpc.Dial(target, opts...)
 }

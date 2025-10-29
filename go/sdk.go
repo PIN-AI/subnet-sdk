@@ -161,8 +161,11 @@ func (sdk *SDK) RegisterCallbacks(callbacks Callbacks) {
 
 // Start starts the SDK
 func (sdk *SDK) Start() error {
+	log.Printf("[SDK DEBUG] Start() called")
 	sdk.mu.Lock()
 	defer sdk.mu.Unlock()
+
+	log.Printf("[SDK DEBUG] Acquired lock")
 
 	if sdk.running {
 		return errors.New("SDK already running")
@@ -172,24 +175,46 @@ func (sdk *SDK) Start() error {
 		return errors.New("no handler registered")
 	}
 
+	log.Printf("[SDK DEBUG] Calling registerWithRegistry()...")
 	if err := sdk.registerWithRegistry(); err != nil {
 		return fmt.Errorf("registry registration failed: %w", err)
 	}
+	log.Printf("[SDK DEBUG] registerWithRegistry() completed")
 
 	// Initialize gRPC clients
+	log.Printf("[SDK DEBUG] Calling initGRPCClients()...")
 	if err := sdk.initGRPCClients(); err != nil {
 		return fmt.Errorf("failed to initialize gRPC clients: %w", err)
 	}
+	log.Printf("[SDK DEBUG] initGRPCClients() completed")
 
 	// Start matcher streams
+	log.Printf("[SDK DEBUG] Calling startMatcherStreams()...")
 	if err := sdk.startMatcherStreams(); err != nil {
 		sdk.closeGRPCClients()
 		return fmt.Errorf("failed to start matcher streams: %w", err)
 	}
+	log.Printf("[SDK DEBUG] startMatcherStreams() completed")
 
+	log.Printf("[SDK DEBUG] Setting sdk.running = true")
 	sdk.running = true
+	log.Printf("[SDK DEBUG] sdk.running set to true")
+
+	log.Printf("[SDK DEBUG] Calling fireCallback(OnStart)...")
 	sdk.fireCallback("OnStart")
-	log.Printf("SDK started with agent ID: %s", sdk.GetAgentID())
+	log.Printf("[SDK DEBUG] fireCallback(OnStart) completed")
+
+	// Get agent ID before logging (GetAgentID() acquires a read lock, which would deadlock)
+	var agentID string
+	if sdk.config.Identity != nil {
+		agentID = sdk.config.Identity.AgentID
+	} else {
+		agentID = sdk.config.AgentID
+	}
+
+	log.Printf("[SDK DEBUG] About to log final message and return")
+	log.Printf("SDK started with agent ID: %s", agentID)
+	log.Printf("[SDK DEBUG] Returning nil from Start()")
 	return nil
 }
 

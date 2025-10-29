@@ -46,34 +46,50 @@ func (sdk *SDK) stopMatcherStreams() {
 func (sdk *SDK) taskStreamLoop(ctx context.Context) {
 	defer sdk.matcherWG.Done()
 
-	req := &pb.StreamTasksRequest{
-		AgentId: sdk.GetAgentID(),
+	// Read agent ID directly to avoid potential deadlock
+	var agentID string
+	if sdk.config.Identity != nil {
+		agentID = sdk.config.Identity.AgentID
+	} else {
+		agentID = sdk.config.AgentID
 	}
+
+	req := &pb.StreamTasksRequest{
+		AgentId: agentID,
+	}
+
+	log.Printf("[SDK DEBUG] Starting task stream loop for agent: %s", agentID)
 
 	for {
 		select {
 		case <-ctx.Done():
+			log.Printf("[SDK DEBUG] Task stream loop context done, exiting")
 			return
 		default:
 		}
 
+		log.Printf("[SDK DEBUG] Calling StreamTasks...")
 		taskCh, errCh := sdk.matcherClient.StreamTasks(ctx, req)
+		log.Printf("[SDK DEBUG] StreamTasks called, waiting for tasks...")
 
 		for {
 			select {
 			case <-ctx.Done():
+				log.Printf("[SDK DEBUG] Task stream context done")
 				return
 			case task, ok := <-taskCh:
 				if !ok {
 					// Channel closed, reconnect
-					log.Printf("Task stream closed, reconnecting...")
+					log.Printf("[SDK DEBUG] Task stream channel closed, reconnecting...")
 					time.Sleep(5 * time.Second)
 					goto reconnect
 				}
-				sdk.handleExecutionTask(ctx, task)
+				log.Printf("[SDK DEBUG] Received task from stream: %s (intent: %s)", task.TaskId, task.IntentId)
+				// Handle task in separate goroutine to avoid blocking the stream
+				go sdk.handleExecutionTask(ctx, task)
 			case err := <-errCh:
 				if err != nil {
-					log.Printf("Task stream error: %v", err)
+					log.Printf("[SDK DEBUG] Task stream error: %v", err)
 					sdk.fireCallback("OnError", err)
 					time.Sleep(5 * time.Second)
 					goto reconnect
@@ -92,30 +108,37 @@ func (sdk *SDK) intentStreamLoop(ctx context.Context) {
 		SubnetId: sdk.GetSubnetID(),
 	}
 
+	log.Printf("[SDK DEBUG] Starting intent stream loop for subnet: %s", req.SubnetId)
+
 	for {
 		select {
 		case <-ctx.Done():
+			log.Printf("[SDK DEBUG] Intent stream loop context done, exiting")
 			return
 		default:
 		}
 
+		log.Printf("[SDK DEBUG] Calling StreamIntents...")
 		intentCh, errCh := sdk.matcherClient.StreamIntents(ctx, req)
+		log.Printf("[SDK DEBUG] StreamIntents called, waiting for updates...")
 
 		for {
 			select {
 			case <-ctx.Done():
+				log.Printf("[SDK DEBUG] Intent stream context done")
 				return
 			case update, ok := <-intentCh:
 				if !ok {
 					// Channel closed, reconnect
-					log.Printf("Intent stream closed, reconnecting...")
+					log.Printf("[SDK DEBUG] Intent stream channel closed, reconnecting...")
 					time.Sleep(5 * time.Second)
 					goto reconnect
 				}
+				log.Printf("[SDK DEBUG] Received intent update: %s, type: %s", update.IntentId, update.UpdateType)
 				sdk.handleIntentUpdate(ctx, update)
 			case err := <-errCh:
 				if err != nil {
-					log.Printf("Intent stream error: %v", err)
+					log.Printf("[SDK DEBUG] Intent stream error: %v", err)
 					sdk.fireCallback("OnError", err)
 					time.Sleep(5 * time.Second)
 					goto reconnect
@@ -128,7 +151,10 @@ func (sdk *SDK) intentStreamLoop(ctx context.Context) {
 
 // handleExecutionTask processes an execution task
 func (sdk *SDK) handleExecutionTask(ctx context.Context, taskProto *pb.ExecutionTask) {
+	log.Printf("[SDK DEBUG] handleExecutionTask called for task: %s", taskProto.TaskId)
+
 	if !sdk.running {
+		log.Printf("[SDK DEBUG] SDK not running, skipping task")
 		return
 	}
 
@@ -142,56 +168,68 @@ func (sdk *SDK) handleExecutionTask(ctx context.Context, taskProto *pb.Execution
 		CreatedAt: time.Unix(taskProto.CreatedAt, 0),
 	}
 
-	// Respond to task (accept)
-	response := &pb.RespondToTaskRequest{
-		Response: &pb.TaskResponse{
-			TaskId:    task.ID,
-			AgentId:   sdk.GetAgentID(),
-			Accepted:  true,
-			Timestamp: time.Now().Unix(),
-		},
-	}
+	log.Printf("[SDK DEBUG] Task created, starting execution...")
 
-	if _, err := sdk.matcherClient.RespondToTask(ctx, response); err != nil {
-		log.Printf("Failed to respond to task %s: %v", task.ID, err)
-		sdk.fireCallback("OnTaskRejected", task, fmt.Sprintf("response failed: %v", err))
-		return
-	}
-
+	// Call OnTaskAccepted callback (no need to respond to matcher like validator_test_agent)
+	log.Printf("[SDK DEBUG] Calling OnTaskAccepted callback")
 	sdk.fireCallback("OnTaskAccepted", task)
 
 	// Execute task
+	log.Printf("[SDK DEBUG] Executing task...")
 	result, err := sdk.ExecuteTask(ctx, task)
 	if err != nil {
-		log.Printf("Task %s execution failed: %v", task.ID, err)
+		log.Printf("[SDK DEBUG] Task %s execution failed: %v", task.ID, err)
+	} else {
+		log.Printf("[SDK DEBUG] Task %s executed successfully", task.ID)
 	}
 
+	log.Printf("[SDK DEBUG] Calling OnTaskCompleted callback")
 	sdk.fireCallback("OnTaskCompleted", task, result, err)
 
-	// Submit execution report
-	report := &ExecutionReport{
-		ReportID:     generateReportID(),
-		AssignmentID: task.ID,
-		IntentID:     task.IntentID,
-		AgentID:      sdk.GetAgentID(),
-		Status:       ExecutionReportStatusSuccess,
-		ResultData:   result.Data,
-		Timestamp:    time.Now(),
-		Metadata: map[string]string{
-			"bid_id": taskProto.BidId,
-		},
+	// Submit execution report via gRPC
+	log.Printf("[SDK DEBUG] Submitting execution report...")
+
+	if sdk.validatorClient == nil {
+		log.Printf("[SDK DEBUG] No validator client configured, skipping execution report submission")
+		return
 	}
 
+	reportID := generateReportID()
+	status := pb.ExecutionReport_SUCCESS
 	if !result.Success {
-		report.Status = ExecutionReportStatusFailed
-		if result.Error != "" {
-			report.Metadata["error"] = result.Error
+		status = pb.ExecutionReport_FAILED
+	}
+
+	// Prepare error info if task failed
+	var errorInfo *pb.ErrorInfo
+	if !result.Success && result.Error != "" {
+		errorInfo = &pb.ErrorInfo{
+			Code:    "EXECUTION_FAILED",
+			Message: result.Error,
 		}
 	}
 
-	if _, err := sdk.SubmitExecutionReport(ctx, report); err != nil {
-		log.Printf("Failed to submit execution report %s: %v", report.ReportID, err)
+	reportProto := &pb.ExecutionReport{
+		ReportId:     reportID,
+		AssignmentId: task.ID,
+		IntentId:     task.IntentID,
+		AgentId:      sdk.GetChainAddress(), // Use chain address for RootLayer compatibility
+		Status:       status,
+		ResultData:   result.Data,
+		Timestamp:    time.Now().Unix(),
+		Evidence:     nil,       // Optional: verification evidence
+		Error:        errorInfo, // Optional: error details
+		Signature:    []byte{},  // TODO: Sign the report
 	}
+
+	receipt, err := sdk.validatorClient.SubmitExecutionReport(ctx, reportProto)
+	if err != nil {
+		log.Printf("[SDK DEBUG] Failed to submit execution report %s: %v", reportID, err)
+		return
+	}
+
+	log.Printf("[SDK DEBUG] Execution report %s submitted successfully", reportID)
+	log.Printf("[SDK DEBUG] Receipt: ReportID=%s, Status=%s, Phase=%s", receipt.ReportId, receipt.Status, receipt.Phase)
 }
 
 // handleIntentUpdate processes an intent update for bidding
@@ -272,9 +310,9 @@ func generateReportID() string {
 	return fmt.Sprintf("report-%s", hex.EncodeToString(b))
 }
 
-// generateBidID generates a unique bid ID
+// generateBidID generates a unique bid ID in format 0x + 64 hex characters (32 bytes)
 func generateBidID() string {
-	b := make([]byte, 16)
+	b := make([]byte, 32)
 	rand.Read(b)
-	return fmt.Sprintf("bid-%s", hex.EncodeToString(b))
+	return fmt.Sprintf("0x%s", hex.EncodeToString(b))
 }
