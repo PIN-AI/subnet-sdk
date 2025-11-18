@@ -433,6 +433,206 @@ func (x *DoubleSignEvidence) GetEvidence() []byte {
 	return nil
 }
 
+type GetExecutionReportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ReportId      string                 `protobuf:"bytes,1,opt,name=report_id,json=reportId,proto3" json:"report_id,omitempty"` // Required: report ID
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetExecutionReportRequest) Reset() {
+	*x = GetExecutionReportRequest{}
+	mi := &file_subnet_service_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetExecutionReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetExecutionReportRequest) ProtoMessage() {}
+
+func (x *GetExecutionReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_subnet_service_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetExecutionReportRequest.ProtoReflect.Descriptor instead.
+func (*GetExecutionReportRequest) Descriptor() ([]byte, []int) {
+	return file_subnet_service_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *GetExecutionReportRequest) GetReportId() string {
+	if x != nil {
+		return x.ReportId
+	}
+	return ""
+}
+
+type ListExecutionReportsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	IntentId      string                 `protobuf:"bytes,1,opt,name=intent_id,json=intentId,proto3" json:"intent_id,omitempty"` // Optional: filter by intent ID
+	Limit         uint32                 `protobuf:"varint,2,opt,name=limit,proto3" json:"limit,omitempty"`                      // Optional: max number of reports to return (default: 100)
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListExecutionReportsRequest) Reset() {
+	*x = ListExecutionReportsRequest{}
+	mi := &file_subnet_service_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListExecutionReportsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListExecutionReportsRequest) ProtoMessage() {}
+
+func (x *ListExecutionReportsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_subnet_service_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListExecutionReportsRequest.ProtoReflect.Descriptor instead.
+func (*ListExecutionReportsRequest) Descriptor() ([]byte, []int) {
+	return file_subnet_service_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListExecutionReportsRequest) GetIntentId() string {
+	if x != nil {
+		return x.IntentId
+	}
+	return ""
+}
+
+func (x *ListExecutionReportsRequest) GetLimit() uint32 {
+	if x != nil {
+		return x.Limit
+	}
+	return 0
+}
+
+type ListExecutionReportsResponse struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Reports       []*ExecutionReportEntry `protobuf:"bytes,1,rep,name=reports,proto3" json:"reports,omitempty"`
+	Total         uint32                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"` // Total number of reports returned
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListExecutionReportsResponse) Reset() {
+	*x = ListExecutionReportsResponse{}
+	mi := &file_subnet_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListExecutionReportsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListExecutionReportsResponse) ProtoMessage() {}
+
+func (x *ListExecutionReportsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_subnet_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListExecutionReportsResponse.ProtoReflect.Descriptor instead.
+func (*ListExecutionReportsResponse) Descriptor() ([]byte, []int) {
+	return file_subnet_service_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *ListExecutionReportsResponse) GetReports() []*ExecutionReportEntry {
+	if x != nil {
+		return x.Reports
+	}
+	return nil
+}
+
+func (x *ListExecutionReportsResponse) GetTotal() uint32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type ExecutionReportEntry struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ReportId      string                 `protobuf:"bytes,1,opt,name=report_id,json=reportId,proto3" json:"report_id,omitempty"`
+	Report        *ExecutionReport       `protobuf:"bytes,2,opt,name=report,proto3" json:"report,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ExecutionReportEntry) Reset() {
+	*x = ExecutionReportEntry{}
+	mi := &file_subnet_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ExecutionReportEntry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ExecutionReportEntry) ProtoMessage() {}
+
+func (x *ExecutionReportEntry) ProtoReflect() protoreflect.Message {
+	mi := &file_subnet_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ExecutionReportEntry.ProtoReflect.Descriptor instead.
+func (*ExecutionReportEntry) Descriptor() ([]byte, []int) {
+	return file_subnet_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ExecutionReportEntry) GetReportId() string {
+	if x != nil {
+		return x.ReportId
+	}
+	return ""
+}
+
+func (x *ExecutionReportEntry) GetReport() *ExecutionReport {
+	if x != nil {
+		return x.Report
+	}
+	return nil
+}
+
 type ValidatorMetrics struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	ValidatorId       string                 `protobuf:"bytes,1,opt,name=validator_id,json=validatorId,proto3" json:"validator_id,omitempty"`
@@ -446,7 +646,7 @@ type ValidatorMetrics struct {
 
 func (x *ValidatorMetrics) Reset() {
 	*x = ValidatorMetrics{}
-	mi := &file_subnet_service_proto_msgTypes[7]
+	mi := &file_subnet_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -458,7 +658,7 @@ func (x *ValidatorMetrics) String() string {
 func (*ValidatorMetrics) ProtoMessage() {}
 
 func (x *ValidatorMetrics) ProtoReflect() protoreflect.Message {
-	mi := &file_subnet_service_proto_msgTypes[7]
+	mi := &file_subnet_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -471,7 +671,7 @@ func (x *ValidatorMetrics) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ValidatorMetrics.ProtoReflect.Descriptor instead.
 func (*ValidatorMetrics) Descriptor() ([]byte, []int) {
-	return file_subnet_service_proto_rawDescGZIP(), []int{7}
+	return file_subnet_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ValidatorMetrics) GetValidatorId() string {
@@ -521,7 +721,7 @@ type ExecutionReportBatchRequest struct {
 
 func (x *ExecutionReportBatchRequest) Reset() {
 	*x = ExecutionReportBatchRequest{}
-	mi := &file_subnet_service_proto_msgTypes[8]
+	mi := &file_subnet_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -533,7 +733,7 @@ func (x *ExecutionReportBatchRequest) String() string {
 func (*ExecutionReportBatchRequest) ProtoMessage() {}
 
 func (x *ExecutionReportBatchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_subnet_service_proto_msgTypes[8]
+	mi := &file_subnet_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -546,7 +746,7 @@ func (x *ExecutionReportBatchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecutionReportBatchRequest.ProtoReflect.Descriptor instead.
 func (*ExecutionReportBatchRequest) Descriptor() ([]byte, []int) {
-	return file_subnet_service_proto_rawDescGZIP(), []int{8}
+	return file_subnet_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ExecutionReportBatchRequest) GetReports() []*ExecutionReport {
@@ -583,7 +783,7 @@ type ExecutionReportBatchResponse struct {
 
 func (x *ExecutionReportBatchResponse) Reset() {
 	*x = ExecutionReportBatchResponse{}
-	mi := &file_subnet_service_proto_msgTypes[9]
+	mi := &file_subnet_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -595,7 +795,7 @@ func (x *ExecutionReportBatchResponse) String() string {
 func (*ExecutionReportBatchResponse) ProtoMessage() {}
 
 func (x *ExecutionReportBatchResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_subnet_service_proto_msgTypes[9]
+	mi := &file_subnet_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -608,7 +808,7 @@ func (x *ExecutionReportBatchResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExecutionReportBatchResponse.ProtoReflect.Descriptor instead.
 func (*ExecutionReportBatchResponse) Descriptor() ([]byte, []int) {
-	return file_subnet_service_proto_rawDescGZIP(), []int{9}
+	return file_subnet_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ExecutionReportBatchResponse) GetReceipts() []*Receipt {
@@ -668,7 +868,18 @@ const file_subnet_service_proto_rawDesc = "" +
 	"\x12DoubleSignEvidence\x12!\n" +
 	"\fvalidator_id\x18\x01 \x01(\tR\vvalidatorId\x12\x14\n" +
 	"\x05epoch\x18\x02 \x01(\x04R\x05epoch\x12\x1a\n" +
-	"\bevidence\x18\x03 \x01(\fR\bevidence\"\xdd\x01\n" +
+	"\bevidence\x18\x03 \x01(\fR\bevidence\"8\n" +
+	"\x19GetExecutionReportRequest\x12\x1b\n" +
+	"\treport_id\x18\x01 \x01(\tR\breportId\"P\n" +
+	"\x1bListExecutionReportsRequest\x12\x1b\n" +
+	"\tintent_id\x18\x01 \x01(\tR\bintentId\x12\x14\n" +
+	"\x05limit\x18\x02 \x01(\rR\x05limit\"o\n" +
+	"\x1cListExecutionReportsResponse\x129\n" +
+	"\areports\x18\x01 \x03(\v2\x1f.subnet.v1.ExecutionReportEntryR\areports\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\rR\x05total\"g\n" +
+	"\x14ExecutionReportEntry\x12\x1b\n" +
+	"\treport_id\x18\x01 \x01(\tR\breportId\x122\n" +
+	"\x06report\x18\x02 \x01(\v2\x1a.subnet.v1.ExecutionReportR\x06report\"\xdd\x01\n" +
 	"\x10ValidatorMetrics\x12!\n" +
 	"\fvalidator_id\x18\x01 \x01(\tR\vvalidatorId\x12)\n" +
 	"\x10reports_verified\x18\x02 \x01(\x04R\x0freportsVerified\x12-\n" +
@@ -686,7 +897,7 @@ const file_subnet_service_proto_rawDesc = "" +
 	"\breceipts\x18\x01 \x03(\v2\x12.subnet.v1.ReceiptR\breceipts\x12\x18\n" +
 	"\asuccess\x18\x02 \x01(\x05R\asuccess\x12\x16\n" +
 	"\x06failed\x18\x03 \x01(\x05R\x06failed\x12\x10\n" +
-	"\x03msg\x18\x04 \x01(\tR\x03msg2\xa3\a\n" +
+	"\x03msg\x18\x04 \x01(\tR\x03msg2\xe4\b\n" +
 	"\x10ValidatorService\x12G\n" +
 	"\x15SubmitExecutionReport\x12\x1a.subnet.v1.ExecutionReport\x1a\x12.subnet.v1.Receipt\x12m\n" +
 	"\x1aSubmitExecutionReportBatch\x12&.subnet.v1.ExecutionReportBatchRequest\x1a'.subnet.v1.ExecutionReportBatchResponse\x12M\n" +
@@ -698,7 +909,9 @@ const file_subnet_service_proto_rawDesc = "" +
 	"\x16GetDoubleSignEvidences\x12\x1a.subnet.v1.DoubleSignQuery\x1a\x1d.subnet.v1.DoubleSignEvidence0\x01\x12Y\n" +
 	"\x13GetValidationPolicy\x12%.subnet.v1.GetValidationPolicyRequest\x1a\x1b.subnet.v1.ValidationPolicy\x12c\n" +
 	"\x16GetVerificationRecords\x12(.subnet.v1.GetVerificationRecordsRequest\x1a\x1d.subnet.v1.VerificationRecord0\x01\x12Y\n" +
-	"\x13GetValidatorMetrics\x12%.subnet.v1.GetValidatorMetricsRequest\x1a\x1b.subnet.v1.ValidatorMetricsB\x18Z\x16subnet/proto/subnet;pbb\x06proto3"
+	"\x13GetValidatorMetrics\x12%.subnet.v1.GetValidatorMetricsRequest\x1a\x1b.subnet.v1.ValidatorMetrics\x12V\n" +
+	"\x12GetExecutionReport\x12$.subnet.v1.GetExecutionReportRequest\x1a\x1a.subnet.v1.ExecutionReport\x12g\n" +
+	"\x14ListExecutionReports\x12&.subnet.v1.ListExecutionReportsRequest\x1a'.subnet.v1.ListExecutionReportsResponseB\x18Z\x16subnet/proto/subnet;pbb\x06proto3"
 
 var (
 	file_subnet_service_proto_rawDescOnce sync.Once
@@ -712,7 +925,7 @@ func file_subnet_service_proto_rawDescGZIP() []byte {
 	return file_subnet_service_proto_rawDescData
 }
 
-var file_subnet_service_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_subnet_service_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_subnet_service_proto_goTypes = []any{
 	(*Ack)(nil),                           // 0: subnet.v1.Ack
 	(*GetCheckpointRequest)(nil),          // 1: subnet.v1.GetCheckpointRequest
@@ -721,48 +934,58 @@ var file_subnet_service_proto_goTypes = []any{
 	(*GetValidatorMetricsRequest)(nil),    // 4: subnet.v1.GetValidatorMetricsRequest
 	(*DoubleSignQuery)(nil),               // 5: subnet.v1.DoubleSignQuery
 	(*DoubleSignEvidence)(nil),            // 6: subnet.v1.DoubleSignEvidence
-	(*ValidatorMetrics)(nil),              // 7: subnet.v1.ValidatorMetrics
-	(*ExecutionReportBatchRequest)(nil),   // 8: subnet.v1.ExecutionReportBatchRequest
-	(*ExecutionReportBatchResponse)(nil),  // 9: subnet.v1.ExecutionReportBatchResponse
-	(*ExecutionReport)(nil),               // 10: subnet.v1.ExecutionReport
-	(*Receipt)(nil),                       // 11: subnet.v1.Receipt
-	(*CheckpointHeader)(nil),              // 12: subnet.v1.CheckpointHeader
-	(*SignatureSubmission)(nil),           // 13: subnet.v1.SignatureSubmission
-	(*Signature)(nil),                     // 14: subnet.v1.Signature
-	(*ValidatorSet)(nil),                  // 15: subnet.v1.ValidatorSet
-	(*ValidationPolicy)(nil),              // 16: subnet.v1.ValidationPolicy
-	(*VerificationRecord)(nil),            // 17: subnet.v1.VerificationRecord
+	(*GetExecutionReportRequest)(nil),     // 7: subnet.v1.GetExecutionReportRequest
+	(*ListExecutionReportsRequest)(nil),   // 8: subnet.v1.ListExecutionReportsRequest
+	(*ListExecutionReportsResponse)(nil),  // 9: subnet.v1.ListExecutionReportsResponse
+	(*ExecutionReportEntry)(nil),          // 10: subnet.v1.ExecutionReportEntry
+	(*ValidatorMetrics)(nil),              // 11: subnet.v1.ValidatorMetrics
+	(*ExecutionReportBatchRequest)(nil),   // 12: subnet.v1.ExecutionReportBatchRequest
+	(*ExecutionReportBatchResponse)(nil),  // 13: subnet.v1.ExecutionReportBatchResponse
+	(*ExecutionReport)(nil),               // 14: subnet.v1.ExecutionReport
+	(*Receipt)(nil),                       // 15: subnet.v1.Receipt
+	(*CheckpointHeader)(nil),              // 16: subnet.v1.CheckpointHeader
+	(*SignatureSubmission)(nil),           // 17: subnet.v1.SignatureSubmission
+	(*Signature)(nil),                     // 18: subnet.v1.Signature
+	(*ValidatorSet)(nil),                  // 19: subnet.v1.ValidatorSet
+	(*ValidationPolicy)(nil),              // 20: subnet.v1.ValidationPolicy
+	(*VerificationRecord)(nil),            // 21: subnet.v1.VerificationRecord
 }
 var file_subnet_service_proto_depIdxs = []int32{
-	10, // 0: subnet.v1.ExecutionReportBatchRequest.reports:type_name -> subnet.v1.ExecutionReport
-	11, // 1: subnet.v1.ExecutionReportBatchResponse.receipts:type_name -> subnet.v1.Receipt
-	10, // 2: subnet.v1.ValidatorService.SubmitExecutionReport:input_type -> subnet.v1.ExecutionReport
-	8,  // 3: subnet.v1.ValidatorService.SubmitExecutionReportBatch:input_type -> subnet.v1.ExecutionReportBatchRequest
-	1,  // 4: subnet.v1.ValidatorService.GetCheckpoint:input_type -> subnet.v1.GetCheckpointRequest
-	12, // 5: subnet.v1.ValidatorService.ProposeHeader:input_type -> subnet.v1.CheckpointHeader
-	13, // 6: subnet.v1.ValidatorService.SubmitSignature:input_type -> subnet.v1.SignatureSubmission
-	1,  // 7: subnet.v1.ValidatorService.GetSignatures:input_type -> subnet.v1.GetCheckpointRequest
-	1,  // 8: subnet.v1.ValidatorService.GetValidatorSet:input_type -> subnet.v1.GetCheckpointRequest
-	5,  // 9: subnet.v1.ValidatorService.GetDoubleSignEvidences:input_type -> subnet.v1.DoubleSignQuery
-	2,  // 10: subnet.v1.ValidatorService.GetValidationPolicy:input_type -> subnet.v1.GetValidationPolicyRequest
-	3,  // 11: subnet.v1.ValidatorService.GetVerificationRecords:input_type -> subnet.v1.GetVerificationRecordsRequest
-	4,  // 12: subnet.v1.ValidatorService.GetValidatorMetrics:input_type -> subnet.v1.GetValidatorMetricsRequest
-	11, // 13: subnet.v1.ValidatorService.SubmitExecutionReport:output_type -> subnet.v1.Receipt
-	9,  // 14: subnet.v1.ValidatorService.SubmitExecutionReportBatch:output_type -> subnet.v1.ExecutionReportBatchResponse
-	12, // 15: subnet.v1.ValidatorService.GetCheckpoint:output_type -> subnet.v1.CheckpointHeader
-	0,  // 16: subnet.v1.ValidatorService.ProposeHeader:output_type -> subnet.v1.Ack
-	0,  // 17: subnet.v1.ValidatorService.SubmitSignature:output_type -> subnet.v1.Ack
-	14, // 18: subnet.v1.ValidatorService.GetSignatures:output_type -> subnet.v1.Signature
-	15, // 19: subnet.v1.ValidatorService.GetValidatorSet:output_type -> subnet.v1.ValidatorSet
-	6,  // 20: subnet.v1.ValidatorService.GetDoubleSignEvidences:output_type -> subnet.v1.DoubleSignEvidence
-	16, // 21: subnet.v1.ValidatorService.GetValidationPolicy:output_type -> subnet.v1.ValidationPolicy
-	17, // 22: subnet.v1.ValidatorService.GetVerificationRecords:output_type -> subnet.v1.VerificationRecord
-	7,  // 23: subnet.v1.ValidatorService.GetValidatorMetrics:output_type -> subnet.v1.ValidatorMetrics
-	13, // [13:24] is the sub-list for method output_type
-	2,  // [2:13] is the sub-list for method input_type
-	2,  // [2:2] is the sub-list for extension type_name
-	2,  // [2:2] is the sub-list for extension extendee
-	0,  // [0:2] is the sub-list for field type_name
+	10, // 0: subnet.v1.ListExecutionReportsResponse.reports:type_name -> subnet.v1.ExecutionReportEntry
+	14, // 1: subnet.v1.ExecutionReportEntry.report:type_name -> subnet.v1.ExecutionReport
+	14, // 2: subnet.v1.ExecutionReportBatchRequest.reports:type_name -> subnet.v1.ExecutionReport
+	15, // 3: subnet.v1.ExecutionReportBatchResponse.receipts:type_name -> subnet.v1.Receipt
+	14, // 4: subnet.v1.ValidatorService.SubmitExecutionReport:input_type -> subnet.v1.ExecutionReport
+	12, // 5: subnet.v1.ValidatorService.SubmitExecutionReportBatch:input_type -> subnet.v1.ExecutionReportBatchRequest
+	1,  // 6: subnet.v1.ValidatorService.GetCheckpoint:input_type -> subnet.v1.GetCheckpointRequest
+	16, // 7: subnet.v1.ValidatorService.ProposeHeader:input_type -> subnet.v1.CheckpointHeader
+	17, // 8: subnet.v1.ValidatorService.SubmitSignature:input_type -> subnet.v1.SignatureSubmission
+	1,  // 9: subnet.v1.ValidatorService.GetSignatures:input_type -> subnet.v1.GetCheckpointRequest
+	1,  // 10: subnet.v1.ValidatorService.GetValidatorSet:input_type -> subnet.v1.GetCheckpointRequest
+	5,  // 11: subnet.v1.ValidatorService.GetDoubleSignEvidences:input_type -> subnet.v1.DoubleSignQuery
+	2,  // 12: subnet.v1.ValidatorService.GetValidationPolicy:input_type -> subnet.v1.GetValidationPolicyRequest
+	3,  // 13: subnet.v1.ValidatorService.GetVerificationRecords:input_type -> subnet.v1.GetVerificationRecordsRequest
+	4,  // 14: subnet.v1.ValidatorService.GetValidatorMetrics:input_type -> subnet.v1.GetValidatorMetricsRequest
+	7,  // 15: subnet.v1.ValidatorService.GetExecutionReport:input_type -> subnet.v1.GetExecutionReportRequest
+	8,  // 16: subnet.v1.ValidatorService.ListExecutionReports:input_type -> subnet.v1.ListExecutionReportsRequest
+	15, // 17: subnet.v1.ValidatorService.SubmitExecutionReport:output_type -> subnet.v1.Receipt
+	13, // 18: subnet.v1.ValidatorService.SubmitExecutionReportBatch:output_type -> subnet.v1.ExecutionReportBatchResponse
+	16, // 19: subnet.v1.ValidatorService.GetCheckpoint:output_type -> subnet.v1.CheckpointHeader
+	0,  // 20: subnet.v1.ValidatorService.ProposeHeader:output_type -> subnet.v1.Ack
+	0,  // 21: subnet.v1.ValidatorService.SubmitSignature:output_type -> subnet.v1.Ack
+	18, // 22: subnet.v1.ValidatorService.GetSignatures:output_type -> subnet.v1.Signature
+	19, // 23: subnet.v1.ValidatorService.GetValidatorSet:output_type -> subnet.v1.ValidatorSet
+	6,  // 24: subnet.v1.ValidatorService.GetDoubleSignEvidences:output_type -> subnet.v1.DoubleSignEvidence
+	20, // 25: subnet.v1.ValidatorService.GetValidationPolicy:output_type -> subnet.v1.ValidationPolicy
+	21, // 26: subnet.v1.ValidatorService.GetVerificationRecords:output_type -> subnet.v1.VerificationRecord
+	11, // 27: subnet.v1.ValidatorService.GetValidatorMetrics:output_type -> subnet.v1.ValidatorMetrics
+	14, // 28: subnet.v1.ValidatorService.GetExecutionReport:output_type -> subnet.v1.ExecutionReport
+	9,  // 29: subnet.v1.ValidatorService.ListExecutionReports:output_type -> subnet.v1.ListExecutionReportsResponse
+	17, // [17:30] is the sub-list for method output_type
+	4,  // [4:17] is the sub-list for method input_type
+	4,  // [4:4] is the sub-list for extension type_name
+	4,  // [4:4] is the sub-list for extension extendee
+	0,  // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_subnet_service_proto_init() }
@@ -779,14 +1002,14 @@ func file_subnet_service_proto_init() {
 		(*GetCheckpointRequest_Epoch)(nil),
 		(*GetCheckpointRequest_CpHash)(nil),
 	}
-	file_subnet_service_proto_msgTypes[8].OneofWrappers = []any{}
+	file_subnet_service_proto_msgTypes[12].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_subnet_service_proto_rawDesc), len(file_subnet_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

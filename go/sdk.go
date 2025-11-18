@@ -20,6 +20,7 @@ import (
 
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
+	pb "subnet/proto/subnet"
 )
 
 // SDK provides the core agent functionality
@@ -605,6 +606,88 @@ func (sdk *SDK) SubmitExecutionReport(ctx context.Context, report *ExecutionRepo
 	}
 
 	return receipts, nil
+}
+
+// GetExecutionReport retrieves a single execution report by report ID from the validator
+func (sdk *SDK) GetExecutionReport(ctx context.Context, reportID string) (*ExecutionReport, error) {
+	if sdk.validatorClient == nil {
+		return nil, errors.New("validator client not initialized")
+	}
+
+	if reportID == "" {
+		return nil, errors.New("report_id is required")
+	}
+
+	pbReport, err := sdk.validatorClient.GetExecutionReport(ctx, reportID)
+	if err != nil {
+		return nil, fmt.Errorf("failed to get execution report: %w", err)
+	}
+
+	// Convert protobuf ExecutionReport to SDK ExecutionReport
+	report := &ExecutionReport{
+		ReportID:     pbReport.ReportId,
+		AssignmentID: pbReport.AssignmentId,
+		IntentID:     pbReport.IntentId,
+		AgentID:      pbReport.AgentId,
+		Status:       convertProtoStatusToSDK(pbReport.Status),
+		ResultData:   pbReport.ResultData,
+		Timestamp:    time.Unix(pbReport.Timestamp, 0),
+		Metadata:     nil, // Protobuf ExecutionReport doesn't have metadata field
+	}
+
+	return report, nil
+}
+
+// ListExecutionReports retrieves a list of execution reports, optionally filtered by intent ID
+// If intentID is empty, returns all reports. The limit parameter controls the maximum number of reports returned.
+func (sdk *SDK) ListExecutionReports(ctx context.Context, intentID string, limit uint32) ([]*ExecutionReport, error) {
+	if sdk.validatorClient == nil {
+		return nil, errors.New("validator client not initialized")
+	}
+
+	if limit == 0 {
+		limit = 100 // default limit
+	}
+
+	resp, err := sdk.validatorClient.ListExecutionReports(ctx, intentID, limit)
+	if err != nil {
+		return nil, fmt.Errorf("failed to list execution reports: %w", err)
+	}
+
+	reports := make([]*ExecutionReport, 0, len(resp.Reports))
+	for _, entry := range resp.Reports {
+		if entry.Report == nil {
+			continue
+		}
+
+		report := &ExecutionReport{
+			ReportID:     entry.Report.ReportId,
+			AssignmentID: entry.Report.AssignmentId,
+			IntentID:     entry.Report.IntentId,
+			AgentID:      entry.Report.AgentId,
+			Status:       convertProtoStatusToSDK(entry.Report.Status),
+			ResultData:   entry.Report.ResultData,
+			Timestamp:    time.Unix(entry.Report.Timestamp, 0),
+			Metadata:     nil, // Protobuf ExecutionReport doesn't have metadata field
+		}
+		reports = append(reports, report)
+	}
+
+	return reports, nil
+}
+
+// convertProtoStatusToSDK converts protobuf ExecutionReport.Status enum to SDK ExecutionReportStatus string
+func convertProtoStatusToSDK(protoStatus pb.ExecutionReport_Status) ExecutionReportStatus {
+	switch protoStatus {
+	case pb.ExecutionReport_SUCCESS:
+		return ExecutionReportStatusSuccess
+	case pb.ExecutionReport_FAILED:
+		return ExecutionReportStatusFailed
+	case pb.ExecutionReport_PARTIAL:
+		return ExecutionReportStatusPartial
+	default:
+		return ExecutionReportStatusUnspecified
+	}
 }
 
 type executionReportRequest struct {

@@ -37,6 +37,10 @@ service ValidatorService {
   rpc GetValidationPolicy(GetValidationPolicyRequest) returns (ValidationPolicy);
   rpc GetVerificationRecords(GetVerificationRecordsRequest) returns (stream VerificationRecord);
   rpc GetValidatorMetrics(GetValidatorMetricsRequest) returns (ValidatorMetrics);
+
+  // Execution report queries
+  rpc GetExecutionReport(GetExecutionReportRequest) returns (ExecutionReport);
+  rpc ListExecutionReports(ListExecutionReportsRequest) returns (ListExecutionReportsResponse);
 }
 
 // Request messages
@@ -72,6 +76,25 @@ message DoubleSignEvidence {
   string validator_id = 1;
   uint64 epoch = 2;
   bytes evidence = 3;      // opaque evidence blob
+}
+
+message GetExecutionReportRequest {
+  string report_id = 1;  // Required: report ID
+}
+
+message ListExecutionReportsRequest {
+  string intent_id = 1;  // Optional: filter by intent ID
+  uint32 limit = 2;      // Optional: max number of reports to return (default: 100)
+}
+
+message ListExecutionReportsResponse {
+  repeated ExecutionReportEntry reports = 1;
+  uint32 total = 2;  // Total number of reports returned
+}
+
+message ExecutionReportEntry {
+  string report_id = 1;
+  ExecutionReport report = 2;
 }
 
 message ValidatorMetrics {

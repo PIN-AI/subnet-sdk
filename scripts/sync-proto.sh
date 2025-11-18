@@ -35,6 +35,7 @@ else
     cd "$PROTO_DEST"
 
     # List of proto files (update when new files are added)
+    # Note: gossip.proto is validator-internal and not needed for agent SDK
     PROTO_FILES=(
         "agent.proto"
         "bid.proto"
@@ -42,7 +43,6 @@ else
         "execution_report.proto"
         "matcher.proto"
         "matcher_service.proto"
-        "registry_service.proto"
         "report.proto"
         "service.proto"
         "validation.proto"

@@ -71,6 +71,36 @@ class DoubleSignEvidence(_message.Message):
     evidence: bytes
     def __init__(self, validator_id: _Optional[str] = ..., epoch: _Optional[int] = ..., evidence: _Optional[bytes] = ...) -> None: ...
 
+class GetExecutionReportRequest(_message.Message):
+    __slots__ = ("report_id",)
+    REPORT_ID_FIELD_NUMBER: _ClassVar[int]
+    report_id: str
+    def __init__(self, report_id: _Optional[str] = ...) -> None: ...
+
+class ListExecutionReportsRequest(_message.Message):
+    __slots__ = ("intent_id", "limit")
+    INTENT_ID_FIELD_NUMBER: _ClassVar[int]
+    LIMIT_FIELD_NUMBER: _ClassVar[int]
+    intent_id: str
+    limit: int
+    def __init__(self, intent_id: _Optional[str] = ..., limit: _Optional[int] = ...) -> None: ...
+
+class ListExecutionReportsResponse(_message.Message):
+    __slots__ = ("reports", "total")
+    REPORTS_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_FIELD_NUMBER: _ClassVar[int]
+    reports: _containers.RepeatedCompositeFieldContainer[ExecutionReportEntry]
+    total: int
+    def __init__(self, reports: _Optional[_Iterable[_Union[ExecutionReportEntry, _Mapping]]] = ..., total: _Optional[int] = ...) -> None: ...
+
+class ExecutionReportEntry(_message.Message):
+    __slots__ = ("report_id", "report")
+    REPORT_ID_FIELD_NUMBER: _ClassVar[int]
+    REPORT_FIELD_NUMBER: _ClassVar[int]
+    report_id: str
+    report: _execution_report_pb2.ExecutionReport
+    def __init__(self, report_id: _Optional[str] = ..., report: _Optional[_Union[_execution_report_pb2.ExecutionReport, _Mapping]] = ...) -> None: ...
+
 class ValidatorMetrics(_message.Message):
     __slots__ = ("validator_id", "reports_verified", "checkpoints_signed", "uptime_percentage", "last_active")
     VALIDATOR_ID_FIELD_NUMBER: _ClassVar[int]

@@ -30,6 +30,8 @@ const (
 	ValidatorService_GetValidationPolicy_FullMethodName        = "/subnet.v1.ValidatorService/GetValidationPolicy"
 	ValidatorService_GetVerificationRecords_FullMethodName     = "/subnet.v1.ValidatorService/GetVerificationRecords"
 	ValidatorService_GetValidatorMetrics_FullMethodName        = "/subnet.v1.ValidatorService/GetValidatorMetrics"
+	ValidatorService_GetExecutionReport_FullMethodName         = "/subnet.v1.ValidatorService/GetExecutionReport"
+	ValidatorService_ListExecutionReports_FullMethodName       = "/subnet.v1.ValidatorService/ListExecutionReports"
 )
 
 // ValidatorServiceClient is the client API for ValidatorService service.
@@ -54,6 +56,9 @@ type ValidatorServiceClient interface {
 	GetValidationPolicy(ctx context.Context, in *GetValidationPolicyRequest, opts ...grpc.CallOption) (*ValidationPolicy, error)
 	GetVerificationRecords(ctx context.Context, in *GetVerificationRecordsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[VerificationRecord], error)
 	GetValidatorMetrics(ctx context.Context, in *GetValidatorMetricsRequest, opts ...grpc.CallOption) (*ValidatorMetrics, error)
+	// Execution report queries
+	GetExecutionReport(ctx context.Context, in *GetExecutionReportRequest, opts ...grpc.CallOption) (*ExecutionReport, error)
+	ListExecutionReports(ctx context.Context, in *ListExecutionReportsRequest, opts ...grpc.CallOption) (*ListExecutionReportsResponse, error)
 }
 
 type validatorServiceClient struct {
@@ -201,6 +206,26 @@ func (c *validatorServiceClient) GetValidatorMetrics(ctx context.Context, in *Ge
 	return out, nil
 }
 
+func (c *validatorServiceClient) GetExecutionReport(ctx context.Context, in *GetExecutionReportRequest, opts ...grpc.CallOption) (*ExecutionReport, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExecutionReport)
+	err := c.cc.Invoke(ctx, ValidatorService_GetExecutionReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *validatorServiceClient) ListExecutionReports(ctx context.Context, in *ListExecutionReportsRequest, opts ...grpc.CallOption) (*ListExecutionReportsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListExecutionReportsResponse)
+	err := c.cc.Invoke(ctx, ValidatorService_ListExecutionReports_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ValidatorServiceServer is the server API for ValidatorService service.
 // All implementations must embed UnimplementedValidatorServiceServer
 // for forward compatibility.
@@ -223,6 +248,9 @@ type ValidatorServiceServer interface {
 	GetValidationPolicy(context.Context, *GetValidationPolicyRequest) (*ValidationPolicy, error)
 	GetVerificationRecords(*GetVerificationRecordsRequest, grpc.ServerStreamingServer[VerificationRecord]) error
 	GetValidatorMetrics(context.Context, *GetValidatorMetricsRequest) (*ValidatorMetrics, error)
+	// Execution report queries
+	GetExecutionReport(context.Context, *GetExecutionReportRequest) (*ExecutionReport, error)
+	ListExecutionReports(context.Context, *ListExecutionReportsRequest) (*ListExecutionReportsResponse, error)
 	mustEmbedUnimplementedValidatorServiceServer()
 }
 
@@ -265,6 +293,12 @@ func (UnimplementedValidatorServiceServer) GetVerificationRecords(*GetVerificati
 }
 func (UnimplementedValidatorServiceServer) GetValidatorMetrics(context.Context, *GetValidatorMetricsRequest) (*ValidatorMetrics, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetValidatorMetrics not implemented")
+}
+func (UnimplementedValidatorServiceServer) GetExecutionReport(context.Context, *GetExecutionReportRequest) (*ExecutionReport, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExecutionReport not implemented")
+}
+func (UnimplementedValidatorServiceServer) ListExecutionReports(context.Context, *ListExecutionReportsRequest) (*ListExecutionReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExecutionReports not implemented")
 }
 func (UnimplementedValidatorServiceServer) mustEmbedUnimplementedValidatorServiceServer() {}
 func (UnimplementedValidatorServiceServer) testEmbeddedByValue()                          {}
@@ -464,6 +498,42 @@ func _ValidatorService_GetValidatorMetrics_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ValidatorService_GetExecutionReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExecutionReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ValidatorServiceServer).GetExecutionReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ValidatorService_GetExecutionReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ValidatorServiceServer).GetExecutionReport(ctx, req.(*GetExecutionReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ValidatorService_ListExecutionReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListExecutionReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ValidatorServiceServer).ListExecutionReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ValidatorService_ListExecutionReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ValidatorServiceServer).ListExecutionReports(ctx, req.(*ListExecutionReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ValidatorService_ServiceDesc is the grpc.ServiceDesc for ValidatorService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -502,6 +572,14 @@ var ValidatorService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetValidatorMetrics",
 			Handler:    _ValidatorService_GetValidatorMetrics_Handler,
+		},
+		{
+			MethodName: "GetExecutionReport",
+			Handler:    _ValidatorService_GetExecutionReport_Handler,
+		},
+		{
+			MethodName: "ListExecutionReports",
+			Handler:    _ValidatorService_ListExecutionReports_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

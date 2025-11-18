@@ -95,6 +95,16 @@ class ValidatorServiceStub(object):
                 request_serializer=subnet_dot_service__pb2.GetValidatorMetricsRequest.SerializeToString,
                 response_deserializer=subnet_dot_service__pb2.ValidatorMetrics.FromString,
                 _registered_method=True)
+        self.GetExecutionReport = channel.unary_unary(
+                '/subnet.v1.ValidatorService/GetExecutionReport',
+                request_serializer=subnet_dot_service__pb2.GetExecutionReportRequest.SerializeToString,
+                response_deserializer=subnet_dot_execution__report__pb2.ExecutionReport.FromString,
+                _registered_method=True)
+        self.ListExecutionReports = channel.unary_unary(
+                '/subnet.v1.ValidatorService/ListExecutionReports',
+                request_serializer=subnet_dot_service__pb2.ListExecutionReportsRequest.SerializeToString,
+                response_deserializer=subnet_dot_service__pb2.ListExecutionReportsResponse.FromString,
+                _registered_method=True)
 
 
 class ValidatorServiceServicer(object):
@@ -172,6 +182,19 @@ class ValidatorServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetExecutionReport(self, request, context):
+        """Execution report queries
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListExecutionReports(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ValidatorServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -229,6 +252,16 @@ def add_ValidatorServiceServicer_to_server(servicer, server):
                     servicer.GetValidatorMetrics,
                     request_deserializer=subnet_dot_service__pb2.GetValidatorMetricsRequest.FromString,
                     response_serializer=subnet_dot_service__pb2.ValidatorMetrics.SerializeToString,
+            ),
+            'GetExecutionReport': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetExecutionReport,
+                    request_deserializer=subnet_dot_service__pb2.GetExecutionReportRequest.FromString,
+                    response_serializer=subnet_dot_execution__report__pb2.ExecutionReport.SerializeToString,
+            ),
+            'ListExecutionReports': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListExecutionReports,
+                    request_deserializer=subnet_dot_service__pb2.ListExecutionReportsRequest.FromString,
+                    response_serializer=subnet_dot_service__pb2.ListExecutionReportsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -529,6 +562,60 @@ class ValidatorService(object):
             '/subnet.v1.ValidatorService/GetValidatorMetrics',
             subnet_dot_service__pb2.GetValidatorMetricsRequest.SerializeToString,
             subnet_dot_service__pb2.ValidatorMetrics.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def GetExecutionReport(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/subnet.v1.ValidatorService/GetExecutionReport',
+            subnet_dot_service__pb2.GetExecutionReportRequest.SerializeToString,
+            subnet_dot_execution__report__pb2.ExecutionReport.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ListExecutionReports(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/subnet.v1.ValidatorService/ListExecutionReports',
+            subnet_dot_service__pb2.ListExecutionReportsRequest.SerializeToString,
+            subnet_dot_service__pb2.ListExecutionReportsResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -49,3 +49,20 @@ func (c *ValidatorClient) SubmitExecutionReportBatch(ctx context.Context, req *p
 func (c *ValidatorClient) GetValidatorSet(ctx context.Context, req *pb.GetCheckpointRequest) (*pb.ValidatorSet, error) {
 	return c.client.GetValidatorSet(ctx, req)
 }
+
+// GetExecutionReport retrieves a single execution report by report ID
+func (c *ValidatorClient) GetExecutionReport(ctx context.Context, reportID string) (*pb.ExecutionReport, error) {
+	req := &pb.GetExecutionReportRequest{
+		ReportId: reportID,
+	}
+	return c.client.GetExecutionReport(ctx, req)
+}
+
+// ListExecutionReports retrieves a list of execution reports, optionally filtered by intent ID
+func (c *ValidatorClient) ListExecutionReports(ctx context.Context, intentID string, limit uint32) (*pb.ListExecutionReportsResponse, error) {
+	req := &pb.ListExecutionReportsRequest{
+		IntentId: intentID,
+		Limit:    limit,
+	}
+	return c.client.ListExecutionReports(ctx, req)
+}
