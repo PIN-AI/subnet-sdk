@@ -17,7 +17,7 @@ from web3 import Web3
 
 from .grpc_transport import SigningConfig
 from .matcher_client import MatcherClient
-from .proto.subnet import matcher_service_pb2
+from .proto.subnet import matcher_service_pb2, bid_pb2
 from .matcher_client import MatcherClient, ValidatorClient
 from .proto.subnet import execution_report_pb2, service_pb2, report_pb2, matcher_pb2
 from .types import (
@@ -27,6 +27,7 @@ from .types import (
     Handler,
     Callbacks,
     BiddingStrategy,
+    Intent,
     Metrics,
     Result,
     Task,
@@ -511,7 +512,9 @@ class SDK:
         self, request: matcher_service_pb2.StreamTasksRequest
     ) -> None:
         assert self._matcher_client is not None
+        logger.debug("Starting task stream loop for agent_id=%s", request.agent_id)
         try:
+            logger.debug("Calling matcher_client.stream_tasks()...")
             async for task_proto in self._matcher_client.stream_tasks(request):
                 await self._handle_execution_task(task_proto)
         except asyncio.CancelledError:
@@ -524,7 +527,10 @@ class SDK:
         self, request: matcher_pb2.StreamIntentsRequest
     ) -> None:
         assert self._matcher_client is not None
+        logger.debug("Starting intent stream loop for subnet_id=%s intent_types=%s",
+                    request.subnet_id, request.intent_types)
         try:
+            logger.debug("Calling matcher_client.stream_intents()...")
             async for update in self._matcher_client.stream_intents(request):
                 await self._handle_intent_update(update)
         except asyncio.CancelledError:
@@ -563,10 +569,11 @@ class SDK:
             await self._fire_callback("on_error", exc)
             return
 
-        bid_id = str(uuid.uuid4())
+        # Generate 32-byte (64 hex chars) bid ID for RootLayer compatibility
+        bid_id = "0x" + uuid.uuid4().hex + uuid.uuid4().hex
         bid_metadata = self._ensure_chain_metadata(getattr(bid_info, "metadata", None))
 
-        bid_pb = matcher_service_pb2.Bid(
+        bid_pb = bid_pb2.Bid(
             bid_id=bid_id,
             intent_id=intent.id,
             agent_id=self.get_agent_id(),
@@ -577,7 +584,7 @@ class SDK:
             metadata=bid_metadata,
         )
 
-        request = matcher_service_pb2.SubmitBidRequest(bid=bid_pb)
+        request = matcher_pb2.SubmitBidRequest(bid=bid_pb)
         try:
             response = await self._matcher_client.submit_bid(request)
             ack = response.ack if response is not None else None
