@@ -13,6 +13,7 @@ config, err := sdk.NewConfigBuilder().
     WithSubnetID(string).        // Set subnet ID (REQUIRED)
     WithAgentID(string).         // Set agent ID (REQUIRED)
     WithPrivateKey(string).      // Set private key for signing (64 hex chars)
+    WithChainAddress(string).    // Set on-chain address (optional, derived from private key if not set)
     WithMatcherAddr(string).     // Set matcher address (REQUIRED)
     WithRegistryAddr(string).    // Set registry HTTP base (optional)
     WithAgentEndpoint(string).   // Advertised agent endpoint (required when registry is set)
@@ -38,6 +39,7 @@ config = ConfigBuilder() \
     .with_subnet_id(str) \        # Set subnet ID (REQUIRED)
     .with_agent_id(str) \         # Set agent ID (REQUIRED)
     .with_private_key(str) \      # Set private key (64 hex chars)
+    .with_chain_address(str) \    # Set on-chain address (optional)
     .with_matcher_addr(str) \     # Set matcher address (REQUIRED)
     .with_registry_addr(str) \    # Set registry HTTP base
     .with_agent_endpoint(str) \  # Advertised agent endpoint for registry
@@ -74,18 +76,23 @@ sdk = SDK(config: Config)
 | Method | Go Signature | Python Signature | Description |
 |--------|-------------|------------------|-------------|
 | Register Handler | `RegisterHandler(handler Handler)` | `register_handler(handler: Handler)` | Register task execution handler |
+| Register Bidding Strategy | `RegisterBiddingStrategy(strategy BiddingStrategy)` | `register_bidding_strategy(strategy: BiddingStrategy)` | Register custom bidding strategy |
+| Register Callbacks | `RegisterCallbacks(callbacks Callbacks)` | `register_callbacks(callbacks: Callbacks)` | Register lifecycle callbacks |
 | Start | `Start() error` | `async start()` | Start the SDK |
 | Stop | `Stop() error` | `async stop()` | Stop the SDK |
 | Get Agent ID | `GetAgentID() string` | `get_agent_id() -> str` | Get agent identifier |
 | Get Subnet ID | `GetSubnetID() string` | `get_subnet_id() -> str` | Get subnet identifier |
-| Get Address | `GetAddress() string` | `get_address() -> Optional[str]` | Get Ethereum address |
+| Get Address | `GetAddress() string` | `get_address() -> Optional[str]` | Get Ethereum address (derived from private key) |
+| Get Chain Address | `GetChainAddress() string` | `get_chain_address() -> Optional[str]` | Get configured on-chain address |
 | Get Capabilities | `GetCapabilities() []string` | `get_capabilities() -> List[str]` | Get agent capabilities |
 | Get Config | `GetConfig() *Config` | `get_config() -> Config` | Get configuration copy |
 | Get Metrics | `GetMetrics() *Metrics` | `get_metrics() -> Metrics` | Get metrics instance |
 | Execute Task | `ExecuteTask(ctx Context, task *Task) (*Result, error)` | `async execute_task(task: Task) -> Result` | Execute a task |
-| Sign | `Sign(data []byte) ([]byte, error)` | `sign(data: bytes) -> Optional[bytes]` | Sign data with private key |
-| Discover Validators | `DiscoverValidators(ctx context.Context) ([]ValidatorEndpoint, error)` | `discover_validators() -> List[ValidatorEndpoint]` | Fetch active validators from the registry |
-| Submit Execution Report | `SubmitExecutionReport(ctx context.Context, report *ExecutionReport) ([]*ExecutionReceipt, error)` | `submit_execution_report(report: ExecutionReport) -> List[ExecutionReceipt]` | Fan out execution reports to validators and return receipts |
+| Sign | `Sign(data []byte) ([]byte, error)` | `sign(data: bytes) -> bytes` | Sign data with private key |
+| Discover Validators | `DiscoverValidators(ctx context.Context) ([]ValidatorEndpoint, error)` | `async discover_validators() -> List[ValidatorEndpoint]` | Fetch active validators from the registry |
+| Submit Execution Report | `SubmitExecutionReport(ctx context.Context, report *ExecutionReport) ([]*ExecutionReceipt, error)` | `async submit_execution_report(report: ExecutionReport) -> List[ExecutionReceipt]` | Fan out execution reports to validators and return receipts |
+| Get Execution Report | `GetExecutionReport(ctx context.Context, reportID string) (*ExecutionReport, error)` | - | Retrieve a single execution report by ID (Go only) |
+| List Execution Reports | `ListExecutionReports(ctx context.Context, intentID string, limit uint32) ([]*ExecutionReport, error)` | - | List execution reports, optionally filtered by intent ID (Go only) |
 
 ### 3. Handler Interface
 
@@ -160,6 +167,247 @@ class Result:
     metadata: Optional[Dict[str, Any]] = None
 ```
 
+#### Intent
+Represents an intent for bidding.
+
+**Go:**
+```go
+type Intent struct {
+    ID          string    // Intent identifier
+    Type        string    // Intent type
+    Description string    // Intent description
+    CreatedAt   time.Time // When the intent was created
+}
+```
+
+**Python:**
+```python
+@dataclass
+class Intent:
+    id: str              # Intent identifier
+    type: str            # Intent type
+    description: str     # Intent description
+    created_at: datetime # When the intent was created
+```
+
+#### Bid
+Represents a bid for an intent.
+
+**Go:**
+```go
+type Bid struct {
+    Price    uint64            // Bid price
+    Currency string            // Currency (e.g., "PIN")
+    Metadata map[string]string // Optional metadata
+}
+```
+
+**Python:**
+```python
+@dataclass
+class Bid:
+    price: int                           # Bid price
+    currency: str = "PIN"                # Currency
+    metadata: Optional[Dict[str, Any]] = None
+```
+
+#### ExecutionReport
+Payload sent from agents to validators.
+
+**Go:**
+```go
+type ExecutionReport struct {
+    ReportID     string
+    AssignmentID string
+    IntentID     string
+    AgentID      string
+    Status       ExecutionReportStatus  // "success", "failed", "partial"
+    ResultData   []byte
+    Timestamp    time.Time
+    Metadata     map[string]string
+}
+```
+
+**Python:**
+```python
+@dataclass
+class ExecutionReport:
+    report_id: str
+    assignment_id: str
+    intent_id: str
+    agent_id: Optional[str] = None
+    status: ExecutionReportStatus = ExecutionReportStatus.SUCCESS
+    result_data: Optional[bytes] = None
+    timestamp: Optional[datetime] = None
+    metadata: Optional[Dict[str, str]] = None
+```
+
+#### ExecutionReceipt
+Response returned by validators for execution reports.
+
+**Go:**
+```go
+type ExecutionReceipt struct {
+    ReportID    string
+    IntentID    string
+    ValidatorID string
+    Status      string
+    ReceivedAt  time.Time
+    Message     string
+    Endpoint    string
+}
+```
+
+**Python:**
+```python
+@dataclass
+class ExecutionReceipt:
+    report_id: str
+    intent_id: str
+    validator_id: str
+    status: str
+    message: Optional[str] = None
+    received_at: Optional[datetime] = None
+    endpoint: Optional[str] = None
+```
+
+#### ValidatorEndpoint
+Validator discovery information from registry service.
+
+**Go:**
+```go
+type ValidatorEndpoint struct {
+    ID       string
+    Endpoint string
+    Status   string
+    LastSeen time.Time
+}
+```
+
+**Python:**
+```python
+@dataclass
+class ValidatorEndpoint:
+    id: str
+    endpoint: str
+    status: str
+    last_seen: Optional[datetime] = None
+```
+
+### 5. BiddingStrategy Interface
+
+Optional interface for custom bidding behavior.
+
+**Go:**
+```go
+type BiddingStrategy interface {
+    // ShouldBid decides whether to bid on an intent
+    ShouldBid(intent *Intent) bool
+    // CalculateBid calculates the bid price
+    CalculateBid(intent *Intent) *Bid
+}
+```
+
+**Python:**
+```python
+class BiddingStrategy(ABC):
+    @abstractmethod
+    def should_bid(self, intent: Intent) -> bool:
+        """Return True if the agent should bid on the given intent."""
+
+    @abstractmethod
+    def calculate_bid(self, intent: Intent) -> Bid:
+        """Produce a bid for the provided intent."""
+```
+
+**Example Implementation:**
+```go
+type MyBiddingStrategy struct{}
+
+func (s *MyBiddingStrategy) ShouldBid(intent *Intent) bool {
+    return intent.Type == "compute"  // Only bid on compute tasks
+}
+
+func (s *MyBiddingStrategy) CalculateBid(intent *Intent) *Bid {
+    return &Bid{Price: 100, Currency: "PIN"}
+}
+
+// Register with SDK
+sdk.RegisterBiddingStrategy(&MyBiddingStrategy{})
+```
+
+### 6. Callbacks Interface
+
+Optional lifecycle callbacks for monitoring agent events.
+
+**Go:**
+```go
+type Callbacks interface {
+    OnStart() error
+    OnStop() error
+    OnTaskAccepted(task *Task)
+    OnTaskRejected(task *Task, reason string)
+    OnTaskCompleted(task *Task, result *Result, err error)
+    OnBidSubmitted(intent *Intent, bid *Bid)
+    OnBidWon(intentID string)
+    OnBidLost(intentID string)
+    OnError(err error)
+}
+```
+
+**Python:**
+```python
+class Callbacks(ABC):
+    async def on_start(self) -> None: pass
+    async def on_stop(self) -> None: pass
+    async def on_task_accepted(self, task: Task) -> None: pass
+    async def on_task_rejected(self, task: Task, reason: str) -> None: pass
+    async def on_task_completed(self, task: Task, result: Result) -> None: pass
+    async def on_report_submitted(self, report_id: str) -> None: pass
+    async def on_report_failed(self, report_id: str, error: str) -> None: pass
+    async def on_bid_submitted(self, intent_id: str, bid_id: str) -> None: pass
+    async def on_bid_failed(self, intent_id: str, bid_id: str, reason: str) -> None: pass
+    async def on_error(self, error: BaseException) -> None: pass
+```
+
+**Example Implementation:**
+```go
+type MyCallbacks struct{}
+
+func (c *MyCallbacks) OnStart() error {
+    log.Println("Agent started")
+    return nil
+}
+func (c *MyCallbacks) OnStop() error {
+    log.Println("Agent stopped")
+    return nil
+}
+func (c *MyCallbacks) OnTaskAccepted(task *Task) {
+    log.Printf("Task accepted: %s", task.ID)
+}
+func (c *MyCallbacks) OnTaskRejected(task *Task, reason string) {
+    log.Printf("Task rejected: %s - %s", task.ID, reason)
+}
+func (c *MyCallbacks) OnTaskCompleted(task *Task, result *Result, err error) {
+    log.Printf("Task completed: %s, success: %v", task.ID, result.Success)
+}
+func (c *MyCallbacks) OnBidSubmitted(intent *Intent, bid *Bid) {
+    log.Printf("Bid submitted for intent: %s", intent.ID)
+}
+func (c *MyCallbacks) OnBidWon(intentID string) {
+    log.Printf("Won bid for intent: %s", intentID)
+}
+func (c *MyCallbacks) OnBidLost(intentID string) {
+    log.Printf("Lost bid for intent: %s", intentID)
+}
+func (c *MyCallbacks) OnError(err error) {
+    log.Printf("Error: %v", err)
+}
+
+// Register with SDK
+sdk.RegisterCallbacks(&MyCallbacks{})
+```
+
 #### Metrics
 Performance and statistics tracking.
 
@@ -190,7 +438,7 @@ class Metrics:
     # Returns: (tasks_completed, tasks_failed, total_bids, successful_bids)
 ```
 
-### 5. Configuration Structure
+### 7. Configuration Structure
 
 #### Config
 Main configuration object.
@@ -201,6 +449,7 @@ Main configuration object.
 | identity.subnet_id | string | ✅ | - | Subnet identifier |
 | identity.agent_id | string | ✅ | - | Agent identifier |
 | private_key | string | ❌ | - | Private key (64 hex) |
+| chain_address | string | ❌ | - | On-chain address (derived from private_key if not set) |
 | matcher_addr | string | ✅ | - | Matcher address |
 | registry_addr | string | ❌ | - | Registry HTTP base for discovery |
 | agent_endpoint | string | ❌ | - | Public URL advertised to the registry |

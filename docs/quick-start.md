@@ -308,17 +308,17 @@ config = (
 ## Registry & Execution Reports
 
 1. **Agent Registration**
-   - Go: `WithRegistryAddr(...).WithAgentEndpoint(...)` 启用服务注册，SDK 会维护心跳。
-   - Python: `with_registry_addr(...).with_agent_endpoint(...)`，`start()` 时注册，`stop()` 时注销。
+   - Go: Use `WithRegistryAddr(...).WithAgentEndpoint(...)` to enable service registration. The SDK will maintain heartbeats automatically.
+   - Python: Use `with_registry_addr(...).with_agent_endpoint(...)`. Registration happens on `start()`, deregistration on `stop()`.
 
-2. **validator 发现**
-   - Go: `sdk.DiscoverValidators(ctx)` 返回 `[]ValidatorEndpoint`。
-   - Python: `await sdk.discover_validators()`；字段 `id/endpoint/status/last_seen` 与 Go 对齐。
+2. **Validator Discovery**
+   - Go: Call `sdk.DiscoverValidators(ctx)` to get `[]ValidatorEndpoint`.
+   - Python: Call `await sdk.discover_validators()` to get a list of `ValidatorEndpoint` (fields: `id`, `endpoint`, `status`, `last_seen`).
 
-3. **执行报告**
-   - Go: 构造 `agentsdk.ExecutionReport` 并调用 `sdk.SubmitExecutionReport(ctx, report)`。
-   - Python: 构造 `ExecutionReport` 并执行 `await sdk.submit_execution_report(report)`。
-   - SDK 会自动拼接 `/api/v1/execution-report` 路径、Base64 编码结果并在 metrics 中统计成功/失败次数。
+3. **Execution Reports**
+   - Go: Create an `ExecutionReport` and call `sdk.SubmitExecutionReport(ctx, report)`.
+   - Python: Create an `ExecutionReport` and call `await sdk.submit_execution_report(report)`.
+   - The SDK automatically appends `/api/v1/execution-report` to validator endpoints, Base64-encodes result data, and tracks success/failure counts in metrics.
 
 ## What's Next?
 
@@ -332,7 +332,7 @@ config = (
 
 - 📖 Read the full [Tutorial](tutorial.md)
 - 📚 Check the [API Reference](api-reference.md)
-- 💡 See [Example Implementations](../examples/)
+- 💡 See Examples: [Go](../go/example/) | [Python](../python/examples/)
 - 💬 Join our Discord community
 
 ## Common Issues

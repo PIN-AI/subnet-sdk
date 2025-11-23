@@ -1,91 +1,145 @@
 # Subnet SDK
 
-Official SDKs for building agents that interact with PinAI Subnets.
+Official SDKs for building agents on PinAI Subnets. Available in **Go** and **Python**.
 
-## Structure
+## What is an Agent?
+
+An **Agent** is a service provider in the PinAI network. Agents:
+- Connect to a Subnet's Matcher service
+- Bid on tasks (Intents) they can handle
+- Execute tasks and submit results
+- Get paid for successful execution
 
 ```
-subnet-sdk/
-├── proto-src/          # Proto source files (synced from pin_protocol)
-├── go/                 # Go SDK
-├── python/             # Python SDK
-└── scripts/            # Utility scripts
+Subnet Matcher ──── streams tasks ────→ Your Agent
+                                            │
+                                            ↓
+                                      Execute task
+                                            │
+                                            ↓
+Your Agent ──── submits result ────→ Validator ──→ Verified & Paid
 ```
+
+---
 
 ## Quick Start
 
-### Go SDK
+### Installation
 
+**Go:**
 ```bash
-cd go
-make proto    # Generate proto files (optional, already generated)
-make build    # Build SDK
-make test     # Run tests
+go get github.com/PIN-AI/subnet-sdk/go
 ```
 
-### Python SDK
-
+**Python:**
 ```bash
-cd python
-pip install -e ".[dev]"  # Install SDK with dev dependencies
-make test                # Run tests
+pip install subnet-sdk
 ```
 
-## Proto Management
+### Minimal Agent (Go)
 
-Proto source files are maintained in `proto-src/` directory.
+```go
+package main
 
-### Syncing Proto from pin_protocol
+import (
+    "context"
+    "log"
+    sdk "github.com/PIN-AI/subnet-sdk/go"
+)
 
-```bash
-# From local pin_protocol (development)
-./scripts/sync-proto.sh
+type MyHandler struct{}
 
-# From GitHub tag (production)
-./scripts/sync-proto.sh v0.1.0
+func (h *MyHandler) Execute(ctx context.Context, task *sdk.Task) (*sdk.Result, error) {
+    // Your business logic here
+    return &sdk.Result{Data: []byte("done"), Success: true}, nil
+}
 
-# From GitHub main branch
-./scripts/sync-proto.sh main
+func main() {
+    config, _ := sdk.NewConfigBuilder().
+        WithSubnetID("your-subnet-id").      // Get from subnet operator
+        WithAgentID("your-agent-id").        // Your unique ID
+        WithMatcherAddr("matcher:8090").     // Matcher address
+        WithCapabilities("compute").         // What you can do
+        Build()
+
+    agent, _ := sdk.New(config)
+    agent.RegisterHandler(&MyHandler{})
+    agent.Start()
+
+    select {} // Run forever
+}
 ```
 
-After syncing, regenerate proto for both SDKs:
+### Minimal Agent (Python)
 
-```bash
-cd go && make proto
-cd python && make proto
+```python
+import asyncio
+from subnet_sdk import SDK, ConfigBuilder, Handler, Task, Result
+
+class MyHandler(Handler):
+    async def execute(self, task: Task) -> Result:
+        # Your business logic here
+        return Result(data=b"done", success=True)
+
+async def main():
+    config = (
+        ConfigBuilder()
+        .with_subnet_id("your-subnet-id")    # Get from subnet operator
+        .with_agent_id("your-agent-id")      # Your unique ID
+        .with_matcher_addr("matcher:8090")   # Matcher address
+        .with_capabilities("compute")        # What you can do
+        .build()
+    )
+
+    agent = SDK(config)
+    agent.register_handler(MyHandler())
+    await agent.start()
+    await asyncio.Event().wait()
+
+asyncio.run(main())
 ```
 
-## Development Workflow
+---
 
-### 1. Clone Repository
+## Documentation
 
-```bash
-git clone https://github.com/PIN-AI/subnet-sdk
-cd subnet-sdk
-```
+| Document | Description |
+|----------|-------------|
+| [Quick Start](docs/quick-start.md) | Get your first agent running in 5 minutes |
+| [Tutorial](docs/tutorial.md) | Step-by-step guide with examples |
+| [API Reference](docs/api-reference.md) | Complete API documentation |
+| [Execution Reporting](docs/execution-reporting.md) | How to submit results to validators |
 
-### 2. Build and Test
+---
 
-```bash
-# Go
-cd go
-make build
-make test
+## Configuration Reference
 
-# Python
-cd python
-pip install -e ".[dev]"
-make test
-```
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `subnet_id` | ✅ | The subnet to join (get from operator) |
+| `agent_id` | ✅ | Your unique agent identifier |
+| `matcher_addr` | ✅ | Matcher service address (e.g., `host:8090`) |
+| `capabilities` | ✅ | What tasks you can handle (e.g., `compute`, `ml`) |
+| `private_key` | Optional | 64 hex chars, for signing (required for payments) |
 
-## Proto Source Strategy
+---
 
-The SDK uses a **proto-in-repo** strategy:
+## Examples
 
-- ✅ Proto source files are committed to `proto-src/`
-- ✅ Generated files are also committed (for user convenience)
-- ✅ No external dependencies required for build
-- ✅ Version control over proto definitions
+See working examples:
+
+- **Go**: [`go/example/`](go/example/)
+- **Python**: [`python/examples/`](python/examples/)
+
+---
+
+## Need Help?
+
+- Check the [Tutorial](docs/tutorial.md) for detailed walkthrough
+- See [Troubleshooting](docs/quick-start.md#common-issues) for common issues
+- For subnet setup, see [Subnet Repository](https://github.com/PIN-AI/Subnet)
+
+---
 
 ## License
 

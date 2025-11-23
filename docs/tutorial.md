@@ -321,8 +321,11 @@ async def monitor_metrics(agent):
 
 # Start monitoring
 asyncio.create_task(monitor_metrics(agent))
+```
 
-## 提交执行报告
+### 3. Execution Reports
+
+See [Execution Reporting Guide](execution-reporting.md) for full details.
 
 **Go:**
 ```go
@@ -357,9 +360,8 @@ receipts = await sdk.submit_execution_report(report)
 for receipt in receipts:
     print(receipt.validator_id, receipt.status)
 ```
-```
 
-### 3. Dynamic Capability Management
+### 4. Dynamic Capability Management
 
 ```go
 // Go: Get current capabilities
@@ -385,7 +387,7 @@ def can_handle(task_type: str, capabilities: list) -> bool:
     return any(task_type.startswith(cap) for cap in capabilities)
 ```
 
-### 4. Graceful Shutdown
+### 5. Graceful Shutdown
 
 **Go:**
 ```go
@@ -660,6 +662,6 @@ func (rl *RateLimiter) Wait() {
 ## Next Steps
 
 1. Explore the [API Reference](api-reference.md)
-2. Check [Example Implementations](../examples/)
-3. Read about [Security Best Practices](security.md)
+2. Check Examples: [Go](../go/example/) | [Python](../python/examples/)
+3. Read the [Execution Reporting Guide](execution-reporting.md)
 4. Join the community on Discord
