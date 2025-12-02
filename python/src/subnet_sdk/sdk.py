@@ -641,8 +641,8 @@ class SDK:
             created_at=created_at,
         )
 
-        response = matcher_service_pb2.RespondToTaskRequest(
-            response=matcher_service_pb2.TaskResponse(
+        response = matcher_pb2.RespondToTaskRequest(
+            response=matcher_pb2.TaskResponse(
                 task_id=task.id,
                 agent_id=self.get_agent_id(),
                 accepted=True,

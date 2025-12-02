@@ -17,6 +17,7 @@ from .proto.subnet import matcher_pb2
 from .proto.subnet import service_pb2_grpc
 from .proto.subnet import service_pb2
 from .proto.subnet import execution_report_pb2
+from .proto.subnet import report_pb2
 from .proto.subnet import validator_pb2
 
 
@@ -43,8 +44,8 @@ class MatcherClient:
         await self._channel.close()
 
     async def submit_bid(
-        self, request: matcher_service_pb2.SubmitBidRequest
-    ) -> matcher_service_pb2.SubmitBidResponse:
+        self, request: matcher_pb2.SubmitBidRequest
+    ) -> matcher_pb2.SubmitBidResponse:
         metadata = await self._metadata("/subnet.v1.MatcherService/SubmitBid", request)
         return await self._stub.SubmitBid(request, metadata=metadata)
 
@@ -56,8 +57,8 @@ class MatcherClient:
         return await self._stub.SubmitBidBatch(request, metadata=metadata)
 
     async def stream_intents(
-        self, request: matcher_service_pb2.StreamIntentsRequest
-    ) -> AsyncIterator[matcher_service_pb2.MatcherIntentUpdate]:
+        self, request: matcher_pb2.StreamIntentsRequest
+    ) -> AsyncIterator[matcher_pb2.MatcherIntentUpdate]:
         metadata = await self._metadata("/subnet.v1.MatcherService/StreamIntents", request)
         call = self._stub.StreamIntents(request, metadata=metadata)
         async for update in call:
@@ -72,8 +73,8 @@ class MatcherClient:
             yield task
 
     async def respond_to_task(
-        self, request: matcher_service_pb2.RespondToTaskRequest
-    ) -> matcher_service_pb2.RespondToTaskResponse:
+        self, request: matcher_pb2.RespondToTaskRequest
+    ) -> matcher_pb2.RespondToTaskResponse:
         metadata = await self._metadata("/subnet.v1.MatcherService/RespondToTask", request)
         return await self._stub.RespondToTask(request, metadata=metadata)
 
@@ -107,7 +108,7 @@ class ValidatorClient:
 
     async def submit_execution_report(
         self, request: execution_report_pb2.ExecutionReport
-    ) -> service_pb2.Receipt:
+    ) -> report_pb2.Receipt:
         metadata = await self._metadata("/subnet.v1.ValidatorService/SubmitExecutionReport", request)
         return await self._stub.SubmitExecutionReport(request, metadata=metadata)
 
