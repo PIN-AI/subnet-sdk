@@ -3,7 +3,7 @@
 # Proto source directory
 PROTO_SRC = ../proto-src
 
-# 生成 proto 文件
+# generate proto files
 proto:
 	@echo "Generating proto files from $(PROTO_SRC)..."
 	@python -m grpc_tools.protoc \
@@ -17,8 +17,13 @@ proto:
 	@mv src/subnet/*_pb2*.py src/subnet_sdk/proto/subnet/ 2>/dev/null || true
 	@rmdir src/subnet 2>/dev/null || true
 	@echo "Fixing proto imports..."
-	@find src/subnet_sdk/proto/subnet -name "*_pb2*.py" -exec sed -i '' \
-		's/from subnet import/from subnet_sdk.proto.subnet import/g' {} \;
+	@if [ "$$(uname)" = "Darwin" ]; then \
+		find src/subnet_sdk/proto/subnet -name "*_pb2*.py" -exec sed -i '' \
+			's/from subnet import/from subnet_sdk.proto.subnet import/g' {} \; ; \
+	else \
+		find src/subnet_sdk/proto/subnet -name "*_pb2*.py" -exec sed -i \
+			's/from subnet import/from subnet_sdk.proto.subnet import/g' {} \; ; \
+	fi
 	@echo "✓ Proto generation complete"
 
 # 检查 proto 是否正确
